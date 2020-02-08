@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AllBusActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_backspace_black_24dp"
+                    android:layout_centerVertical="true"/>
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/back"
+                    android:id="@+id/title"
+                    android:text="Plan your Journey"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textSize="18dp"/>
+
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView
+        android:id="@+id/linear_scroll"
+        android:layout_width="match_parent"
+        android:scrollbars="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/lin_filter"
+        android:visibility="visible"
+        android:layout_margin="@dimen/space_5"
+        android:weightSum="6"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linear_all"
+    android:layout_width="0dp"
+        android:layout_weight="1"
+    android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/space_5"
+        >
+        <ImageView
+            android:id="@+id/img_all"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/bus"
+            android:tint="@color/white"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/tv_filter_all"
+                android:text="All"
+                android:textSize="@dimen/space_12"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_ac"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/space_5"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_ac"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ac"
+                android:tint="@color/white"/>
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/tv_filter_ac"
+                android:background="@drawable/border_card_layout"
+                android:text="A/C"
+            android:textSize="@dimen/space_12"
+            android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_nonac"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/space_5"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/img_nonac"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/nonac"
+                android:tint="@color/white"/>
+             <in.binplus.travel.Fonts.LatoBLack
+                 android:textSize="@dimen/space_12"
+
+                android:background="@drawable/border_card_layout"
+                android:text="Non A/C"
+                 android:id="@+id/tv_filter_nonac"
+
+                 android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_seater"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/space_5"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/img_seater"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/seater"
+                android:padding="@dimen/space_5"
+                android:tint="@color/white"/>
+             <in.binplus.travel.Fonts.LatoBLack
+                 android:id="@+id/tv_filter_seater"
+                android:background="@drawable/border_card_layout"
+                android:text="Seater"
+                 android:textSize="@dimen/space_12"
+                 android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_sleeper"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/space_5"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/img_sleeper"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/sleeper"
+                android:rotation="90"
+                android:tint="@color/white"/>
+             <in.binplus.travel.Fonts.LatoBLack
+                 android:id="@+id/tv_filter_sleeper"
+                android:background="@drawable/border_card_layout"
+                android:text="Sleeper"
+
+                 android:textSize="@dimen/space_12"
+                 android:textAlignment="center"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear_semi_sleeper"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/space_5"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/img_semi_sleeper"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/nonac"
+                android:tint="@color/white"/>
+
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/tv_filter_semi_sleeper"
+            android:background="@drawable/border_card_layout"
+            android:text="Semi Sleeper"
+            android:textSize="@dimen/space_12"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:layout_above="@+id/linear_scroll">
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rec_buses"
+           android:visibility="visible"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+       <LinearLayout
+
+           android:id="@+id/lin_no_bus"
+           android:layout_centerInParent="true"
+           android:orientation="vertical"
+            android:visibility="gone"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:src="@drawable/no_bus"
+               android:padding="@dimen/space_10"
+               android:layout_gravity="center_horizontal"
+               android:layout_width="250dp"
+               android:layout_height="wrap_content"/>
+           <in.binplus.travel.Fonts.LatoBLack
+               android:textSize="22dp"
+               android:textAlignment="center"
+               android:textColor="@color/dark_black"
+               android:text="@string/tv_no_bus"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+       </LinearLayout>
+   </RelativeLayout>
+
+</RelativeLayout>

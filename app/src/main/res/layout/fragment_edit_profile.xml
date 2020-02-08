@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.EditProfileFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ScrollView>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/space_15"
+    android:layout_marginRight="@dimen/space_15"
+    android:layout_marginTop="@dimen/space_20">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/space_10"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/space_10"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <in.binplus.travel.Fonts.LatoBLack
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/iconn" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_name"
+        android:hint="Enter Name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_4"
+        android:textSize="14sp"
+        android:background="@drawable/xml_textbox_bg"
+        android:ems="10"
+        android:fontFamily="@font/bold"
+        android:inputType="text"
+        android:singleLine="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <in.binplus.travel.Fonts.LatoBLack
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Franshise Name"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ImageView
+
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/iconn" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_f_name"
+        android:hint="Enter Franshise Name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_4"
+        android:textSize="14sp"
+        android:background="@drawable/xml_textbox_bg"
+        android:ems="10"
+        android:fontFamily="@font/bold"
+        android:inputType="text"
+        android:singleLine="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <in.binplus.travel.Fonts.LatoBLack
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile No."
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ImageView
+
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/iconn" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_mobile"
+        android:hint="Enter Mobile Number"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_4"
+        android:textSize="14sp"
+        android:background="@drawable/xml_textbox_bg"
+        android:ems="10"
+        android:fontFamily="@font/bold"
+        android:inputType="number"
+        android:maxLength="10"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <in.binplus.travel.Fonts.LatoBLack
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Id"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/iconn" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_email"
+        android:hint="Enter Email Id"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_4"
+        android:textSize="14sp"
+        android:background="@drawable/xml_textbox_bg"
+        android:ems="10"
+        android:fontFamily="@font/bold"
+        android:inputType="text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/tv_pro_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/iconnemail"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/iconn" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/et_address"
+        android:hint="Enter Address"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_4"
+        android:textSize="14sp"
+        android:fontFamily="@font/bold"
+        android:background="@drawable/xml_textbox_bg"
+       android:gravity="top"
+        android:inputType="text"
+        android:singleLine="false"/>
+
+
+
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="@dimen/space_10"
+        android:layout_marginRight="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_10"
+        android:text="Update"
+        android:fontFamily="@font/bold"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="@dimen/space_16"/>
+</LinearLayout>
+
+</FrameLayout>

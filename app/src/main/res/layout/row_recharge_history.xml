@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_5"
+    android:background="@drawable/xml_textbox_bg">
+
+
+        <RelativeLayout
+            android:id="@+id/img_icons"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="@dimen/space_5"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circleshape"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/space_5"
+                android:src="@drawable/icons8_get_cash_96px"
+                android:layout_weight="1"/></RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/img_icons"
+        android:layout_margin="@dimen/space_5">
+
+
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/request_amt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="Amount"
+            android:textStyle="bold"
+            android:textColor="@color/textcolor"/>
+
+<!--        <TextView-->
+<!--            android:id="@+id/transaction_date"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/space_5"-->
+<!--            android:textSize="@dimen/space_15"-->
+<!--            android:text="Date"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/textcolor"/>-->
+
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/request_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="Transaction Date "
+
+           />
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/request_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_18"
+            android:text="Status"
+            android:textStyle="bold"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/textcolor"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/transparent"
+
+    app:cardElevation="@dimen/space_5">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/xml_textbox_bg"
+        android:layout_margin="@dimen/space_5">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/vehicle_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="@dimen/space_16"
+                android:text=""
+                android:textColor="@color/textcolor"
+                android:layout_marginTop="@dimen/space_10"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_margin="@dimen/space_10"
+                android:id="@+id/vehicle_img"
+                android:backgroundTint="@color/colorPrimary"
+                android:scaleType="center"/>
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/vehicle_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textSize="@dimen/space_15"
+                android:text=""
+                android:textColor="@color/textcolor"
+                android:layout_marginTop="@dimen/space_10"
+               />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/xml_textbox_bg"
+    android:backgroundTint="@color/all">
+
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:scaleType="fitXY"-->
+<!--        android:src="@drawable/why"/>-->
+    <in.binplus.travel.Fonts.LatoBLack
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please let us know the reason for cancelling the Booking :"/>
+
+    <EditText
+        android:id="@+id/et_remark"
+         android:singleLine="false"
+        android:layout_margin="@dimen/space_10"
+        android:background="@drawable/xml_textbox_bg"
+        android:hint="Enter Remark"
+        android:gravity="top"
+        android:textSize="15dp"
+        android:fontFamily="@font/bold"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="end"
+        android:paddingBottom="@dimen/space_5"
+        android:layout_height="wrap_content">
+    <in.binplus.travel.Fonts.LatoBLack
+        android:id="@+id/btn_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_rounded_button"
+        android:padding="5dp"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:text="Proceed"
+        android:textColor="#fff"
+        android:textSize="15sp" />
+    <in.binplus.travel.Fonts.LatoBLack
+        android:id="@+id/btn_no"
+        android:layout_toRightOf="@id/btn_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_rounded_button"
+        android:padding="5dp"
+        android:backgroundTint="#D50525"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:text="Cancel"
+        android:textColor="#fff"
+        android:textSize="15sp" />
+    </RelativeLayout>
+
+</LinearLayout>

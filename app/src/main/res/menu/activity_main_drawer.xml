@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icons8_home_48px"
+            android:iconTint="@color/white"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/icons8_wallet_48px"
+            android:iconTint="@color/white"
+            android:title="Wallet" />
+        <item
+            android:id="@+id/nav_profiel"
+            android:icon="@drawable/icons8_male_user_48px"
+            android:iconTint="@color/white"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_Bookings"
+            android:icon="@drawable/icons8_order_history_60px"
+            android:iconTint="@color/white"
+            android:title="My Bookings" />
+        <item
+            android:id="@+id/nav_aboutus"
+            android:icon="@drawable/icons8_info_48px_1"
+            android:iconTint="@color/white"
+            android:title="About Us" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/icons8_online_support_60px"
+            android:iconTint="@color/white"
+            android:title="ContactUs" />
+        <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/icons8_terms_and_conditions_48px"
+            android:iconTint="@color/white"
+            android:title="Terms and Conditions" />
+
+        <item
+            android:id="@+id/nav_privacy"
+            android:icon="@drawable/icons8_secure_128px"
+            android:iconTint="@color/white"
+            android:title="Privacy Policy" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/icons8_shutdown_48px"
+            android:iconTint="@color/white"
+
+            android:title="Logout" />
+    </group>
+
+
+</menu>

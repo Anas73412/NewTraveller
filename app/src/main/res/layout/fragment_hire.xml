@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.HireFragment"
+    android:orientation="vertical">
+
+   <RelativeLayout
+
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <com.daimajia.slider.library.SliderLayout
+           android:id="@+id/slider_hire"
+           android:layout_width="match_parent"
+           android:layout_height="200dp"
+           android:background="@drawable/bus_banner"
+           app:indicator_visibility="visible"
+           />
+
+
+
+   </RelativeLayout>
+    <in.binplus.travel.Fonts.LatoBLack
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="@dimen/space_16"
+        android:text="Vehicle you can choose from :"
+        android:textColor="@color/textcolor"
+        android:layout_marginTop="@dimen/space_10"
+        android:textStyle="bold"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylcer_vehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_5"/>
+
+
+</LinearLayout>

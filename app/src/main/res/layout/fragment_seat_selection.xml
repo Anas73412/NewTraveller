@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.SeatSelectionFragment">
+
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/rec_sleeper"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+
+   <Button
+       android:id="@+id/btn_book"
+       android:textColor="@color/white"
+       android:textAllCaps="false"
+       android:text="Data"
+       android:layout_margin="30dp"
+       android:layout_below="@id/rec_sleeper"
+       android:backgroundTint="@color/colorAccent"
+       android:background="@drawable/xml_textbox_bg"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+</RelativeLayout>

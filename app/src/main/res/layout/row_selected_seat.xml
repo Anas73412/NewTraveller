@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/all">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:background="@drawable/xml_textbox_bg">
+        <ImageView
+            android:id="@+id/seat_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/armchair_32px"
+            android:layout_gravity="center_horizontal"
+            android:tint="@color/colorPrimary"
+            />
+        <RadioButton
+            android:id="@+id/radio_seat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"/>
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/seat_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="seat"
+
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/textcolor"/>
+<!--        <TextView-->
+<!--            android:id="@+id/txt_add_pass"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/space_5"-->
+<!--            android:textSize="@dimen/space_15"-->
+<!--            android:text="Add Passenger Detail"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textAlignment="center"-->
+<!--           android:layout_gravity="center_vertical"-->
+<!--            android:textColor="@color/textcolor"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/txt_pass_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/space_5"-->
+<!--            android:textSize="@dimen/space_15"-->
+<!--            android:text=""-->
+<!--            android:visibility="gone"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:textColor="@color/textcolor"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/txt_pass_age"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/space_5"-->
+<!--            android:textSize="@dimen/space_15"-->
+<!--            android:text="Add Passenger Detail"-->
+<!--            android:textStyle="bold"-->
+<!--            android:visibility="gone"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:textColor="@color/textcolor"/>-->
+    </LinearLayout>
+
+
+</RelativeLayout>

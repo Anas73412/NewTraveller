@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.TransactionHistory"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linear_trans"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginRight="@dimen/space_5"
+        android:layout_marginLeft="@dimen/space_5"
+        android:background="@color/gray"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+
+        android:orientation="horizontal">
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/transaction_id"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:layout_gravity="center"
+            android:text="Transaction Id "
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/textcolor"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/textcolor"
+            android:layout_marginTop="@dimen/space_5"
+            android:layout_marginBottom="@dimen/space_5"/>
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/trsaction_amt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="Amount"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/textcolor"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/textcolor"
+            android:layout_marginTop="@dimen/space_5"
+            android:layout_marginBottom="@dimen/space_5"/>
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/transaction_status"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="Status"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/textcolor"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/textcolor"
+            android:layout_marginTop="@dimen/space_5"
+            android:layout_marginBottom="@dimen/space_5"/>
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/transaction_date"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="Date"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/textcolor"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/all"
+        android:id="@+id/recycler_transaction"/>
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rel_norecord"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:src="@drawable/norecord"
+            android:layout_centerInParent="true"/>
+       <in.binplus.travel.Fonts.LatoBLack
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="No Records Found"
+           android:layout_below="@id/img"
+           android:layout_marginTop="-80dp"
+           android:textAlignment="center"
+           android:textSize="@dimen/space_20"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

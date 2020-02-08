@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragment.RequestRechargeFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/user_img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/cashback"
+            android:tint="@color/colorPrimary"
+            android:textAlignment="center" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <in.binplus.travel.Fonts.LatoBLack
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_5"
+            android:textSize="@dimen/space_15"
+            android:text="Enter Amount"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/space_20"
+            android:textColor="@color/textcolor"/>
+
+        <ImageView
+
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+
+            android:src="@drawable/iconn" />
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/et_amount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Amount"
+        android:textAlignment="gravity"
+        android:textSize="@dimen/space_18"
+        android:background="@color/white"
+        android:inputType="number"
+        android:fontFamily="@font/bold"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginLeft="@dimen/space_20"
+        android:layout_marginRight="@dimen/space_20"
+        android:padding="@dimen/space_5"/>
+
+    <Button
+        android:id="@+id/btnRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/bg_rounded_button"
+        android:padding="12dp"
+        android:gravity="center"
+        android:text="Request"
+        android:fontFamily="@font/bold"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16dp" />
+    <in.binplus.travel.Fonts.LatoBLack
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_5"
+        android:textSize="@dimen/space_13"
+        android:text="Your recharge request will be sent to Admin ."
+        android:layout_marginLeft="@dimen/space_20"
+        android:textColor="@android:color/darker_gray"/>
+
+
+
+</LinearLayout>

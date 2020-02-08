@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/space_5"
+   >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/xml_textbox_bg"
+       android:layout_marginLeft="@dimen/space_5"
+        android:layout_marginRight="@dimen/space_5"
+        android:layout_marginTop="@dimen/space_5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content">
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/tv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/space_16"
+                    android:text="time"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/colorPrimary"/>
+
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/tv_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/space_5"
+                    android:text="duration"
+                    android:textSize="@dimen/space_12"/>
+
+
+            </LinearLayout>
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/tv_price"
+                android:layout_weight="5"
+                android:textAlignment="textEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/space_16"
+                android:text="price"
+                android:padding="5dp"
+                android:layout_gravity="end"
+                android:layout_centerInParent="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/green_500"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/tv_comp_name"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/space_16"
+                android:text="name"
+                android:paddingLeft="5dp"
+                android:textColor="@color/textcolor"/>
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/tv_seats"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:gravity="end"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/space_12"
+                android:text="name"
+                android:paddingLeft="5dp"
+                android:textColor="@color/textcolor"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/tv_type"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/space_11"
+                android:text="name"
+                android:paddingLeft="5dp"
+                android:textColor="@color/textcolor"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:rowCount="4"
+            android:visibility="gone"
+            >
+           <ImageView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="30dp"
+               android:src="@drawable/icons8_cooling_100px"
+               android:layout_marginLeft="@dimen/space_10"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:src="@drawable/icons8_cooling_100px"
+                android:layout_marginLeft="@dimen/space_10"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:src="@drawable/icons8_cooling_100px"
+                android:layout_marginLeft="@dimen/space_10"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:src="@drawable/icons8_cooling_100px"
+                android:layout_marginLeft="@dimen/space_10"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

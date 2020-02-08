@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00264D</color>
+    <color name="colorPrimaryDark">#00264D</color>
+    <color name="colorAccent">#0052A2</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#E3E3E3</color>
+    <color name="textcolor">#000000</color>
+    <color name="bgcolor2">#eff0f4</color>
+    <color name="dark_black">#000000</color>
+    <color name="dark_gray">#FFBAB7B7</color>
+    <color name="color_1">#1bdc84</color>
+    <color name="color_2">#1b4ddc</color>
+    <color name="color_3">#ff0023</color>
+    <color name="orange">#ffbb00</color>
+    <color name="yelow">#ffee05</color>
+    <color name="purple">#ed0bc0</color>
+    <color name="color_cancel">#FF5576</color>
+    <color name="green">#6fb70f</color>
+    <color name="light_gray">#c7c5c5</color>
+    <color name="contact_name">#333333</color>
+    <color name="contact_number">#8c8c8c</color>
+    <color name="contact">#A09F9F</color>
+    <color name="all">#f2f3f4</color>
+    <color name="tot">#2E7731</color>
+    <color name="orange1">#c45b10</color>
+    <color name="red_switch">#FFBAB7B7</color>
+    <color name="green_switch">#00264D</color>
+
+    <color name="grey_5">#f2f2f2</color>
+    <color name="grey_20">#cccccc</color>
+    <color name="grey_40">#999999</color>
+    <color name="grey_60">#666666</color>
+    <color name="grey_90">#263238</color>
+
+    <color name="green_500">#4CAF50</color>
+    <color name="red_600">#E53935</color>
+
+</resources>

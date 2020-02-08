@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.DocumentsFragment">
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+          <in.binplus.travel.Fonts.LatoBLack
+              android:layout_marginTop="@dimen/space_20"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/space_5"
+              android:textSize="@dimen/space_18"
+              android:text="Your Documents :"
+              android:textStyle="bold"
+             android:layout_marginLeft="@dimen/space_10"
+              android:textColor="@color/textcolor"/>
+
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_margin="@dimen/space_5"
+              android:weightSum="2">
+              <in.binplus.travel.Fonts.LatoBLack
+
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/space_5"
+                  android:textSize="@dimen/space_15"
+                  android:text="Adhaar Card:"
+                  android:textStyle="bold"
+                  android:textAlignment="viewEnd"
+                  android:textColor="@color/textcolor"/>
+              <in.binplus.travel.Fonts.LatoBLack
+                  android:id="@+id/adhaar_no"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/space_5"
+                  android:textSize="@dimen/space_15"
+                  android:text=""
+                  android:textStyle="bold"
+                  android:textAlignment="viewStart"
+                  android:textColor="@color/textcolor"/>
+
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="200dp"
+              android:orientation="horizontal"
+              android:layout_marginRight="@dimen/space_5"
+              android:layout_marginLeft="@dimen/space_5"
+              android:weightSum="2">
+              <ImageView
+                  android:id="@+id/adhar_front"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="match_parent"/>
+              <ImageView
+                  android:id="@+id/adhar_back"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="match_parent"/>
+
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_margin="@dimen/space_5"
+              android:weightSum="2">
+              <in.binplus.travel.Fonts.LatoBLack
+
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/space_5"
+                  android:textSize="@dimen/space_15"
+                  android:text="Pan Card:"
+                  android:textStyle="bold"
+                  android:textAlignment="viewEnd"
+                  android:textColor="@color/textcolor"/>
+              <in.binplus.travel.Fonts.LatoBLack
+                  android:id="@+id/pancard_no"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/space_5"
+                  android:textSize="@dimen/space_15"
+                  android:text=""
+                  android:textStyle="bold"
+                  android:textAlignment="viewStart"
+                  android:textColor="@color/textcolor"/>
+
+          </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="200dp"
+              android:orientation="horizontal"
+              android:layout_marginLeft="@dimen/space_5"
+              android:layout_marginRight="@dimen/space_5"
+              android:weightSum="2">
+              <ImageView
+                  android:id="@+id/img_pan"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="match_parent"/>
+              <ImageView
+
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="match_parent"/>
+
+          </LinearLayout>
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/recycler_docs"
+              android:layout_margin="@dimen/space_10"
+              android:visibility="gone"/>
+
+          <in.binplus.travel.Fonts.LatoBLack
+              android:layout_marginTop="@dimen/space_20"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/space_5"
+              android:textSize="@dimen/space_15"
+              android:text="Upload new Documents"
+              android:textStyle="bold"
+             android:layout_marginLeft="@dimen/space_10"
+              android:visibility="gone"
+              android:textColor="@color/textcolor"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rel_upload">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+          <in.binplus.travel.Fonts.LatoBLack
+
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/space_5"
+              android:textSize="@dimen/space_15"
+              android:text="Select documents"
+              android:layout_marginLeft="@dimen/space_10"
+              android:visibility="gone"
+              android:textColor="@color/textcolor"/>
+          <Spinner
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:background="@drawable/xml_textbox_bg"
+              android:layout_marginLeft="@dimen/space_20"
+              android:layout_marginRight="@dimen/space_20"
+              android:layout_marginTop="@dimen/space_10"/>
+          <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Upload"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginTop="@dimen/space_10"
+              android:background="@color/colorPrimary"
+              android:textColor="@color/white"
+              android:padding="@dimen/space_10"
+              android:visibility="gone"
+              android:fontFamily="@font/bold"
+              android:textAllCaps="false"
+              android:layout_marginEnd="@dimen/space_20"/>
+    </LinearLayout>
+</RelativeLayout>
+
+          <RelativeLayout
+              android:id="@+id/rel_upload_doc"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:visibility="gone"
+              android:layout_marginLeft="@dimen/space_10"
+              android:layout_marginRight="@dimen/space_10">
+              <in.binplus.travel.Fonts.LatoBLack
+                  android:layout_marginTop="@dimen/space_20"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/space_5"
+                  android:textSize="@dimen/space_15"
+                  android:text="Upload Document Details"
+                  android:textStyle="bold"
+                  android:layout_marginLeft="@dimen/space_10"
+                  android:textColor="@color/textcolor"/>
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="@dimen/space_10"
+                  >
+
+                  <RelativeLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="50dp"
+                      android:layout_marginLeft="@dimen/space_20"
+                      android:layout_marginRight="@dimen/space_20"
+
+                      android:orientation="horizontal">
+
+
+                  <in.binplus.travel.Fonts.LatoBLack
+                      android:id="@+id/doc_name"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=" Adhaar Card :"
+                      android:textSize="@dimen/space_15"
+                      android:padding="@dimen/space_5"
+                        android:layout_marginTop="@dimen/space_5"
+                      android:textColor="@color/textcolor"
+                      android:textStyle="bold"/>
+                  <EditText
+                      android:id="@+id/adhar_id"
+                      android:layout_below="@+id/doc_name"
+                      android:background="@drawable/xml_textbox_bg"
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:layout_toLeftOf="@+id/rel_img"
+                      android:layout_marginRight="@dimen/space_20"
+                      android:textSize="@dimen/space_15"
+                      android:padding="@dimen/space_5"
+                      android:hint=" Enter adhaar no"
+                      android:fontFamily="@font/bold"
+                      android:textAlignment="center"
+                      android:layout_marginTop="@dimen/space_10"
+                      android:textColor="@color/textcolor"
+                      android:textStyle="bold"/>
+                  <RelativeLayout
+                      android:id="@+id/rel_img"
+                      android:layout_alignParentEnd="true"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:background="@drawable/xml_textbox_bg">
+                  <ImageView
+                      android:id="@+id/img_adhar"
+                      android:layout_width="100dp"
+                      android:layout_height="100dp"
+                      android:layout_margin="@dimen/space_1"
+                      android:background="@drawable/uploadimage"
+                      android:padding="@dimen/space_5"
+                      />
+                  </RelativeLayout>
+                  </RelativeLayout>
+
+
+              </LinearLayout>
+          </RelativeLayout>
+
+      </LinearLayout>
+  </ScrollView>
+
+
+</FrameLayout>

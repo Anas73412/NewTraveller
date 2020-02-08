@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="2.5"
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/seat_1"
+                android:src="@drawable/sleeper"
+                android:tint="@color/dark_gray"
+                android:layout_weight="2"
+                android:padding="@dimen/space_5"
+                android:layout_width="0dp"
+
+                android:layout_height="80dp"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:gravity="end"
+            android:layout_gravity="end"
+
+            android:layout_weight="7.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:weightSum="9"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/seat_2"
+                        android:src="@drawable/sleeper"
+                        android:tint="@color/dark_gray"
+                        android:layout_weight="2"
+                        android:padding="@dimen/space_5"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"/>
+                    <ImageView
+                        android:id="@+id/seat_3"
+                        android:src="@drawable/sleeper"
+                        android:tint="@color/dark_gray"
+                        android:layout_weight="2"
+                        android:padding="@dimen/space_5"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
