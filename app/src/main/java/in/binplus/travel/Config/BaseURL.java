@@ -30,6 +30,7 @@ public class BaseURL {
     public  static String GET_RECHARGE_REQUEST = BASE_URL+"request_recharge_wallet";
     public  static String GET_RECHARGE_HISTORY = BASE_URL+"allrecharge_history";
     public  static String MAKE_BOOKING = BASE_URL+"add_bookings";
+    public  static String MAKE_ENQUIRY = BASE_URL+"set_enquiry";
     public  static String UPDATE_DOCUMENTS = BASE_URL+"update_docs";
     public  static String GET_DOCUMENTS = BASE_URL+"get_user_details";
 

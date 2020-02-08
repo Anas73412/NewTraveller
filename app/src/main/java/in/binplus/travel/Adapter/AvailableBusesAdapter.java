@@ -46,9 +46,27 @@ public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAd
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         AvailableBusesModel model = buslist.get( position );
 
-        holder.tv_time.setText(getTimeInFormat(model.getFrom_time()) +" - "+getTimeInFormat(model.getTo_time()));
+
         holder.tv_comp_name.setText(model.getCompany_name());
-        holder.tv_duration.setText(getTimeDuration(getTimeInFormat(model.getFrom_time()),getTimeInFormat(model.getTo_time())));
+        if (model.getV_type().equalsIgnoreCase( "car" )) {
+            holder.tv_time.setText( model.getVehicle_name() );
+            holder.tv_duration.setVisibility( View.GONE );
+        }
+        else {
+
+        if (model.getFrom_time().equals( "" ) || model.getTo_time().equals( "" )) {
+
+            holder.tv_time.setText( model.getVehicle_name() );
+            holder.tv_duration.setVisibility( View.GONE );
+        }
+
+             else {
+
+                holder.tv_time.setText( getTimeInFormat( model.getFrom_time() ) + " - " + getTimeInFormat( model.getTo_time() ) );
+                holder.tv_duration.setText( getTimeDuration( getTimeInFormat( model.getFrom_time() ), getTimeInFormat( model.getTo_time() ) ) );
+            }
+        }
+
         holder.tv_price.setText("From : "+activity.getResources().getString(R.string.currency)+model.getSeat_fare());
         holder.tv_seats.setText("available seat : "+model.getTotal_seats());
         holder.tv_type.setText(model.getVehicle_type() +" "+model.getSitting_type());
