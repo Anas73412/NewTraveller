@@ -36,7 +36,7 @@ public class BookingActivity extends AppCompatActivity implements View.OnClickLi
     public static TextView txt_from , txt_to ,txt_date ;
     RadioButton radio_car,radio_bus, radio_sharing;
     public String vehicle_type ="" ;
-    public ImageView back ;
+     ImageView back ;
     Button btn_search ;
     private int mYear, mMonth, mDay;
     RelativeLayout rel_swap ;
