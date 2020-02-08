@@ -154,17 +154,17 @@ public class CarBookingActivity extends AppCompatActivity {
                     txt_mobile.requestFocus();
                     txt_mobile.setError( "Enter Valid Mobile No" );
                 }
-                else if (address.isEmpty())
-                {
-                    txt_address.setError( "Enter Address" );
-                    txt_address.requestFocus();
-                }
+//                else if (address.isEmpty())
+//                {
+//                    txt_address.setError( "Enter Address" );
+//                    txt_address.requestFocus();
+//                }
                 else if (adhar_id.isEmpty())
                 {
                     txt_adhar_id.setError( "Enter Adhaar id" );
                     txt_adhar_id.requestFocus();
                 }
-                else if (adhar_id.length()<12)
+                else if (adhar_id.length()!=12)
                 {
                     txt_adhar_id.setError( "Enter valid Adhaar id" );
                     txt_adhar_id.requestFocus();
@@ -175,10 +175,10 @@ public class CarBookingActivity extends AppCompatActivity {
 
 
                     makeEnquiry();
-//
-                }
-//                makeEnquiry();
 
+                }
+////                makeEnquiry();
+//
             }
         } );
 
@@ -292,3 +292,4 @@ public class CarBookingActivity extends AppCompatActivity {
 //    }
 
 }
+
