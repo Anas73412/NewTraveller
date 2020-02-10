@@ -62,16 +62,18 @@ public class SleeperAdapter extends RecyclerView.Adapter<SleeperAdapter.ViewHold
                 if(seat_number ==1)
                 {
                     holder.seat_1.setBackgroundColor(activity.getResources().getColor(R.color.orange));
+                    holder.seat_1.setClickable(false);
 
                 }
                 else if(seat_number == 2)
                 {
                     holder.seat_2.setBackgroundColor(activity.getResources().getColor(R.color.orange));
-
+                    holder.seat_2.setClickable(false);
                 }
                 else
                 {
                     holder.seat_3.setBackgroundColor(activity.getResources().getColor(R.color.orange));
+                    holder.seat_3.setClickable(false);
                 }
                  }
             else {

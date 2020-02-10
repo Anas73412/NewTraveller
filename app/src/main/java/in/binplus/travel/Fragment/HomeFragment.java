@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -41,6 +42,7 @@ import in.binplus.travel.Config.BaseURL;
 import in.binplus.travel.Config.Module;
 import in.binplus.travel.CustomSlider;
 import in.binplus.travel.R;
+import in.binplus.travel.ScanQrCodeActivity;
 import in.binplus.travel.networkconnectivity.NetworkConnection;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
 import in.binplus.travel.util.Session_management;
@@ -65,7 +67,7 @@ public class HomeFragment extends Fragment
     Double wallet ;
     Session_management session_management ;
     SliderLayout imgSlider;
-
+    Button btn_qr;
 
     @Nullable
     @Override
@@ -83,6 +85,7 @@ public class HomeFragment extends Fragment
         active_switch=view.findViewById( R.id.available_status );
         imgSlider = view.findViewById( R.id.home_slider );
         txt_wallet = view.findViewById( R.id.txt_amount );
+        btn_qr = view.findViewById( R.id.btn_qr );
         module = new Module( getActivity());
         loadingBar = new ProgressDialog( getActivity() );
         loadingBar.setMessage( "Loading" );
@@ -194,6 +197,14 @@ public class HomeFragment extends Fragment
             }
         } );
 
+        btn_qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(getActivity(), ScanQrCodeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

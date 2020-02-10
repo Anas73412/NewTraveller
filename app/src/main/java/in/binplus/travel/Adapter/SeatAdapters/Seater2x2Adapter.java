@@ -60,20 +60,22 @@ public class Seater2x2Adapter extends RecyclerView.Adapter<Seater2x2Adapter.View
                 if(seat_number ==1)
                 {
                     holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.orange) ) );
-
+                    holder.seat_1.setClickable( false );
                 }
                 else if(seat_number == 2)
                 {
                     holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.orange) ) );
-                    holder.seat_1.setClickable( false );
+                    holder.seat_2.setClickable( false );
                 }
                 else if(seat_number == 3)
                 {
                     holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.orange) ) );
+                    holder.seat_3.setClickable( false );
                 }
                 else
                 {
                     holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.orange) ) );
+                    holder.seat_4.setClickable( false );
                 }
             }
             else {
