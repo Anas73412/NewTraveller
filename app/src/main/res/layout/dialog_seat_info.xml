@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="@color/white"
+        android:layout_width="match_parent"
+        android:padding="@dimen/space_5"
+        app:cardCornerRadius="@dimen/space_10"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="@dimen/space_5"
+        android:weightSum="12"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/seat_1"
+                android:padding="@dimen/space_2"
+                android:tint="@color/dark_gray"
+                android:src="@drawable/armchair_32px"
+                android:layout_height="50dp"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:text="Seater"
+                android:textSize="@dimen/space_11"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/seat_2"
+                android:padding="@dimen/space_2"
+                android:tint="@color/red_600"
+                android:src="@drawable/armchair_32px"
+                android:layout_height="50dp"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:text="Occupied"
+                android:textSize="@dimen/space_11"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_marginLeft="@dimen/space_2"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/seat_3"
+                android:padding="@dimen/space_2"
+                android:tint="@color/green_500"
+                android:src="@drawable/armchair_32px"
+                android:layout_height="50dp"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:text="Selected"
+                android:textSize="@dimen/space_11"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_marginLeft="@dimen/space_2"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/seat_4"
+                android:padding="@dimen/space_2"
+                android:tint="@color/dark_gray"
+                android:src="@drawable/sleeper"
+                android:layout_height="50dp"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:text="Sleeper"
+                android:textSize="@dimen/space_11"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_marginLeft="@dimen/space_2"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/seat_5"
+                android:padding="@dimen/space_2"
+                android:tint="@color/dark_gray"
+                android:src="@drawable/semi_seat"
+                android:layout_height="50dp"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:text="Semi Sleeper"
+                android:textSize="@dimen/space_11"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/seat_close"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/space_2"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/close"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"/>
+
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

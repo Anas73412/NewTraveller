@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -46,6 +48,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     ImageView back;
     TextView title ;
     ImageView img_bus;
+    Dialog dialog;
     public static TextView txt_vehicle_name, tv_seats, tv_upr_seats;
     int birth_type = 0;
     ArrayList<String> upperSeatList=new ArrayList<>();
@@ -53,7 +56,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     ArrayList<String> sleeperSeaterUpperSeatList=new ArrayList<>();
     ArrayList<String> sleeperSeaterLowerSeatList=new ArrayList<>();
     ArrayList<String> remainSeats=new ArrayList<>();
-
+    ImageView img_info;
     Module module;
     String availabe_seats="";
     double seat_fare = 0;
@@ -72,7 +75,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     public static ArrayList<String> seat_list = new ArrayList<>();
     ArrayList<String> receiver_seat_list = new ArrayList<>();
     Button btn_ok;
-   public static String bus_id = "";
+    public static String bus_id = "";
     String layout = "", sitting_type = "";
     RelativeLayout rel_birth, rel_lower_seats, rel_upper_sheats;
     public static ArrayList<StopsModel> selected_seat_list;
@@ -113,6 +116,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
 //        img_bus = findViewById(R.id.img_buses);
         txt_vehicle_name = findViewById(R.id.bus_detail);
         tv_seats = findViewById(R.id.tv_seats);
+        img_info = findViewById(R.id.img_info);
         tv_upr_seats = findViewById(R.id.tv_upr_seats);
         loadingBar = new ProgressDialog(activity);
         loadingBar.setMessage("Loading...");
@@ -134,6 +138,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
         btn_ok.setOnClickListener(this);
         btn_upper.setOnClickListener(this);
         back.setOnClickListener(this);
+        img_info.setOnClickListener(this);
     }
 
     @Override
@@ -385,6 +390,27 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
         } else if (id == R.id.back) {
             finish();
         }
+        else if( id == R.id.img_info)
+        {
+            createInfoDialog();
+        }
+    }
+
+    private void createInfoDialog() {
+
+        dialog=new Dialog(SelectSeatActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_seat_info);
+        dialog.show();
+
+        ImageView seat_close=(ImageView)dialog.findViewById(R.id.seat_close);
+        seat_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+            }
+        });
     }
 
     @Override
