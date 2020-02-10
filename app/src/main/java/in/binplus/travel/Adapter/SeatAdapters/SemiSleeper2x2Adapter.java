@@ -55,15 +55,21 @@ public class SemiSleeper2x2Adapter extends RecyclerView.Adapter<SemiSleeper2x2Ad
                 int seat_number = Integer.parseInt( s[2].toString() );
 
                 if (seat_number == 1) {
-                    holder.seat_1.setBackgroundColor( activity.getResources().getColor( R.color.orange ) );
+                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_1.setClickable( false );
 
                 } else if (seat_number == 2) {
-                    holder.seat_2.setBackgroundColor( activity.getResources().getColor( R.color.orange ) );
-                    holder.seat_1.setClickable( false );
+                    holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_2.setClickable( false );
+
                 } else if (seat_number == 3) {
-                    holder.seat_3.setBackgroundColor( activity.getResources().getColor( R.color.orange ) );
+                    holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_3.setClickable( false );
+
                 } else {
-                    holder.seat_4.setBackgroundColor( activity.getResources().getColor( R.color.orange ) );
+                    holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_4.setClickable( false );
+
                 }
             } else {
 
@@ -81,13 +87,13 @@ public class SemiSleeper2x2Adapter extends RecyclerView.Adapter<SemiSleeper2x2Ad
                 else {
                 if(module.getSeatDeseletct(seat_list,module.getRowData(position)+"1"))
                 {
-                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.white) ) );
+                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.dark_gray) ) );
                     seat_list.remove(module.getSeatListPosition(seat_list,module.getRowData(position)+"1"));
 
                 }
                 else {
 
-                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.dark_black) ) );
+                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.green_500) ) );
                     seat_list.add(module.getRowData(position) + "1");
                 }
                 updateintent();}
@@ -110,7 +116,7 @@ public class SemiSleeper2x2Adapter extends RecyclerView.Adapter<SemiSleeper2x2Ad
                 }
                 else {
 
-                    holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.dark_black) ) );
+                    holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.green_500) ) );
                     seat_list.add(module.getRowData(position) + "2");
                 }
                 updateintent();
@@ -127,12 +133,12 @@ public class SemiSleeper2x2Adapter extends RecyclerView.Adapter<SemiSleeper2x2Ad
                 }
                 else {
                     if (module.getSeatDeseletct( seat_list, module.getRowData( position ) + "3" )) {
-                        holder.seat_3.setBackgroundColor( activity.getResources().getColor( R.color.white ) );
+                        holder.seat_3.setBackgroundColor( activity.getResources().getColor( R.color.dark_gray ) );
                         seat_list.remove( module.getSeatListPosition( seat_list, module.getRowData( position ) + "3" ) );
 
                     } else {
 
-                        holder.seat_3.setBackgroundColor( activity.getResources().getColor( R.color.dark_black) );
+                        holder.seat_3.setBackgroundColor( activity.getResources().getColor( R.color.green_500) );
                         seat_list.add( module.getRowData( position ) + "3" );
                     }
                     updateintent();
@@ -149,12 +155,12 @@ public class SemiSleeper2x2Adapter extends RecyclerView.Adapter<SemiSleeper2x2Ad
                 }
                 else {
                     if (module.getSeatDeseletct( seat_list, module.getRowData( position ) + "4" )) {
-                        holder.seat_4.setBackgroundColor( activity.getResources().getColor( R.color.white ) );
+                        holder.seat_4.setBackgroundColor( activity.getResources().getColor( R.color.dark_gray ) );
                         seat_list.remove( module.getSeatListPosition( seat_list, module.getRowData( position ) + "4" ) );
 
                     } else {
 
-                        holder.seat_4.setBackgroundColor( activity.getResources().getColor( R.color.dark_black ) );
+                        holder.seat_4.setBackgroundColor( activity.getResources().getColor( R.color.green_500 ) );
                         seat_list.add( module.getRowData( position ) + "4" );
                     }
                     updateintent();
