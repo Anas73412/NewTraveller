@@ -7,24 +7,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@drawable/xml_textbox_bg">
-        <ImageView
-            android:id="@+id/seat_img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/armchair_32px"
-            android:layout_gravity="center_horizontal"
-            android:tint="@color/colorPrimary"
-            />
-        <RadioButton
+<!--        <ImageView-->
+<!--            android:id="@+id/seat_img"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/armchair_32px"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:tint="@color/colorPrimary"-->
+<!--            />-->
+        <CheckBox
             android:id="@+id/radio_seat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+
             android:layout_gravity="center_horizontal"/>
         <in.binplus.travel.Fonts.LatoBLack
-            android:id="@+id/seat_no"
+            android:id="@+id/stop_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/space_5"

@@ -1,7 +1,6 @@
 package in.binplus.travel;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,20 +17,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.android.material.tabs.TabItem;
-import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import in.binplus.travel.Adapter.SeatAdapters.Seater2x2Adapter;
 import in.binplus.travel.Adapter.SeatAdapters.Seater3x2Adapter;
@@ -40,11 +35,8 @@ import in.binplus.travel.Adapter.SeatAdapters.SemiSleeper3x2Adapter;
 import in.binplus.travel.Adapter.SeatAdapters.SleeperAdapter;
 import in.binplus.travel.Adapter.SeatAdapters.SleeperSeaterAdapter;
 import in.binplus.travel.Adapter.SeatAdapters.SleeperSeaterUpperAdapter;
-import in.binplus.travel.Adapter.SelectedSeatAdapter;
 import in.binplus.travel.Config.Module;
-import in.binplus.travel.Fragment.RestoHomeFragment;
-import in.binplus.travel.Fragment.SeatSelectionFragment;
-import in.binplus.travel.Model.SeatModel;
+import in.binplus.travel.Model.StopsModel;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
 import in.binplus.travel.util.ToastMsg;
 
@@ -83,7 +75,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
    public static String bus_id = "";
     String layout = "", sitting_type = "";
     RelativeLayout rel_birth, rel_lower_seats, rel_upper_sheats;
-    public static ArrayList<SeatModel> selected_seat_list;
+    public static ArrayList<StopsModel> selected_seat_list;
 
     public static String id ,vehicle_type,vehicle_name ,total_seats,destination,source,end_time,start_time,bus_no,bus_desc,agency_name,date,price;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonalBookingActivity">
+    tools:context=".CarBookingActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/back"
                 android:id="@+id/title"
-                android:text="Booking Details"
+                android:text="Book your Car"
                 android:layout_centerVertical="true"
                 android:textColor="@color/white"
                 android:layout_marginLeft="@dimen/space_5"
@@ -50,7 +50,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:elevation="@dimen/space_5"
         >
         <LinearLayout
@@ -83,6 +82,12 @@
                     android:text="to-from"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icons8_right_80px"
+                    android:layout_centerHorizontal="true"
+                   />
                 <TextView
                     android:id="@+id/txt_to"
                     android:layout_width="wrap_content"
@@ -94,16 +99,17 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"/>
             </RelativeLayout>
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:src="@drawable/icons8_right_80px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="-20dp"/>
+<!--            <ImageView-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:src="@drawable/icons8_right_80px"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="-20dp"/>-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-15dp">
+                android:layout_marginTop="-15dp"
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/time_from"
                     android:layout_width="wrap_content"
@@ -131,36 +137,17 @@
                 android:background="@color/gray"
                 android:layout_marginLeft="@dimen/space_5"
                 android:layout_marginRight="@dimen/space_5"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/space_5"
-                    android:textSize="@dimen/space_16"
-                    android:text="Total Amount :"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"/>
-                <TextView
-                    android:id="@+id/txt_tot_price"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/space_5"
-                    android:textSize="@dimen/space_16"
-                    android:text="to-from"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"/>
-            </RelativeLayout>
-
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_stops"
+            android:layout_margin="15dp"/>
+
+
+
     <TextView
 
         android:layout_width="wrap_content"
@@ -192,7 +179,8 @@
         android:padding="@dimen/space_5"
         android:layout_marginTop="@dimen/space_10"
         android:textColor="@color/textcolor"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
     <EditText
         android:id="@+id/et_mobile"
         android:hint="Enter Mobile"
@@ -205,7 +193,8 @@
         android:ems="10"
         android:inputType="number"
         android:maxLength="10"
-        android:singleLine="true"/>
+        android:singleLine="true"
+       />
     <TextView
 
         android:layout_width="wrap_content"
@@ -214,7 +203,8 @@
         android:textSize="@dimen/space_13"
         android:padding="@dimen/space_5"
         android:textColor="@color/textcolor"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:visibility="gone"/>
     <EditText
         android:id="@+id/et_address"
         android:hint="Enter Address"
@@ -227,6 +217,7 @@
         android:ems="10"
         android:gravity="top"
         android:inputType="text"
+        android:visibility="gone"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -249,6 +240,57 @@
         android:inputType="number"
         android:maxLength="12"
         android:singleLine="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Special Requirements(if any):"
+            android:textSize="@dimen/space_13"
+            android:padding="@dimen/space_5"
+            android:textColor="@color/textcolor"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_message"
+            android:hint="Enter your requirements"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="@dimen/space_5"
+            android:layout_marginTop="@dimen/space_4"
+            android:textSize="14sp"
+            android:gravity="top"
+            android:background="@drawable/xml_textbox_bg"
+            android:ems="10"
+            android:maxLength="12"
+            android:singleLine="false"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_5"
+                android:textSize="@dimen/space_16"
+                android:text="Total Amount :"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"/>
+            <TextView
+                android:id="@+id/txt_tot_price"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_5"
+                android:textSize="@dimen/space_16"
+                android:text="to-from"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
+        </RelativeLayout>
+
+
     </LinearLayout>
     </ScrollView>
     <Button

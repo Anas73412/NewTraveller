@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -55,6 +54,8 @@ ArrayList<AvailableBusesModel> non_ac_list;
 ArrayList<AvailableBusesModel> seater_list;
 ArrayList<AvailableBusesModel> sleeper_list;
 ArrayList<AvailableBusesModel> semi_sleeper_list;
+ArrayList<AvailableBusesModel> car_list ;
+ArrayList<AvailableBusesModel> sharing_list ;
 Context ctx=AllBusActivity.this;
 AvailableBusesAdapter adapter;
 Module module;
@@ -66,10 +67,10 @@ Module module;
         initViews();
 
 //
-//        date = getIntent().getStringExtra( "date" );
-//        source= getIntent().getStringExtra( "source" );
-//        destination=getIntent().getStringExtra( "destination" );
-//        type = getIntent().getStringExtra("type");
+        date = getIntent().getStringExtra( "date" );
+        source= getIntent().getStringExtra( "source" );
+        destination=getIntent().getStringExtra( "destination" );
+        type = getIntent().getStringExtra("type");
 
 
 
@@ -108,16 +109,19 @@ Module module;
                     model=semi_sleeper_list.get(position);
                 }
 
-                if (model.getVehicle_type().equalsIgnoreCase( "car" ))
+                if (model.getV_type().equalsIgnoreCase( "car" ))
                 {
-                    intent = new Intent( ctx, PersonalBookingActivity.class );
+                    intent = new Intent( ctx, CarBookingActivity.class );
                    // new ToastMsg(ctx).toastIconSuccess("car"+"\n"+list_type+"\n"+model.getCompany_name());
                 }
                 else {
                  //   new ToastMsg(ctx).toastIconSuccess("not car"+"\n"+list_type+"\n"+model.getCompany_name());
                    intent = new Intent( ctx, SelectSeatActivity.class );
-                   intent.putExtra("id",model.getId());
-                    intent.putExtra( "vehicle_type",model.getVehicle_type() );
+
+
+                }
+                intent.putExtra("id",model.getId());
+                intent.putExtra( "vehicle_type",model.getVehicle_type() );
                 intent.putExtra( "vehicle_name",model.getVehicle_name() );
                 intent.putExtra( "total_seats",model.getTotal_seats() );
                 intent.putExtra( "station_to",destination);
@@ -133,8 +137,6 @@ Module module;
 //                intent.putExtra( "bus_image",model.get );
 //                intent.putExtra( "stops",model.getStops() );
 //                intent.putExtra( "bus_id",model.getBus_id() );
-
-                }
                 startActivity(intent);
 
 
@@ -188,6 +190,8 @@ Module module;
         seater_list=new ArrayList<>();
         sleeper_list=new ArrayList<>();
         semi_sleeper_list=new ArrayList<>();
+        car_list = new ArrayList<>(  );
+        sharing_list = new ArrayList<>(  );
         filter_list.add(tv_filter_all);
         filter_list.add(tv_filter_ac);
         filter_list.add(tv_filter_nonac);
@@ -282,13 +286,39 @@ Module module;
                          model.setV_type(object.getString("v_type"));
                          model.setVehicles_path(object.getString("vehicles_path"));
                      //    model.setVehicles_end(object.getString("vehicles_end"));
-                         model.setFrom_time(object.getString("from_time"));
-                         model.setTo_time(object.getString("to_time"));
+                         if (object.getString( "from_time" ).equalsIgnoreCase( "null" )
+                                 || object.getString("from_time" ).isEmpty()
+                         ||object.getString("from_time" ).equals( "" ))
+                         {
+                             model.setFrom_time("");
+                         }
+                         else
+                         {
+                             model.setFrom_time(object.getString("from_time"));
+                         }
+
+                         if (object.getString( "to_time" ).equalsIgnoreCase( "null" )
+                                 || object.getString("to_time" ).isEmpty()
+                          || object.getString("to_time" ).equals( "" ))
+                         {
+                             model.setTo_time("");
+                         }
+                         else
+                         {
+
+                             model.setTo_time(object.getString("to_time"));
+                         }
+
+
                          model.setTotal_seats(object.getString("total_seats"));
                          model.setSeat_fare(object.getString("seat_fare"));
-
                          String sitting_type=object.getString("sitting_type");
                          String vehicle_type=object.getString("vehicle_type");
+                         String v_type = object.getString( "v_type" );
+                         if (v_type.equalsIgnoreCase( "Car" ))
+                         {
+                             car_list.add( model );
+                         }
 
                          if(sitting_type.equalsIgnoreCase("Sleeper"))
                          {

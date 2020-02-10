@@ -16,9 +16,8 @@
             android:name=".VerificationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AllBusActivity" />
-        <activity android:name=".PersonalBookingActivity" />
+        <activity android:name=".CarBookingActivity" />
         <activity android:name=".BookingConfirmation" />
-        <activity android:name=".EnterPassengerDetails" />
         <activity android:name=".ScanQrCodeActivity" />
         <activity android:name=".OtpVerificationActivity" />
         <activity android:name=".MobileVerificationActivity" />
