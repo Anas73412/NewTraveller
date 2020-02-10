@@ -61,18 +61,18 @@ public class SleeperAdapter extends RecyclerView.Adapter<SleeperAdapter.ViewHold
 
                 if(seat_number ==1)
                 {
-                    holder.seat_1.setBackgroundColor(activity.getResources().getColor(R.color.orange));
+                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
                     holder.seat_1.setClickable(false);
 
                 }
                 else if(seat_number == 2)
                 {
-                    holder.seat_2.setBackgroundColor(activity.getResources().getColor(R.color.orange));
+                    holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
                     holder.seat_2.setClickable(false);
                 }
                 else
                 {
-                    holder.seat_3.setBackgroundColor(activity.getResources().getColor(R.color.orange));
+                    holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
                     holder.seat_3.setClickable(false);
                 }
                  }
@@ -103,7 +103,7 @@ public class SleeperAdapter extends RecyclerView.Adapter<SleeperAdapter.ViewHold
                         seat_list.remove( getSeatListPosition( seat_list, seat_no ) );
 
                     } else {
-                        holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_black ) ) );
+                        holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
                         seat_list.add( seat_no );
 
                     }
@@ -130,7 +130,7 @@ public class SleeperAdapter extends RecyclerView.Adapter<SleeperAdapter.ViewHold
                         seat_list.remove( getSeatListPosition( seat_list, seat_no ) );
 
                     } else {
-                        holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_black ) ) );
+                        holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
 
                         seat_list.add( seat_no );
                     }
@@ -158,7 +158,7 @@ public class SleeperAdapter extends RecyclerView.Adapter<SleeperAdapter.ViewHold
 
                     } else {
 
-                        holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_black ) ) );
+                        holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
                         seat_list.add( seat_no );
                     }
                     updateintent();
