@@ -128,7 +128,7 @@ public class SelectBoardingPoint extends AppCompatActivity {
                                 JSONObject from_obj = array_from.getJSONObject( 0 );
                                JSONArray drop_arr = from_obj.getJSONArray( "bus_drops" );
                                 String from = from_obj.getString( "bus_drops" );
-                                JSONArray to_arr = new JSONArray(from);
+                                JSONArray from_arr = new JSONArray(from);
 
 //                                for (int i =0 ; i<from_arr.length();i++)
 //                                {
