@@ -47,9 +47,9 @@ public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAd
         AvailableBusesModel model = buslist.get( position );
 
 
-        holder.tv_comp_name.setText(model.getCompany_name());
+        holder.tv_comp_name.setText(model.getVehicle_name());
         if (model.getV_type().equalsIgnoreCase( "car" )) {
-            holder.tv_time.setText( model.getVehicle_name() );
+            holder.tv_time.setVisibility( View.GONE );
             holder.tv_duration.setVisibility( View.GONE );
         }
         else {
@@ -68,7 +68,7 @@ public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAd
         }
 
         holder.tv_price.setText("From : "+activity.getResources().getString(R.string.currency)+model.getSeat_fare());
-        holder.tv_seats.setText("available seat : "+model.getTotal_seats());
+        holder.tv_seats.setText("available seats : "+model.getTotal_seats());
         holder.tv_type.setText(model.getVehicle_type() +" "+model.getSitting_type());
 
 

@@ -202,7 +202,8 @@
                 android:id="@+id/img_semi_sleeper"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/nonac"
+                android:padding="2dp"
+                android:src="@drawable/semi_seat"
                 android:tint="@color/white"/>
 
         <in.binplus.travel.Fonts.LatoBLack

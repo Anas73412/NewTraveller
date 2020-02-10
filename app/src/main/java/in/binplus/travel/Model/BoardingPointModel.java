@@ -12,6 +12,9 @@ public class BoardingPointModel {
         this.location_time = location_time;
     }
 
+    public BoardingPointModel() {
+    }
+
     public String getLocation_name() {
         return location_name;
     }

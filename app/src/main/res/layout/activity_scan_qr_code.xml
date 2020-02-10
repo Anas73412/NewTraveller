@@ -6,12 +6,28 @@
         android:layout_height="match_parent"
         android:padding="@dimen/activity_horizontal_margin">
 
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/circleshape"
 
-    <ImageView
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/img_qr"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+    android:padding="5dp">
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_qr"
+            android:layout_margin="10dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            />
+
+
+
+
+
+</RelativeLayout>
     <EditText
         android:id="@+id/edt_text"
         android:hint="Enter text"

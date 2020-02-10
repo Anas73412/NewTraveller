@@ -37,6 +37,7 @@ import in.binplus.travel.Adapter.AddPassengerToSeatAdapter;
 import in.binplus.travel.Adapter.PassengerListAdapter;
 import in.binplus.travel.Adapter.Seat_PassengerDeatilsAdapter;
 import in.binplus.travel.Config.BaseURL;
+import in.binplus.travel.Config.Module;
 import in.binplus.travel.Fragment.HomeFragment;
 import in.binplus.travel.Model.AddPassengerToSeatModel;
 import in.binplus.travel.Model.PassengerDetailsModel;
@@ -61,6 +62,7 @@ public class BookingConfirmation extends AppCompatActivity {
     String user_id ,wallet_amount ;
    Double total_amount =0.0 ;
    Button btnConfirm ;
+   Module module ;
    String bus_id ,bus_name ,startfrom ,endto,timefrom,timeto;
    int total_seats ;
     JSONArray passArray ;
@@ -125,6 +127,7 @@ public class BookingConfirmation extends AppCompatActivity {
         j_date = getIntent().getStringExtra( "date" );
         u_name = getIntent().getStringExtra( "p_name" ) ;
 
+        module = new Module( BookingConfirmation.this );
 
 
         txt_mobile.setText( mobile );
@@ -316,7 +319,12 @@ public class BookingConfirmation extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText( BookingConfirmation.this,error.getMessage(),Toast.LENGTH_LONG ).show();
+                        String msg=module.VolleyErrorMessage(error);
+                        if(!(msg.isEmpty() || msg.equals("")))
+                        {
+                            Toast.makeText(BookingConfirmation.this,""+msg.toString(),Toast.LENGTH_SHORT).show();
+                        }
+                //        Toast.makeText( BookingConfirmation.this,error.getMessage(),Toast.LENGTH_LONG ).show();
 
                     }
                 } );

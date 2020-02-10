@@ -32,8 +32,10 @@ import java.util.HashMap;
 
 import in.binplus.travel.Adapter.SelectedStopsAdapter;
 import in.binplus.travel.Config.BaseURL;
+import in.binplus.travel.Config.Module;
 import in.binplus.travel.Model.StopsModel;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
+import in.binplus.travel.util.RecyclerTouchListener;
 import in.binplus.travel.util.Session_management;
 import pl.droidsonroids.gif.GifImageView;
 
@@ -58,10 +60,12 @@ public class CarBookingActivity extends AppCompatActivity {
     GifImageView dialog_gif ;
     TextView dialog_txt ;
     Button dialog_btn ;
+    Module module ;
     ProgressDialog loadingBar ;
     RecyclerView recycler_stops ;
     ArrayList<StopsModel> stop_list ;
     SelectedStopsAdapter stopsAdapter ;
+    public static  ArrayList<StopsModel> selected_stop_list ;
 
 
 
@@ -97,12 +101,13 @@ public class CarBookingActivity extends AppCompatActivity {
         btnConfirm = findViewById( R.id.btnContinue );
         recycler_stops = findViewById( R.id.recycler_stops );
         recycler_stops.setLayoutManager( new GridLayoutManager( CarBookingActivity.this,2 ) );
-//        recycler_stops.setNestedScrollingEnabled( false );
+       recycler_stops.setNestedScrollingEnabled( false );
 
-
+        module = new Module( CarBookingActivity.this );
         session_management = new Session_management( CarBookingActivity.this );
         user_id = session_management.getUserDetails().get( KEY_ID );
         stop_list = new ArrayList<>(  );
+        selected_stop_list = new ArrayList<>(  );
          passArray =new JSONArray();
 
         bus_id = getIntent().getStringExtra( "id" );
@@ -136,6 +141,8 @@ public class CarBookingActivity extends AppCompatActivity {
 
 
         loadingBar = new ProgressDialog( CarBookingActivity.this );
+
+
 
         btnConfirm.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -180,11 +187,28 @@ public class CarBookingActivity extends AppCompatActivity {
 
                 else
                 {
+                    if (selected_stop_list.size() > 0) {
+                        passArray = new JSONArray();
+                        for (int i = 0; i < selected_stop_list.size(); i++) {
+                            JSONObject jObjP = new JSONObject();
+                            try {
+
+                                jObjP.put( "stop", selected_stop_list.get( i ).getStop_name() );
 
 
-                    makeEnquiry();
+                                passArray.put( jObjP );
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+
+                    makeEnquiry(passArray);
 
                 }
+          //      Toast.makeText( CarBookingActivity.this,""+CarBookingActivity.selected_stop_list.size(),Toast.LENGTH_LONG ).show();
 
 //
             }
@@ -195,8 +219,8 @@ public class CarBookingActivity extends AppCompatActivity {
 
     }
 //
-//    public void makeEnquiry(JSONArray jsonArray)
-    public void makeEnquiry()
+    public void makeEnquiry(JSONArray jsonArray)
+
     {
         loadingBar.show();
 
@@ -210,8 +234,7 @@ public class CarBookingActivity extends AppCompatActivity {
         params.put( "to_location",station_to );
         params.put( "note",note );
         params.put( "journey_date",date );
-
-      //  params.put( "passenger_list", String.valueOf( jsonArray ) );
+      params.put( "route", String.valueOf( jsonArray ) );
 
         CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest( Request.Method.POST,BaseURL.MAKE_ENQUIRY,params,
                 new Response.Listener<JSONObject>() {
@@ -221,7 +244,7 @@ public class CarBookingActivity extends AppCompatActivity {
                             loadingBar.dismiss();
                             Log.e("car_booking",response.toString() );
                             Boolean status = response.getBoolean( "responce" );
-                            Toast.makeText( CarBookingActivity.this, ""+response.toString(),Toast.LENGTH_LONG).show();
+//                            Toast.makeText( CarBookingActivity.this, ""+response.toString(),Toast.LENGTH_LONG).show();
                             if (status)
                             {
                                 String msg = response.getString( "message" );
@@ -318,7 +341,7 @@ public class CarBookingActivity extends AppCompatActivity {
                                    stop_list.add( model_to );
                                }
 
-                               Toast.makeText(CarBookingActivity.this, ""+from_arr, Toast.LENGTH_SHORT ).show();
+                               Toast.makeText(CarBookingActivity.this, ""+from_arr.length() +"\n"+to_arr.length(), Toast.LENGTH_SHORT ).show();
 
                                stopsAdapter = new SelectedStopsAdapter( stop_list,CarBookingActivity.this );
                                recycler_stops.setAdapter( stopsAdapter );
@@ -333,6 +356,11 @@ public class CarBookingActivity extends AppCompatActivity {
                new Response.ErrorListener() {
                    @Override
                    public void onErrorResponse(VolleyError error) {
+                       String msg=module.VolleyErrorMessage(error);
+                       if(!(msg.isEmpty() || msg.equals("")))
+                       {
+                           Toast.makeText(CarBookingActivity.this,""+msg.toString(),Toast.LENGTH_SHORT).show();
+                       }
 
                    }
                } );

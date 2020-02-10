@@ -34,6 +34,7 @@ public class BaseURL {
     public  static String UPDATE_DOCUMENTS = BASE_URL+"update_docs";
     public  static String GET_DOCUMENTS = BASE_URL+"get_user_details";
     public  static String GET_CAR_POINTS = BASE_URL+"get_car_stops";
+    public  static String GET_DROP_POINTS = BASE_URL+"get_board_drops";
 
     public  static String GET_SLIDER_URL = BASE_URL+"get_sliders";
     public  static String GET_R_SLIDER_URL = BASE_URL+"get_mysliders";

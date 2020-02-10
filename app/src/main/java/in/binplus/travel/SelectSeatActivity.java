@@ -102,14 +102,14 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
        getBusData(bus_id);
 
        txt_vehicle_name.setText( vehicle_name  );
-       title.setText(source +" - " +destination  );
+//       title.setText(source +" - " +destination  );
 
 
     }
 
     private void initViews() {
         back = findViewById(R.id.back);
-        title = findViewById( R.id.title );
+//        title = findViewById( R.id.title );
 //        img_bus = findViewById(R.id.img_buses);
         txt_vehicle_name = findViewById(R.id.bus_detail);
         tv_seats = findViewById(R.id.tv_seats);
