@@ -1,6 +1,8 @@
 package in.binplus.travel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -18,17 +20,19 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
+import in.binplus.travel.Adapter.SelectedStopsAdapter;
 import in.binplus.travel.Config.BaseURL;
+import in.binplus.travel.Model.StopsModel;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
 import in.binplus.travel.util.Session_management;
 import pl.droidsonroids.gif.GifImageView;
@@ -55,6 +59,9 @@ public class CarBookingActivity extends AppCompatActivity {
     TextView dialog_txt ;
     Button dialog_btn ;
     ProgressDialog loadingBar ;
+    RecyclerView recycler_stops ;
+    ArrayList<StopsModel> stop_list ;
+    SelectedStopsAdapter stopsAdapter ;
 
 
 
@@ -88,9 +95,14 @@ public class CarBookingActivity extends AppCompatActivity {
             }
         } );
         btnConfirm = findViewById( R.id.btnContinue );
+        recycler_stops = findViewById( R.id.recycler_stops );
+        recycler_stops.setLayoutManager( new GridLayoutManager( CarBookingActivity.this,2 ) );
+//        recycler_stops.setNestedScrollingEnabled( false );
+
 
         session_management = new Session_management( CarBookingActivity.this );
         user_id = session_management.getUserDetails().get( KEY_ID );
+        stop_list = new ArrayList<>(  );
          passArray =new JSONArray();
 
         bus_id = getIntent().getStringExtra( "id" );
@@ -117,17 +129,13 @@ public class CarBookingActivity extends AppCompatActivity {
         txt_timeto.setText( end_time );
         txt_tot_price.setText(this.getResources().getString( R.string.currency ) +price );
 
+        get_car_points( station_to,station_from );
+
 //        Toast.makeText( CarBookingActivity.this,""+bus_id,Toast.LENGTH_LONG ).show();
 
-        Calendar c = Calendar.getInstance();
 
-        SimpleDateFormat df = new SimpleDateFormat( "DDMMYY" );
-        formattedDate = df.format( c.getTime() );
 
         loadingBar = new ProgressDialog( CarBookingActivity.this );
-
-
-
 
         btnConfirm.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -177,7 +185,7 @@ public class CarBookingActivity extends AppCompatActivity {
                     makeEnquiry();
 
                 }
-////                makeEnquiry();
+
 //
             }
         } );
@@ -218,8 +226,8 @@ public class CarBookingActivity extends AppCompatActivity {
                             {
                                 String msg = response.getString( "message" );
                                 //    Toast.makeText( BookingConfirmation.this, ""+msg,Toast.LENGTH_LONG).show();
-                                session_management.updateWallet( left_wallet_amount );
-//
+//                                session_management.updateWallet( left_wallet_amount );
+
                                 dialog=new Dialog( CarBookingActivity.this);
                                 dialog.requestWindowFeature( Window.FEATURE_NO_TITLE);
                                 dialog.setContentView(R.layout.dialogue_booking_confirmation);
@@ -228,6 +236,7 @@ public class CarBookingActivity extends AppCompatActivity {
                                 dialog_gif = dialog.findViewById( R.id.dialog_gif );
                                 dialog_txt = dialog.findViewById( R.id.text_msg );
                                 dialog_btn =dialog.findViewById( R.id.btn_ok );
+                                dialog_gif.setBackgroundResource( R.drawable.cargif );
 
                                 dialog_txt.setText( msg );
                                 dialog_btn.setOnClickListener( new View.OnClickListener() {
@@ -268,28 +277,68 @@ public class CarBookingActivity extends AppCompatActivity {
 
         AppController.getInstance().addToRequestQueue( jsonRequest,"add car Booking" );
     }
-    public static String getRandomKey(int i)
-    {
-        final String characters="0123456789";
-        StringBuilder stringBuilder=new StringBuilder();
-        while (i>0)
-        {
-            Random ran=new Random();
-            stringBuilder.append(characters.charAt(ran.nextInt(characters.length())));
-            i--;
-        }
-        return stringBuilder.toString();
-    }
+   public void get_car_points(String to ,String from)
+   {
+       HashMap<String,String> params = new HashMap<>(  );
+       params.put( "to",to );
+       params.put( "from",from );
+       stop_list.clear();
 
-//    public Double getTotalAmount()
-//    {
-//        for (int i=0 ;i<EnterPassengerDetails.passenger_list.size();i++)
-//        {
-//            Double seat_price = Double.valueOf( EnterPassengerDetails.passenger_list.get( i ).getSeat_price() );
-//            total_amount = total_amount+seat_price;
-//        }
-//        return total_amount ;
-//    }
+       CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest( Request.Method.POST, BaseURL.GET_CAR_POINTS, params,
+               new Response.Listener<JSONObject>() {
+                   @Override
+                   public void onResponse(JSONObject response) {
+//                       Toast.makeText(CarBookingActivity.this, ""+response, Toast.LENGTH_SHORT ).show();
+                       try {
+                           Log.e( "car_points",response.toString() );
+                           Boolean status = response.getBoolean( "responce" );
+                           if (status)
+                           {
+                              JSONObject data = (JSONObject) response.get( "data" );
+
+                               JSONArray array_from = data.getJSONArray( "from" );
+
+                               JSONObject from_obj = array_from.getJSONObject( 0 );
+                               String from = from_obj.getString( "car_stops" );
+                               JSONArray from_arr = new JSONArray( from );
+                               for (int i =0 ; i<from_arr.length();i++)
+                               {
+                                   StopsModel model_from = new StopsModel( );
+                                   model_from.setStop_name( (String) from_arr.get( i ) );
+                                   stop_list.add( model_from );
+                               }
+                               JSONArray array_to = data.getJSONArray( "to" );
+                               JSONObject to_obj = array_to.getJSONObject( 0 );
+                               String to = to_obj.getString( "car_stops" );
+                               JSONArray to_arr = new JSONArray(to );
+                               for (int i =0 ; i<to_arr.length();i++)
+                               {
+                                   StopsModel model_to = new StopsModel( );
+                                   model_to.setStop_name( (String) from_arr.get( i ) );
+                                   stop_list.add( model_to );
+                               }
+
+                               Toast.makeText(CarBookingActivity.this, ""+from_arr, Toast.LENGTH_SHORT ).show();
+
+                               stopsAdapter = new SelectedStopsAdapter( stop_list,CarBookingActivity.this );
+                               recycler_stops.setAdapter( stopsAdapter );
+                           }
+                       } catch (JSONException e) {
+                           e.printStackTrace();
+                       }
+
+
+                   }
+               },
+               new Response.ErrorListener() {
+                   @Override
+                   public void onErrorResponse(VolleyError error) {
+
+                   }
+               } );
+       AppController.getInstance().addToRequestQueue( jsonRequest,"car_points" );
+
+   }
 
 }
 

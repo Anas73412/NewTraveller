@@ -9,6 +9,9 @@ public class StopsModel {
         this.stop_desc = stop_desc;
     }
 
+    public StopsModel() {
+    }
+
     public String getStop_name() {
         return stop_name;
     }
