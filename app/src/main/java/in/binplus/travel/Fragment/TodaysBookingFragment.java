@@ -106,18 +106,18 @@ public class TodaysBookingFragment extends Fragment {
                 args.putString( "end_to",bookingList.get( position ).getEnd_to() );
                 args.putString( "booking_date",bookingList.get( position ).getBooking_date() );
                 args.putString( "journey_startdate",bookingList.get( position ).getJourney_startdate() );
-                args.putString( "journey_enddate",bookingList.get( position ).getJourney_enddate() );
                 args.putString( "vehicle_category" ,bookingList.get( position ).getVehicle_category() );
                 args.putString( "vehicle_no" ,bookingList.get( position ).getVehicle_no() );
-//                   args.putString( "vehicle_name",bookingList.get( position).getVehicle_name() );
                 args.putString( "user_id",bookingList.get( position ).getUser_id() );
-                args.putString( "name",bookingList.get( position ).getB_name() );
+                args.putString( "b_name",bookingList.get( position ).getB_name() );
                 args.putString( "adhar_no",bookingList.get( position ).getAdhar_no() );
                 args.putString( "mobile",bookingList.get( position ).getMobile() );
                 args.putString( "address",bookingList.get( position ).getAddress() );
                 args.putString( "total_seats",bookingList.get( position ).getTot_seats() );
+                args.putString( "board_location",bookingList.get( position ).getBoard_location() );
+                args.putString( "drop_location",bookingList.get( position ).getDrop_location() );
 
-                Toast.makeText( getActivity(),"booking_id:"+bookingList.get( position ).getBooking_id(),Toast.LENGTH_LONG ).show();
+          //      Toast.makeText( getActivity(),"booking_id:"+bookingList.get( position ).getBooking_id(),Toast.LENGTH_LONG ).show();
 
                 BookingDetails details = new BookingDetails();
                 details.setArguments( args );
@@ -168,16 +168,20 @@ public class TodaysBookingFragment extends Fragment {
                                     model.setBooking_id( object.getString( "booking_id" ) );
                                     model.setStatus( object.getString( "status" ) );
                                     model.setJourney_startdate( object.getString( "journey_startdate" ) );
-                                    model.setJourney_enddate( object.getString( "journey_enddate" ) );
+//                                    model.setJourney_enddate( object.getString( "journey_enddate" ) );
                                     model.setVehicle_category( object.getString( "vehicle_categories" ) );
 //                                    model.setVehicle_name( object.getString( "vehicle_name" ) );
                                     model.setVehicle_no( object.getString( "vehicle_no" ) );
                                     model.setVehicle_type( object.getString( "vehicle_type" ) );
+                                    model.setPayment_type( object.getString( "payment_type" ) );
+                                    model.setTotal_money( object.getString( "total_money" ) );
                                     model.setB_name( object.getString( "b_name" ) );
                                     model.setAdhar_no( object.getString( "adhar_no" ) );
                                     model.setMobile( object.getString( "mobile" ) );
                                     model.setAddress( object.getString( "address" ) );
                                     model.setTot_seats( object.getString( "total_seats" ) );
+                                    model.setBoard_location( object.getString( "board_location" ) );
+                                    model.setDrop_location(  object.getString( "drop_location" ) );
 //
                                     bookingList.add(model );
                                 }

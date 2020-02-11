@@ -5,6 +5,11 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/space_5"
    >
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/ripple"
+        android:layout_width="match_parent"
+        app:mrl_rippleHover="true"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,5 +151,5 @@
         </LinearLayout>
     </LinearLayout>
     </RelativeLayout>
-
+    </com.balysv.materialripple.MaterialRippleLayout>
 </RelativeLayout>

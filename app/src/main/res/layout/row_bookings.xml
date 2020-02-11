@@ -1,79 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   android:background="@color/white"
-    android:layout_marginTop="@dimen/space_10"
-    android:layout_marginLeft="@dimen/space_5"
-    android:layout_marginRight="@dimen/space_5"
-    android:padding="@dimen/space_5"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+
+
+    android:padding="@dimen/space_5">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/space_5">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/space_20"
-    android:background="@drawable/xml_textbox_bg">
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_from_to"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_5"
-        android:textSize="@dimen/space_16"
-        android:text="to-from"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/colorPrimary"/>
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_status"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_5"
-        android:textSize="@dimen/space_16"
-        android:text="Amount"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-      />
 
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_price"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
+    android:padding="@dimen/space_10"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/space_5"
-        android:textSize="@dimen/space_18"
-        android:text="Amount"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="50dp"
-        android:textColor="@android:color/holo_red_dark"/>
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/txt_booking_id"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_2"
+            android:textSize="@dimen/space_18"
+            android:text="to-from"
+            android:textAlignment="center"
+            android:textStyle="bold"
 
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_pass_name"
-    android:layout_width="wrap_content"
-    android:layout_weight="1"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/space_2"
-    android:textSize="@dimen/space_14"
-    android:text="name"
-        android:layout_below="@+id/txt_from_to"
-    android:textAlignment="center"
-    android:textColor="@color/textcolor"/>
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_date"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_2"
-        android:textSize="@dimen/space_14"
-        android:text="date and time"
-        android:layout_below="@+id/txt_pass_name"
-        android:textAlignment="center"
-        />
+            android:textColor="@color/colorPrimary"/>
+<!--            <in.binplus.travel.Fonts.LatoBLack-->
+<!--               -->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/space_2"-->
+<!--                android:textSize="@dimen/space_16"-->
+<!--                android:text="@string/date"-->
+<!--                android:layout_marginTop=""-->
+<!--                android:textColor="@color/textcolor"-->
+<!--                android:textAlignment="viewEnd"-->
+<!--                />-->
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:background="@color/all"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/space_2"
+            android:layout_marginRight="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/txt_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_2"
+                android:text="to-from"
+                android:textColor="@color/textcolor"
+                android:textSize="@dimen/space_16" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_keyboard_backspace_black_24dp"
+                android:tint="@color/colorPrimary"
+                android:rotation="180"
+                android:padding="@dimen/space_2"
+                android:layout_gravity="center_vertical"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/txt_to"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_2"
+                android:textSize="@dimen/space_16"
+                android:text="to-from"
+                android:textAlignment="center"
+                android:textColor="@color/textcolor"/>
+        </LinearLayout>
+        <in.binplus.travel.Fonts.LatoBLack
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_2"
+            android:textSize="@dimen/space_16"
+            android:text="@string/date"
+
+           android:layout_gravity="center_horizontal"
+            android:textColor="@color/textcolor"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/all"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="@dimen/space_2"
+            android:layout_marginLeft="@dimen/space_10"
+            android:layout_marginRight="@dimen/space_10"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <in.binplus.travel.Fonts.LatoBLack
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_2"
+                android:textSize="@dimen/space_16"
+                android:text="Name:"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                android:textColor="@color/textcolor"/>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/txt_pass_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/space_2"
+                android:text="Name"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/textcolor"
+                android:textSize="@dimen/space_16"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <in.binplus.travel.Fonts.LatoBLack
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_2"
+                android:textSize="@dimen/space_16"
+                android:text="Mobile:"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                android:textColor="@color/textcolor"/>
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/txt_mobile"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_2"
+                android:textSize="@dimen/space_16"
+                android:text="Name"
+                android:textAlignment="viewEnd"
+                android:textStyle="bold"
+                android:textColor="@color/textcolor"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/all"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/space_5"
+            android:layout_marginLeft="@dimen/space_10"
+            android:layout_marginRight="@dimen/space_10"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+               >
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_18"
+                    android:text="Total:"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    android:textColor="@color/textcolor"
+
+                   />
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_price"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_18"
+                    android:text="Amount"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+              android:gravity="end"
+                >
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_18"
+                    android:text="Status:"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    android:textColor="@color/textcolor"
+                    />
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/txt_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_2"
+                android:textSize="@dimen/space_16"
+                android:text="Amount"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
     <in.binplus.travel.Fonts.LatoBLack
         android:id="@+id/txt_time"
         android:layout_width="wrap_content"
@@ -82,50 +266,42 @@
         android:padding="@dimen/space_2"
         android:textSize="@dimen/space_14"
         android:text="Amount"
-        android:layout_below="@+id/txt_date"
+
         android:textAlignment="center"
         android:visibility="gone"
        />
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_bus"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_2"
-        android:textSize="@dimen/space_14"
-        android:text="bus name"
-        android:layout_below="@+id/txt_time"
-        android:textAlignment="center"
-     />
-    <in.binplus.travel.Fonts.LatoBLack
-        android:id="@+id/txt_payment_type"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/space_2"
-        android:textSize="@dimen/space_14"
-        android:text="bus name"
-        android:layout_below="@+id/txt_time"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
-        android:textAlignment="center"
-        />
+<!--    <in.binplus.travel.Fonts.LatoBLack-->
+<!--        android:id="@+id/txt_bus"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="@dimen/space_2"-->
+<!--        android:textSize="@dimen/space_14"-->
+<!--        android:text="bus name"-->
+<!--        android:layout_below="@+id/txt_time"-->
+<!--        android:textAlignment="center"-->
+<!--     />-->
+
 
 
 
 </RelativeLayout>
-<RelativeLayout
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:padding="@dimen/space_5"
-    android:layout_centerHorizontal="true"
-    android:background="@drawable/circleshape">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/icons8_traffic_jam_128px"
-        android:layout_margin="@dimen/space_5"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="@dimen/space_5"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icons8_traffic_jam_128px"
+                android:layout_margin="@dimen/space_5"
+                android:layout_centerInParent="true"/>
+           </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-        android:layout_centerInParent="true"/></RelativeLayout>
 
 </RelativeLayout>

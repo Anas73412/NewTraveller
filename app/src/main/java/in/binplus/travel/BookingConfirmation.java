@@ -68,7 +68,6 @@ public class BookingConfirmation extends AppCompatActivity {
    int total_seats ;
     JSONArray passArray ;
     String formattedDate ;
-
     String adhar_id ,u_name,mobile,address,j_date ;
     String left_wallet_amount,seat_fare ;
     Dialog dialog;
@@ -171,10 +170,11 @@ public class BookingConfirmation extends AppCompatActivity {
         Double left_amt = wallet_Amt-total_amount;
         left_wallet_amount =String.valueOf( left_amt );
 
-        //  Toast.makeText(BookingConfirmation.this,"booking id " +formattedDate,Toast.LENGTH_LONG).show();
+//        Toast.makeText(BookingConfirmation.this,"gender " + AddPassengerDetails.p_list.get(0).getGender(),Toast.LENGTH_LONG).show();
         btnConfirm.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(BookingConfirmation.this);
 
@@ -256,6 +256,8 @@ public class BookingConfirmation extends AppCompatActivity {
 
     public void makeBooking( JSONArray passArray)
     {
+
+
         HashMap<String,String> params =new HashMap<>(  );
         params.put( "user_id",user_id );
         params.put( "vehicles_id",bus_id );
@@ -281,7 +283,8 @@ public class BookingConfirmation extends AppCompatActivity {
                             Boolean status = response.getBoolean( "responce" );
                             if (status)
                             {
-                                String msg = response.getString( "data" );
+
+                                String data = response.getString( "data" );
                             //    Toast.makeText( BookingConfirmation.this, ""+msg,Toast.LENGTH_LONG).show();
                                 session_management.updateWallet( left_wallet_amount );
 //

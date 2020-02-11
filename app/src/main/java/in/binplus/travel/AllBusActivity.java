@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.balysv.materialripple.MaterialRippleLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -72,8 +74,10 @@ Module module;
         destination=getIntent().getStringExtra( "destination" );
         type = getIntent().getStringExtra("type");
 
-
-
+//
+//        MaterialRippleLayout.on(rec_buses)
+//                .rippleColor( Color.GRAY)
+//                .create();
 
         rec_buses.addOnItemTouchListener(new RecyclerTouchListener(ctx, rec_buses, new RecyclerTouchListener.OnItemClickListener() {
             @Override

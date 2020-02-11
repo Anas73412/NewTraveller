@@ -1,6 +1,7 @@
 package in.binplus.travel.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.balysv.materialripple.MaterialRippleLayout;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import java.util.Date;
 import in.binplus.travel.Model.AvailableBusesModel;
 import in.binplus.travel.Model.CityListModel;
 import in.binplus.travel.R;
+import in.binplus.travel.SelectSeatActivity;
 import in.binplus.travel.util.ToastMsg;
 
 public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAdapter.viewHolder> {
@@ -71,49 +75,16 @@ public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAd
         holder.tv_seats.setText("available seats : "+model.getTotal_seats());
         holder.tv_type.setText(model.getVehicle_type() +" "+model.getSitting_type());
 
-
+//        holder.rippleLayout.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent( activity, SelectSeatActivity.class );
+//                activity.startActivity( intent );
+//            }
+//        }  );
     }
 
-//    @Override
-//    public Filter getFilter() {
 //
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence charSequence) {
-//
-//                String charString = charSequence.toString();
-//
-//                if (charString.isEmpty()) {
-//
-//                    mFilteredList = buslist;
-//                } else {
-//
-//                    ArrayList<AvailableBusesModel> filteredList = new ArrayList<>();
-//
-//                    for (AvailableBusesModel busesModel : buslist) {
-//
-//                        if (busesModel.getDate().toLowerCase().contains( charString ))
-//
-//                        {
-//                            filteredList.add( busesModel);
-//                        }
-//                    }
-//
-//                    mFilteredList = filteredList;
-//                }
-//
-//                FilterResults filterResults = new FilterResults();
-//                filterResults.values = mFilteredList;
-//                return filterResults;
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//                mFilteredList = (ArrayList<AvailableBusesModel>) filterResults.values;
-//                notifyDataSetChanged();
-//            }
-//        };
-//    }
 
     @Override
     public int getItemCount() {
@@ -121,7 +92,8 @@ public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAd
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        TextView tv_time , tv_duration , tv_price , tv_comp_name , tv_seats,tv_type;
+        TextView tv_time , tv_duration , tv_price , tv_comp_name , tv_seats,tv_type ;
+        MaterialRippleLayout  rippleLayout ;
 
         public viewHolder(@NonNull View itemView) {
             super( itemView );
@@ -131,6 +103,7 @@ public class AvailableBusesAdapter extends RecyclerView.Adapter<AvailableBusesAd
             tv_comp_name = itemView.findViewById( R.id.tv_comp_name );
             tv_seats = itemView.findViewById( R.id.tv_seats );
             tv_type = itemView.findViewById(R.id.tv_type );
+            rippleLayout = itemView.findViewById( R.id.ripple );
 
         }
     }

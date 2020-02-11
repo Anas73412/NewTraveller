@@ -102,12 +102,12 @@ public class AddPassengerDetails extends AppCompatActivity {
 
                 if(r_male.isChecked())
                 {
-                    gen="male";
+                    gen="M";
 
                 }
                 else if(r_female.isChecked())
                 {
-                    gen="female";
+                    gen="F";
                 }
 
                 if(name.equals("") || name.isEmpty())

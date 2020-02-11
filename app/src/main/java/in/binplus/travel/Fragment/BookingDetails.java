@@ -57,7 +57,7 @@ import static in.binplus.travel.Config.Constants.KEY_ID;
 public class BookingDetails extends Fragment {
 
     RecyclerView recycler_passenger ;
-    TextView text_to ,txt_from,txt_date,txt_total,txt_busname,txt_busno ,passengers ,cancel_booking ,txt_tot_seats;
+    TextView text_to ,txt_from,txt_date,txt_total,txt_busname,txt_busno ,passengers ,cancel_booking ,txt_tot_seats ,txt_pass_name ,txt_pass_mobile;
     Dialog dialog ;
     TextView btn_no ,btn_yes ;
     EditText et_remark ;
@@ -71,7 +71,7 @@ public class BookingDetails extends Fragment {
     RelativeLayout rel_passenger ;
 
     String booking_id ,vehicle_id ,status ,payment ,total_money ,vehicle_type,start_from ,end_to ,booking_date,start_date,end_date,
-            vehicle_category,vehicle_name,vehicle_number,name ,adhar_id,address ,mobile ,total_seats;
+            vehicle_category,vehicle_name,vehicle_number,name ,adhar_id,address ,mobile ,total_seats ,drop_location ,board_location;
 
 
 
@@ -93,7 +93,7 @@ public class BookingDetails extends Fragment {
         module = new Module( getActivity() );
 
         loadingBar = new ProgressDialog( getActivity() );
-        loadingBar.setMessage("laoding" );
+        loadingBar.setMessage("loading" );
 
         txt_from = view.findViewById( R.id.txt_from );
         text_to=view.findViewById( R.id.txt_to );
@@ -104,6 +104,8 @@ public class BookingDetails extends Fragment {
         cancel_booking = view.findViewById( R.id.cancel_booking );
         passengers = view.findViewById( R.id.passenger_detail );
         txt_tot_seats = view.findViewById( R.id.txt_tot_seats );
+        txt_pass_name = view.findViewById( R.id.booking_name );
+        txt_pass_mobile =view.findViewById( R.id.txt_mobile );
         recycler_passenger = view.findViewById( R.id.recycler_pass_details );
         session_management = new Session_management( getActivity() );
         user_id = session_management.getUserDetails().get( KEY_ID );
@@ -126,8 +128,10 @@ public class BookingDetails extends Fragment {
         mobile = getArguments().getString( "mobile" );
         vehicle_number = getArguments().getString("vehicle_no");
         total_seats = getArguments().getString( "total_seats" );
+        drop_location=getArguments().getString( "drop_location");
+        board_location = getArguments().getString( "board_location" );
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(booking_id);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(start_from +"-"+end_to);
     //    Toast.makeText( getActivity(),"booking_id" +booking_id,Toast.LENGTH_LONG ).show();
 
         passenger_list = new ArrayList<>(  );
@@ -135,12 +139,16 @@ public class BookingDetails extends Fragment {
 
          getBookingDetails();
 
-        txt_from.setText( start_from );
+        txt_from.setText( booking_id);
         text_to.setText( end_to );
         txt_date.setText( booking_date );
         txt_total.setText(getActivity().getResources().getString(R.string.currency)+""+ total_money );
-        txt_busname.setText( vehicle_name );
-        txt_busno.setText( vehicle_number );
+        txt_busname.setText("Board At:"+board_location );
+        txt_busno.setText( "Drop At:" +drop_location );
+        txt_pass_mobile.setText( mobile );
+        txt_pass_name.setText( name );
+        txt_tot_seats.setText( total_seats );
+
 
 
         rel_passenger.setOnClickListener( new View.OnClickListener() {

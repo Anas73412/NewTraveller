@@ -3,38 +3,40 @@ package in.binplus.travel.Model;
 import java.util.ArrayList;
 
 public class BookingDetailsModel {
+    String id ;
     String booking_id;
     String vehicle_id;
     String status ;
     String user_id;
     String payment_type ;
     String total_money ;
+
     String vehicle_type;
     String vehicle_no ;
     String start_from ;
     String end_to ;
     String booking_date ;
     String journey_startdate ;
-    String journey_enddate ;
+
     String vehicle_category;
     String vehicle_name ;
     String note ;
     String f_id ;
-    String f_name ;
-    String f_mobile ;
-    String agent_name ;
-    String f_email;
-    String f_image ;
+
     String b_name ;
     String address ;
     String adhar_no ;
     String mobile;
   String tot_seats ;
+  String seat_no ;
+  String drop_location ;
+  String board_location ;
 
     public BookingDetailsModel() {
     }
 
-    public BookingDetailsModel(String booking_id, String vehicle_id, String status, String user_id, String payment_type, String total_money, String vehicle_type, String vehicle_no, String start_from, String end_to, String booking_date, String journey_startdate, String journey_enddate, String vehicle_category, String vehicle_name, String note, String f_id, String f_name, String f_mobile, String agent_name, String f_email, String f_image, String b_name, String address, String adhar_no, String mobile, String tot_seats) {
+    public BookingDetailsModel(String id, String booking_id, String vehicle_id, String status, String user_id, String payment_type, String total_money, String vehicle_type, String vehicle_no, String start_from, String end_to, String booking_date, String journey_startdate, String vehicle_category, String vehicle_name, String note, String f_id, String b_name, String address, String adhar_no, String mobile, String tot_seats, String seat_no, String drop_location, String board_location) {
+        this.id = id;
         this.booking_id = booking_id;
         this.vehicle_id = vehicle_id;
         this.status = status;
@@ -47,21 +49,26 @@ public class BookingDetailsModel {
         this.end_to = end_to;
         this.booking_date = booking_date;
         this.journey_startdate = journey_startdate;
-        this.journey_enddate = journey_enddate;
         this.vehicle_category = vehicle_category;
         this.vehicle_name = vehicle_name;
         this.note = note;
         this.f_id = f_id;
-        this.f_name = f_name;
-        this.f_mobile = f_mobile;
-        this.agent_name = agent_name;
-        this.f_email = f_email;
-        this.f_image = f_image;
         this.b_name = b_name;
         this.address = address;
         this.adhar_no = adhar_no;
         this.mobile = mobile;
         this.tot_seats = tot_seats;
+        this.seat_no = seat_no;
+        this.drop_location = drop_location;
+        this.board_location = board_location;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBooking_id() {
@@ -160,14 +167,6 @@ public class BookingDetailsModel {
         this.journey_startdate = journey_startdate;
     }
 
-    public String getJourney_enddate() {
-        return journey_enddate;
-    }
-
-    public void setJourney_enddate(String journey_enddate) {
-        this.journey_enddate = journey_enddate;
-    }
-
     public String getVehicle_category() {
         return vehicle_category;
     }
@@ -198,46 +197,6 @@ public class BookingDetailsModel {
 
     public void setF_id(String f_id) {
         this.f_id = f_id;
-    }
-
-    public String getF_name() {
-        return f_name;
-    }
-
-    public void setF_name(String f_name) {
-        this.f_name = f_name;
-    }
-
-    public String getF_mobile() {
-        return f_mobile;
-    }
-
-    public void setF_mobile(String f_mobile) {
-        this.f_mobile = f_mobile;
-    }
-
-    public String getAgent_name() {
-        return agent_name;
-    }
-
-    public void setAgent_name(String agent_name) {
-        this.agent_name = agent_name;
-    }
-
-    public String getF_email() {
-        return f_email;
-    }
-
-    public void setF_email(String f_email) {
-        this.f_email = f_email;
-    }
-
-    public String getF_image() {
-        return f_image;
-    }
-
-    public void setF_image(String f_image) {
-        this.f_image = f_image;
     }
 
     public String getB_name() {
@@ -278,5 +237,29 @@ public class BookingDetailsModel {
 
     public void setTot_seats(String tot_seats) {
         this.tot_seats = tot_seats;
+    }
+
+    public String getSeat_no() {
+        return seat_no;
+    }
+
+    public void setSeat_no(String seat_no) {
+        this.seat_no = seat_no;
+    }
+
+    public String getDrop_location() {
+        return drop_location;
+    }
+
+    public void setDrop_location(String drop_location) {
+        this.drop_location = drop_location;
+    }
+
+    public String getBoard_location() {
+        return board_location;
+    }
+
+    public void setBoard_location(String board_location) {
+        this.board_location = board_location;
     }
 }

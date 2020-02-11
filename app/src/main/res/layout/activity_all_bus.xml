@@ -226,6 +226,7 @@
        android:layout_height="match_parent"
         android:layout_below="@+id/appbar"
         android:layout_above="@+id/linear_scroll">
+
        <androidx.recyclerview.widget.RecyclerView
            android:id="@+id/rec_buses"
            android:visibility="visible"

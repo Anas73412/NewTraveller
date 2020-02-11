@@ -40,10 +40,17 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
         BookingDetailsModel model = new BookingDetailsModel();
         model = bookinglist.get( position );
 
-        holder.txt_from.setText( model.getStart_from()+" - " +model.getEnd_to() );
-        holder.txt_bus_name.setText(model.getVehicle_no());
+        holder.txt_from.setText( model.getStart_from());
+         holder.txt_to.setText(model.getEnd_to() );
+         holder.txt_booking_id.setText("#"+ model.getBooking_id() );
+
+         holder.txt_pass_name.setText( model.getB_name() );
+         holder.txt_mobile.setText( model.getMobile() );
+
+
+//        holder.txt_bus_name.setText(model.getVehicle_no());
         holder.txt_date.setText( model.getJourney_startdate());
-        holder.txt_payment.setText( model.getPayment_type() );
+
         holder.txt_price.setText(activity.getResources().getString(R.string.currency)+ ""+model.getTotal_money() );
         int sts = Integer.parseInt( model.getStatus() );
         if (sts==1)
@@ -51,7 +58,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
            holder.txt_status.setText( "Pending" );
            holder.txt_status.setTextColor( Color.CYAN );
         }
-        else if (sts ==2)
+        else if (sts ==0)
         {
             holder.txt_status.setText( "Confirmed" );
             holder.txt_status.setTextColor( Color.GREEN);
@@ -73,15 +80,16 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_from ,txt_date ,txt_price ,txt_bus_name ,txt_pass_name ,txt_payment ,txt_status;
+        TextView txt_from,txt_to,txt_booking_id,txt_date ,txt_price ,txt_mobile ,txt_pass_name  ,txt_status;
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
-            txt_from = itemView.findViewById( R.id.txt_from_to );
+            txt_from = itemView.findViewById( R.id.txt_from );
+            txt_to = itemView.findViewById( R.id.txt_to );
             txt_date = itemView.findViewById( R.id.txt_date );
-            txt_bus_name= itemView.findViewById( R.id.txt_bus );
+            txt_booking_id = itemView.findViewById( R.id.txt_booking_id );
+            txt_mobile = itemView.findViewById( R.id.txt_mobile );
             txt_price = itemView.findViewById( R.id.txt_price );
             txt_pass_name= itemView.findViewById( R.id.txt_pass_name );
-            txt_payment = itemView.findViewById( R.id.txt_payment_type );
             txt_status = itemView.findViewById( R.id.txt_status );
         }
     }

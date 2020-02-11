@@ -1,6 +1,7 @@
 package in.binplus.travel.Fragment;
 
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -10,9 +11,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import in.binplus.travel.Adapter.MyBookingAdapter;
@@ -55,6 +59,9 @@ public class MyBookingsFragment extends Fragment {
     MyBookingAdapter bookingadapter ;
     TabLayout tabLayout ;
     ProgressDialog loadingBar ;
+    RelativeLayout rel_filter ;
+   int mMonth ,mYear,mDay ;
+    String b_date="";
 
     public MyBookingsFragment() {
         // Required empty public constructor
@@ -73,8 +80,9 @@ public class MyBookingsFragment extends Fragment {
         session_management = new Session_management( getActivity() );
         user_id= session_management.getUserDetails().get( KEY_ID );
         tabLayout = view.findViewById( R.id.tablayout );
+        rel_filter = view.findViewById( R.id.rel_filter );
 
-
+        recyclerView.setNestedScrollingEnabled( false );
         bookingList = new ArrayList<>(  );
         todays_bookingList = new ArrayList<>(  );
         loadingBar= new ProgressDialog( getActivity() );
@@ -86,43 +94,30 @@ public class MyBookingsFragment extends Fragment {
 //        getTodaysBookings( user_id );
 
       getMyBookings( user_id );
-//        tabLayout.addOnTabSelectedListener( new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//               String lable = (String) tab.getText();
-//                Toast.makeText( getActivity(), ""+lable, Toast.LENGTH_SHORT ).show();
-//
-//                if (lable.equals( "todays" ))
-//                {
-//                    if (bookingList.isEmpty())
-//                    {
-//                        rel_norecord.setVisibility( View.VISIBLE );
-//                        recyclerView.setVisibility( View.GONE );
-//                    }
-//                    getTodaysBookings( user_id );
-//                }
-//                else
-//                {
-//                    if (todays_bookingList.isEmpty())
-//                    {
-//                        rel_norecord.setVisibility( View.VISIBLE );
-//                        recyclerView.setVisibility( View.GONE );
-//                    }
-//                   getMyBookings( user_id );
-//                }
-//            }
 
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        } );
+      rel_filter.setOnClickListener( new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              Calendar c = Calendar.getInstance();
+              mYear = c.get(Calendar.YEAR);
+              mMonth = c.get(Calendar.MONTH);
+              mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+              DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                      new DatePickerDialog.OnDateSetListener() {
+
+                          @Override
+                          public void onDateSet(DatePicker view, int year,
+                                                int monthOfYear, int dayOfMonth) {
+                              b_date=year + "-" + getMonthTwoDigit(String.valueOf( monthOfYear + 1 )) + "-" + getMonthTwoDigit(String.valueOf( dayOfMonth));
+
+                          }
+                      }, mYear, mMonth, mDay);
+              datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()+1000);
+              datePickerDialog.show();
+          }
+      } );
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener( getActivity(),recyclerView, new RecyclerTouchListener.OnItemClickListener() {
             @Override
@@ -140,16 +135,16 @@ public class MyBookingsFragment extends Fragment {
                    args.putString( "end_to",bookingList.get( position ).getEnd_to() );
                    args.putString( "booking_date",bookingList.get( position ).getBooking_date() );
                    args.putString( "journey_startdate",bookingList.get( position ).getJourney_startdate() );
-                   args.putString( "journey_enddate",bookingList.get( position ).getJourney_enddate() );
                    args.putString( "vehicle_category" ,bookingList.get( position ).getVehicle_category() );
                    args.putString( "vehicle_no" ,bookingList.get( position ).getVehicle_no() );
-//                   args.putString( "vehicle_name",bookingList.get( position).getVehicle_name() );
                    args.putString( "user_id",bookingList.get( position ).getUser_id() );
-                   args.putString( "name",bookingList.get( position ).getB_name() );
+                   args.putString( "b_name",bookingList.get( position ).getB_name() );
                    args.putString( "adhar_no",bookingList.get( position ).getAdhar_no() );
                    args.putString( "mobile",bookingList.get( position ).getMobile() );
                    args.putString( "address",bookingList.get( position ).getAddress() );
                    args.putString( "total_seats",bookingList.get( position ).getTot_seats() );
+                   args.putString( "board_location",bookingList.get( position ).getBoard_location() );
+                   args.putString( "drop_location",bookingList.get( position ).getDrop_location() );
 
 //                Toast.makeText( getActivity(),"booking_id:"+bookingList.get( position ).getBooking_id(),Toast.LENGTH_LONG ).show();
 
@@ -192,6 +187,7 @@ public class MyBookingsFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             Boolean status = response.getBoolean( "responce" );
+                            Log.e("bookings",response.toString());
 //                          Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
 
 
@@ -221,6 +217,8 @@ public class MyBookingsFragment extends Fragment {
                                     model.setMobile( object.getString( "mobile" ) );
                                     model.setAddress( object.getString( "address" ) );
                                     model.setTot_seats( object.getString( "total_seats" ) );
+                                    model.setBoard_location( object.getString( "board_location" ) );
+                                    model.setDrop_location(  object.getString( "drop_location" ) );
                                     bookingList.add(model );
                                 }
                                 rel_norecord.setVisibility( View.GONE );
@@ -260,5 +258,16 @@ public class MyBookingsFragment extends Fragment {
 
     }
 
-
+    public String getMonthTwoDigit(String m)
+    {
+        String s="";
+        if(m.length()!=2)
+        {
+            s="0"+m;
+        }
+        else {
+            s=m;
+        }
+        return s;
+    }
 }

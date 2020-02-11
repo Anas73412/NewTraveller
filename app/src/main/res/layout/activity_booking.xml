@@ -189,6 +189,7 @@
                             android:id="@+id/radio_sharing"
                             android:text="Sharing"/>
                     </RadioGroup>
+
                     <Button
                         android:id="@+id/btnSearch"
                         android:layout_width="match_parent"
@@ -202,6 +203,7 @@
                         android:background="@drawable/xml_textbox_blue_bg"
                         android:textColor="@android:color/white"
                         android:layout_marginBottom="@dimen/space_10"/>
+
                 </LinearLayout>
                 <RelativeLayout
                     android:id="@+id/rel_swap"
