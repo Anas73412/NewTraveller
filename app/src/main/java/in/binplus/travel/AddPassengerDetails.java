@@ -38,7 +38,7 @@ public class AddPassengerDetails extends AppCompatActivity {
    public static String getname ,getadhar ,getmobile ,getnationality ,getage,getseatno ;
    public static  String getgender = "";
    public static String seat_fare ,source ,destination;
-   public static String date ;
+   public static String date ,board_location,drop_location;
    TextView title ,bus_name ;
    ImageView back ;
 
@@ -69,7 +69,8 @@ public class AddPassengerDetails extends AppCompatActivity {
         date = getIntent().getStringExtra( "date" );
         source = getIntent().getStringExtra( "source" );
         destination = getIntent().getStringExtra( "destination" );
-
+        board_location=getIntent().getStringExtra("board");
+        drop_location=getIntent().getStringExtra("drop");
         title.setText( source + " - " + destination );
         bus_name.setText( SelectSeatActivity.vehicle_name );
 
@@ -195,6 +196,9 @@ public class AddPassengerDetails extends AppCompatActivity {
                         intent.putExtra( "mobile",p_list.get( 0 ).getMobile_no() );
                         intent.putExtra( "seat_fare",seat_fare );
                         intent.putExtra( "date",date );
+                        intent.putExtra( "board",board_location );
+                        intent.putExtra("drop",drop_location);
+
 //                        intent.putExtra( "p_list",p_list );
 
                         startActivity( intent );

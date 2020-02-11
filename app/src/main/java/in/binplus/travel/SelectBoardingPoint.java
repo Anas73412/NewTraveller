@@ -1,12 +1,16 @@
 package in.binplus.travel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,27 +28,44 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
+import in.binplus.travel.Adapter.BoardingPointsAdapter;
+import in.binplus.travel.Adapter.DropingPointsAdapter;
 import in.binplus.travel.Config.BaseURL;
+import in.binplus.travel.Config.Module;
+import in.binplus.travel.Model.BoardingModel;
 import in.binplus.travel.Model.BoardingPointModel;
 import in.binplus.travel.Model.BookingDetailsModel;
 import in.binplus.travel.Model.StopsModel;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
+import in.binplus.travel.util.ToastMsg;
 
 public class SelectBoardingPoint extends AppCompatActivity {
     TextView txt_title ;
+    ProgressDialog loadingBar ;
     ImageView back ;
+    Module module;
+    int flag=0;
+    Activity ctx=SelectBoardingPoint.this;
+    Button btn_next;
+    DropingPointsAdapter drop_adapter;
+    BoardingPointsAdapter adapter;
     RecyclerView recycler_boarding , recycler_droping ;
     RelativeLayout rel_board ,rel_drop ;
     String source,destination ,date ,seat_fare ;
     View view_board ,view_drop ;
+    ArrayList<BoardingModel> list;
     ArrayList<BoardingPointModel> board_list ;
-    ArrayList<BoardingPointModel> drop_list ;
+    ArrayList<BoardingModel> drop_list ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_select_boarding_point );
+        loadingBar = new ProgressDialog( ctx );
+        loadingBar.setMessage( "Loading" );
+        loadingBar.setCancelable(false);
         rel_board = findViewById( R.id.tab_board );
         rel_drop = findViewById( R.id.tab_drop );
         txt_title = findViewById( R.id.title );
@@ -53,7 +74,8 @@ public class SelectBoardingPoint extends AppCompatActivity {
         view_board = findViewById( R.id.view_b );
         view_drop = findViewById( R.id.view_d );
         back = findViewById( R.id.back );
-
+        btn_next = (Button) findViewById( R.id.btn_next );
+        module=new Module(ctx);
         back.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,35 +91,96 @@ public class SelectBoardingPoint extends AppCompatActivity {
         seat_fare = getIntent().getStringExtra( "seat_fare" );
         board_list = new ArrayList<>(  );
         drop_list = new ArrayList<>(  );
-
+        list=new ArrayList<>();
 
         txt_title.setText(source +"-"+destination );
+        recycler_boarding.setVisibility( View.VISIBLE );
+        getBoardPoints();
 
         rel_board.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view_board.setVisibility(SelectBoardingPoint.this.getResources().getColor( R.color.red_600 ) );
-                view_drop.setBackgroundColor(SelectBoardingPoint.this.getResources().getColor( R.color.white ) );
+                if(view_board.getVisibility() ==View.INVISIBLE)
+                {
+                    view_board.setVisibility(View.VISIBLE);
+                }
+                if(view_drop.getVisibility() == View.VISIBLE)
+                {
+                    view_drop.setVisibility(View.INVISIBLE);
+
+                }
+                flag=1;
                 recycler_droping.setVisibility( View.GONE);
                 recycler_boarding.setVisibility( View.VISIBLE );
-                getBoardPoints();
 
-//                Intent  intent = new Intent( SelectBoardingPoint.this,AddPassengerDetails.class);
-//                intent.putExtra( "seat_fare",String.valueOf( seat_fare ));
-//                intent.putExtra( "date",String.valueOf( date ));
-//                intent.putExtra( "source",source );
-//                intent.putExtra( "destination",destination );
-//                startActivity( intent );
+//
 
             }
         } );
 
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String boardLocation=adapter.getBoardingLocation();
+                String dropLoaction=drop_adapter.getDropingLocation();
+                if(boardLocation.equals("") || boardLocation.isEmpty())
+                {
+                   new ToastMsg(ctx).toastIconError("Select Boarding Location");
+                   if(flag == 0 || flag == 1)
+                   {
+
+                   }
+                   else
+                   {
+                           rel_board.performClick();
+                   }
+                }
+                else if(dropLoaction.equals(""))
+                {
+                    new ToastMsg(ctx).toastIconError("Select Droping Location");
+                    if(flag ==2)
+                    {
+
+                    }
+                    else
+                    {
+                        rel_drop.performClick();
+                    }
+                }
+                else
+                {
+                    Intent  intent = new Intent( SelectBoardingPoint.this,AddPassengerDetails.class);
+                intent.putExtra( "seat_fare",String.valueOf( seat_fare ));
+                intent.putExtra( "date",String.valueOf( date ));
+                intent.putExtra( "source",source );
+                intent.putExtra( "destination",destination );
+                intent.putExtra("board",boardLocation);
+                intent.putExtra("drop",dropLoaction);
+
+                startActivity( intent );
+                   // new ToastMsg(ctx).toastIconSuccess("b- "+boardLocation+"\n d-  "+dropLoaction);
+                }
+
+
+            }
+        });
+
+
         rel_drop.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view_board.setVisibility( SelectBoardingPoint.this.getResources().getColor( R.color.white ) );
-                view_drop.setVisibility( SelectBoardingPoint.this.getResources().getColor( R.color.red_600 ));
-                recycler_droping.setVisibility( View.VISIBLE );
+                if(view_board.getVisibility() ==View.VISIBLE)
+                {
+                    view_board.setVisibility(View.INVISIBLE);
+                }
+                if(view_drop.getVisibility() == View.INVISIBLE)
+                {
+                    view_drop.setVisibility(View.VISIBLE);
+
+                }
+                flag=2;
+                recycler_droping.setVisibility( View.VISIBLE);
                 recycler_boarding.setVisibility( View.GONE );
             }
         }  );
@@ -107,6 +190,7 @@ public class SelectBoardingPoint extends AppCompatActivity {
 
     public void getBoardPoints ( )
     {
+        loadingBar.show();
         HashMap<String,String> params = new HashMap<>(  );
         params.put( "to",destination );
         params.put( "from",source );
@@ -116,6 +200,7 @@ public class SelectBoardingPoint extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e( "drop points",response.toString() );
+                        loadingBar.dismiss();
 //                        Toast.makeText(getApplicationContext(),""+response,Toast.LENGTH_LONG).show();
                         try {
                             Boolean status = response.getBoolean( "responce" );
@@ -123,30 +208,66 @@ public class SelectBoardingPoint extends AppCompatActivity {
                             {
                                 JSONObject data = (JSONObject) response.get( "data" );
 
+                                // From Boarding Points
+                                list.clear();
                                 JSONArray array_from = data.getJSONArray( "from" );
+                                JSONObject obj_from=array_from.getJSONObject(0);
+                                JSONArray from_board_arr=new JSONArray(obj_from.getString("bus_board"));
+                                for(int i=0;i<from_board_arr.length();i++)
+                                {
+                                    JSONObject f_board_obj=from_board_arr.getJSONObject(i);
+                                    Iterator iterator=f_board_obj.keys();
+                                    String key="";
+                                    String value="";
+                                    while (iterator.hasNext())
+                                    {
+                                         key=(String)iterator.next();
 
-                                JSONObject from_obj = array_from.getJSONObject( 0 );
-                               JSONArray drop_arr = from_obj.getJSONArray( "bus_drops" );
-                                String from = from_obj.getString( "bus_drops" );
-                                JSONArray from_arr = new JSONArray(from);
+                                          value=f_board_obj.getString(key);
 
-//                                for (int i =0 ; i<from_arr.length();i++)
-//                                {
-//                                    BoardingPointModel model_from = new BoardingPointModel( );
-//                                    model_from.setLocation_name( (String) from_arr.get( i ) );
-//                                    board_list.add( model_from );
-//                                }
+
+                                    }
+                                    BoardingModel boardingModel=new BoardingModel();
+                                    boardingModel.setLocation(key);
+                                    boardingModel.setTime(value);
+
+                                    list.add(boardingModel);
+                                }
+                               // To Droping Points
+                                drop_list.clear();
                                 JSONArray array_to = data.getJSONArray( "to" );
-                                JSONObject to_obj = array_to.getJSONObject( 0 );
-                                String to = to_obj.getString( "bus_drops" );
-                                JSONArray to_arr = new JSONArray(to );
-//                                for (int i =0 ; i<to_arr.length();i++)
-//                                {
-//                                    BoardingPointModel model_to = new BoardingPointModel( );
-//                                    model_to.setLocation_name( (String) from_arr.get( i ) );
-//                                    drop_list.add( model_to );
-//                                }
-                                Toast.makeText(SelectBoardingPoint.this,""+array_from +"\n" +array_to,Toast.LENGTH_LONG).show();
+                                JSONObject obj_to=array_to.getJSONObject(0);
+                                JSONArray to_board_arr=new JSONArray(obj_to.getString("bus_drops"));
+                                for(int i=0;i<to_board_arr.length();i++)
+                                {
+                                    JSONObject t_board_obj=to_board_arr.getJSONObject(i);
+                                    Iterator iterator=t_board_obj.keys();
+                                    String key="";
+                                    String value="";
+                                    while (iterator.hasNext())
+                                    {
+                                        key=(String)iterator.next();
+
+                                        value=t_board_obj.getString(key);
+
+
+                                    }
+                                    BoardingModel boardingModel=new BoardingModel();
+                                    boardingModel.setLocation(key);
+                                    boardingModel.setTime(value);
+
+                                    drop_list.add(boardingModel);
+                                }
+
+                                adapter=new BoardingPointsAdapter(SelectBoardingPoint.this,list);
+                                recycler_boarding.setLayoutManager(new LinearLayoutManager(SelectBoardingPoint.this));
+                                recycler_boarding.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                 drop_adapter=new DropingPointsAdapter(SelectBoardingPoint.this,drop_list);
+                                recycler_droping.setLayoutManager(new LinearLayoutManager(SelectBoardingPoint.this));
+                                recycler_droping.setAdapter(drop_adapter);
+                                drop_adapter.notifyDataSetChanged();
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -157,6 +278,12 @@ public class SelectBoardingPoint extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
+                        String msg=module.VolleyErrorMessage(error);
+                        if(!(msg.equals("") || msg.isEmpty()))
+                        {
+                            new ToastMsg(ctx).toastIconError(msg);
+                        }
 
                     }
                 } );

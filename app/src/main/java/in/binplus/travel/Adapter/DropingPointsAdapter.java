@@ -1,7 +1,6 @@
 package in.binplus.travel.Adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +15,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import in.binplus.travel.Model.BoardingModel;
-import in.binplus.travel.Model.BoardingPointModel;
 import in.binplus.travel.R;
 
-public class BoardingPointsAdapter extends RecyclerView.Adapter<BoardingPointsAdapter.ViewHolder> {
+public class DropingPointsAdapter extends RecyclerView.Adapter<DropingPointsAdapter.ViewHolder> {
     Activity activity;
-    int position=-1;
     String location="";
+    int position=-1;
     ArrayList<BoardingModel> point_list ;
     HashMap<String,String> points=new HashMap<>();
     private int lastSelectedPosition=-1;
 
-    public BoardingPointsAdapter(Activity activity, ArrayList<BoardingModel> point_list) {
+    public DropingPointsAdapter(Activity activity, ArrayList<BoardingModel> point_list) {
         this.activity = activity;
+
         this.point_list = point_list;
     }
 
@@ -130,7 +129,7 @@ public class BoardingPointsAdapter extends RecyclerView.Adapter<BoardingPointsAd
 
     }
 
-    public String getBoardingLocation()
+    public String getDropingLocation()
     {
         return location;
     }

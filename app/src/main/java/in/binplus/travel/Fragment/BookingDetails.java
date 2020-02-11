@@ -228,7 +228,6 @@ public class BookingDetails extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
                         try {
                             Boolean status = response.getBoolean( "responce" );
                             if (status)
@@ -251,7 +250,7 @@ public class BookingDetails extends Fragment {
 
                                 }
 //                                recycler_passenger.setVisibility( View.VISIBLE );
-                                Toast.makeText( getActivity(),""+passenger_list.size(),Toast.LENGTH_LONG ).show();
+
                                 passengerListAdapter = new PassengerListAdapter(passenger_list,getActivity());
                                 recycler_passenger.setLayoutManager( new LinearLayoutManager( getActivity(),LinearLayoutManager.VERTICAL,false ) );
                                 recycler_passenger.setAdapter( passengerListAdapter );

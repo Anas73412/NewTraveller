@@ -192,7 +192,7 @@ public class MyBookingsFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             Boolean status = response.getBoolean( "responce" );
-                          Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
+//                          Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
 
 
                             if (status) {

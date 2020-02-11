@@ -49,7 +49,7 @@ public class CarBookingActivity extends AppCompatActivity {
     TextView title ;
      String formattedDate ;
     String user_id ;
-  Session_management session_management ;
+    Session_management session_management ;
     JSONArray passArray ;
     String random ;
     String sub_name ;
@@ -341,7 +341,6 @@ public class CarBookingActivity extends AppCompatActivity {
                                    stop_list.add( model_to );
                                }
 
-                               Toast.makeText(CarBookingActivity.this, ""+from_arr.length() +"\n"+to_arr.length(), Toast.LENGTH_SHORT ).show();
 
                                stopsAdapter = new SelectedStopsAdapter( stop_list,CarBookingActivity.this );
                                recycler_stops.setAdapter( stopsAdapter );

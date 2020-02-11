@@ -63,6 +63,7 @@ public class BookingConfirmation extends AppCompatActivity {
    Double total_amount =0.0 ;
    Button btnConfirm ;
    Module module ;
+   String board_location="",drop_location="";
    String bus_id ,bus_name ,startfrom ,endto,timefrom,timeto;
    int total_seats ;
     JSONArray passArray ;
@@ -126,6 +127,8 @@ public class BookingConfirmation extends AppCompatActivity {
         mobile = getIntent().getStringExtra( "mobile" );
         j_date = getIntent().getStringExtra( "date" );
         u_name = getIntent().getStringExtra( "p_name" ) ;
+        board_location = getIntent().getStringExtra( "board" ) ;
+        drop_location = getIntent().getStringExtra( "drop" ) ;
 
         module = new Module( BookingConfirmation.this );
 
@@ -266,6 +269,8 @@ public class BookingConfirmation extends AppCompatActivity {
         params.put( "total_money", String.valueOf( total_amount ) );
         params.put( "adhar_no",adhar_id );
         params.put( "b_name",u_name );
+        params.put("board",board_location);
+        params.put("drop",drop_location);
         params.put( "passenger_list", String.valueOf( passArray ) );
 
         CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest( Request.Method.POST, BaseURL.MAKE_BOOKING, params,
