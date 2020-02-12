@@ -251,8 +251,7 @@ public class MyBookingsFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             Boolean status = response.getBoolean( "responce" );
-                            Log.e("bookings",response.toString());
-//                          Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
+                            Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
 
 
                             if (status) {
@@ -324,7 +323,7 @@ public class MyBookingsFragment extends Fragment {
 
                                     rel_norecord.setVisibility( View.GONE );
                                     recyclerView.setVisibility( View.VISIBLE );
-                                   carBookingHistoryAdapter = new CarBookingHistoryAdapter( car_bookinglist,getActivity() );
+                                    carBookingHistoryAdapter = new CarBookingHistoryAdapter( car_bookinglist,getActivity() );
                                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
                                     recyclerView.setLayoutManager( linearLayoutManager );
                                     recyclerView.setAdapter( carBookingHistoryAdapter );

@@ -140,17 +140,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <in.binplus.travel.Fonts.LatoBLack
+
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_2"
+                        android:textSize="@dimen/space_14"
+                        android:layout_marginLeft="@dimen/space_5"
+                        android:text=" Name :"
+                        android:textColor="@color/textcolor"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        />
+                    <in.binplus.travel.Fonts.LatoBLack
+                        android:id="@+id/booking_name"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_2"
+                        android:textSize="@dimen/space_14"
+                        android:layout_marginLeft="@dimen/space_5"
+                        android:text=" Name :"
+                        android:textColor="@color/textcolor"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <in.binplus.travel.Fonts.LatoBLack
-                    android:id="@+id/booking_name"
+
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_2"
                     android:textSize="@dimen/space_14"
                     android:layout_marginLeft="@dimen/space_5"
-                    android:text=" Name :"
+                    android:text="Mobile:"
                     android:textColor="@color/textcolor"
                     android:textAlignment="center"
+                    android:textStyle="bold"
                     />
                 <in.binplus.travel.Fonts.LatoBLack
                     android:id="@+id/txt_mobile"
@@ -164,6 +199,36 @@
                     android:textColor="@color/textcolor"
                     android:textAlignment="center"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <in.binplus.travel.Fonts.LatoBLack
+
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:text="Adhaar Id:"
+                    android:textColor="@color/textcolor"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    />
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_adhaar_id"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:text="date and time"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+                    android:textAlignment="center"
+                    /></LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_below="@+id/view1"
@@ -180,7 +245,7 @@
                     android:padding="@dimen/space_2"
                     android:textSize="@dimen/space_14"
                     android:layout_marginLeft="@dimen/space_5"
-                    android:text=" Seats "
+                    android:text=" Journey Date: "
                     android:textAlignment="center"
                     />
                 <in.binplus.travel.Fonts.LatoBLack
@@ -245,7 +310,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <in.binplus.travel.Fonts.LatoBLack
-                    android:id="@+id/passenger_detail"
+
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -255,8 +320,8 @@
                     android:layout_marginLeft="@dimen/space_5"
                     android:textColor="@color/textcolor"
                     />
-                <EditText
-
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_note"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_height="60dp"
