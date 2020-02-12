@@ -29,7 +29,7 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from( activity ).inflate( R.layout.row_bookings,null );
+        View view = LayoutInflater.from( activity ).inflate( R.layout.booking_history_layout,null );
         ViewHolder holder = new ViewHolder( view );
 
         return holder;
