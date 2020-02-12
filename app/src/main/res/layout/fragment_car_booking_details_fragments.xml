@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/all"
+    tools:context=".Fragment.BookingDetails">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/gradientbackground">
+            <LinearLayout
+                android:id="@+id/linear_to_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_from"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_5"
+                    android:textSize="@dimen/space_18"
+                    android:text="to-from"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="@dimen/space_10"
+                    android:layout_marginEnd="@dimen/space_10"
+                    android:textColor="@color/white"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icons8_right_80px"
+                    android:tint="@color/white"
+                    android:paddingTop="@dimen/space_6"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_gravity="center_vertical"/>
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_to"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_5"
+                    android:textSize="@dimen/space_18"
+                    android:text="to-from"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="@dimen/space_10"
+                    android:visibility="gone"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/txt_date"
+                android:layout_below="@+id/linear_to_from"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_5"
+                android:textSize="@dimen/space_18"
+                android:text="to-from"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/space_10"
+                android:textColor="@color/white"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xml_textbox_bg"
+            android:layout_marginTop="120dp"
+            android:layout_marginRight="@dimen/space_20"
+            android:layout_marginLeft="@dimen/space_20">
+            <LinearLayout
+                android:id="@+id/linear_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/vehicle_name"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:text="Vehicle Name"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textAlignment="center"
+                    />
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/vehicle_no"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:text="vehicle no"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/txt_price"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_5"
+                android:textSize="@dimen/space_16"
+                android:text="Amount"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+
+                android:textColor="@color/colorAccent"/>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_below="@+id/linear_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_margin="@dimen/space_10"/>
+
+
+            <LinearLayout
+                android:layout_below="@+id/view1"
+                android:id="@+id/linear_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/booking_name"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:text=" Name :"
+                    android:textColor="@color/textcolor"
+                    android:textAlignment="center"
+                    />
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:text="date and time"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/view1"
+                android:id="@+id/linear_seats"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical">
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:text=" Seats "
+                    android:textAlignment="center"
+                    />
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/txt_tot_seats"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_14"
+                    android:text="1"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_below="@+id/linear_name"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_margin="@dimen/space_10"/>
+
+            <LinearLayout
+                android:id="@+id/linear_stops"
+                android:layout_below="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <in.binplus.travel.Fonts.LatoBLack
+
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_15"
+                    android:text="Stops:"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+
+                    />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/space_5"
+                    android:id="@+id/recycler_pass_details"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_margin="@dimen/space_10"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_note"
+                android:layout_below="@+id/linear_stops"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <in.binplus.travel.Fonts.LatoBLack
+                    android:id="@+id/passenger_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_2"
+                    android:textSize="@dimen/space_15"
+                    android:text="Note:"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+                    />
+                <EditText
+
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="60dp"
+                    android:background="@drawable/xml_textbox_bg"
+                    android:padding="@dimen/space_5"
+                    android:textSize="@dimen/space_15"
+                    android:hint="Note"
+                    android:gravity="top"
+                    android:layout_marginLeft="@dimen/space_5"
+                    android:textColor="@color/textcolor"
+                    />
+
+
+                <View
+
+                    android:layout_below="@+id/linear_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:visibility="gone"
+                    android:layout_margin="@dimen/space_10"/>
+
+            </LinearLayout>
+
+            <in.binplus.travel.Fonts.LatoBLack
+                android:id="@+id/cancel_booking"
+                android:layout_below="@+id/linear_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Cancel Booking"
+                android:textStyle="bold"
+                android:textSize="@dimen/space_16"
+                android:background="@drawable/xml_textbox_blue_bg"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/space_10"
+                android:padding="@dimen/space_10"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>
