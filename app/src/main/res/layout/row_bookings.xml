@@ -220,21 +220,16 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight=".5"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-              android:gravity="end"
+                android:gravity="end"
                 >
-                <in.binplus.travel.Fonts.LatoBLack
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/space_2"
-                    android:textSize="@dimen/space_18"
-                    android:text="Status:"
-                    android:textAlignment="viewStart"
-                    android:textStyle="bold"
-                    android:textColor="@color/textcolor"
-                    />
+                <ImageView
+                    android:src="@drawable/payment"
+                    android:tint="@color/purple"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
             <in.binplus.travel.Fonts.LatoBLack
                 android:id="@+id/txt_status"
                 android:layout_width="wrap_content"

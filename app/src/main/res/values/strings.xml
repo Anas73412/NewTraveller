@@ -267,5 +267,8 @@
     <string name="required_otp">Enter OTP</string>
     <string name="invalid_otp">Invalid OTP</string>
     <string name="length_otp">OTP too short</string>
+    <string name="required_message">Enter reason</string>
+    <string name="invalid_message">Minimum 10 characters allow</string>
+
 
 </resources>

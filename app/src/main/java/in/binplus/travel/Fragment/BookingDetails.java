@@ -139,9 +139,9 @@ public class BookingDetails extends Fragment {
 
          getBookingDetails();
 
-        txt_from.setText( booking_id);
+        txt_from.setText( "Booking Id : #"+booking_id);
         text_to.setText( end_to );
-        txt_date.setText( booking_date );
+        txt_date.setText( "Date : "+booking_date );
         txt_total.setText(getActivity().getResources().getString(R.string.currency)+""+ total_money );
         txt_busname.setText("Board At:"+board_location );
         txt_busno.setText( "Drop At:" +drop_location );

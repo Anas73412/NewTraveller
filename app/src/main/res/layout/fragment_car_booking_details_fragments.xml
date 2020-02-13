@@ -271,18 +271,15 @@
                 android:background="@color/gray"
                 android:layout_margin="@dimen/space_10"/>
 
-            <LinearLayout
-                android:id="@+id/linear_stops"
-                android:layout_below="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
                 <in.binplus.travel.Fonts.LatoBLack
 
+                    android:id="@+id/tx_stops"
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_2"
+                    android:layout_below="@+id/view2"
                     android:textSize="@dimen/space_15"
                     android:text="Stops:"
                     android:layout_marginLeft="@dimen/space_5"
@@ -291,21 +288,24 @@
                     />
 
                 <ListView
+                    android:layout_below="@id/tx_stops"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
 
                     android:layout_marginTop="@dimen/space_5"
                     android:id="@+id/recycler_pass_details"/>
                 <View
+                    android:layout_below="@id/recycler_pass_details"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:id="@+id/line5"
                     android:background="@color/gray"
                     android:layout_margin="@dimen/space_10"/>
 
-            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/linear_note"
-                android:layout_below="@+id/linear_stops"
+                android:layout_below="@+id/line5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

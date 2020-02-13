@@ -13,9 +13,17 @@ import in.binplus.travel.Model.StopsModel;
 import in.binplus.travel.R;
 
 public class StopsListAdapter extends BaseAdapter {
-    ArrayList<String> stop_list ;
+    ArrayList<StopsModel> stop_list ;
     Activity activity ;
+
+    public StopsListAdapter(ArrayList<StopsModel> stop_list, Activity activity) {
+        this.stop_list = stop_list;
+        this.activity = activity;
+    }
+
     @Override
+
+
     public int getCount() {
         return stop_list.size();
     }
@@ -36,7 +44,7 @@ public class StopsListAdapter extends BaseAdapter {
 
         TextView txt_name = view.findViewById( R.id.txt_cityname );
 
-        txt_name.setText( stop_list.get( i ).toString() );
+        txt_name.setText( stop_list.get( i ).getStop_name() );
 
       return view;
     }

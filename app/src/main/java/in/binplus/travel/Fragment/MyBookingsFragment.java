@@ -52,9 +52,10 @@ import static in.binplus.travel.Config.Constants.KEY_ID;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyBookingsFragment extends Fragment {
+public class MyBookingsFragment extends Fragment implements View.OnClickListener{
     RecyclerView recyclerView ;
     String user_id;
+    RelativeLayout filter;
     Session_management session_management ;
     ArrayList<BookingDetailsModel> bookingList;
     ArrayList<CarEnquiryHistroyModel> car_bookinglist;
@@ -81,80 +82,10 @@ public class MyBookingsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("My Bookings");
-        // Inflate the layout for this fragment
         View view = inflater.inflate( R.layout.fragment_my_bookings, container, false );
-        recyclerView = view.findViewById( R.id.recycler_booking );
-        rel_norecord = view.findViewById( R.id.rel_norecord );
-        session_management = new Session_management( getActivity() );
-        user_id= session_management.getUserDetails().get( KEY_ID );
-        tabLayout = view.findViewById( R.id.tablayout );
-        rel_filter = view.findViewById( R.id.rel_filter );
-        linear_bus = view.findViewById( R.id.linear_bus );
-        linear_car = view.findViewById( R.id.linear_car );
-        img_bus = view.findViewById( R.id.img_bus );
-        img_car = view.findViewById( R.id.img_car );
-        img_filter = view.findViewById( R.id.img_filter );
 
-        recyclerView.setNestedScrollingEnabled( false );
-        bookingList = new ArrayList<>(  );
-        car_bookinglist = new ArrayList<>(  );
-        loadingBar= new ProgressDialog( getActivity() );
-        loadingBar.setMessage( "loading" );
-
-//        getTodaysBookings( user_id );
-
-      getMyBookings( user_id );
-      linear_bus.setOnClickListener( new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              booking_type ="bus";
-              img_bus.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow ) ) );
-              img_car.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white) ) );
-              img_filter.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white) ) );
-//              Toast.makeText( getActivity(),"type:" +booking_type,Toast.LENGTH_LONG ).show();
-              getMyBookings( user_id );
-
-          }
-      }  );
-      linear_car.setOnClickListener( new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              booking_type = "car";
-              img_car.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow ) ) );
-              img_bus.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
-              img_filter.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
-//              Toast.makeText( getActivity(),"type:" +booking_type,Toast.LENGTH_LONG ).show();
-             getMyBookings( user_id );
-          }
-      } );
-
-      rel_filter.setOnClickListener( new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              booking_type ="";
-              img_filter.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow )) );
-              img_car.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
-              img_bus.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
-              Calendar c = Calendar.getInstance();
-              mYear = c.get(Calendar.YEAR);
-              mMonth = c.get(Calendar.MONTH);
-              mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-              DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
-                      new DatePickerDialog.OnDateSetListener() {
-
-                          @Override
-                          public void onDateSet(DatePicker view, int year,
-                                                int monthOfYear, int dayOfMonth) {
-                              b_date=year + "-" + getMonthTwoDigit(String.valueOf( monthOfYear + 1 )) + "-" + getMonthTwoDigit(String.valueOf( dayOfMonth));
-
-                          }
-                      }, mYear, mMonth, mDay);
-              datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()+1000);
-              datePickerDialog.show();
-          }
-      } );
+        initViews(view);
+       getMyBookings( user_id );
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener( getActivity(),recyclerView, new RecyclerTouchListener.OnItemClickListener() {
             @Override
@@ -212,7 +143,7 @@ public class MyBookingsFragment extends Fragment {
                        CarBookingDetailsFragments carBookingDetailsFragments = new CarBookingDetailsFragments();
                        carBookingDetailsFragments.setArguments( args );
                        FragmentManager fragmentManager = getFragmentManager();
-                       fragmentManager.beginTransaction().replace( R.id.container_frame,carBookingDetailsFragments ).addToBackStack( null ).commit();
+                       fragmentManager.beginTransaction().replace( R.id.container_frame,carBookingDetailsFragments ).addToBackStack(null).commit();
                    }
 
             }
@@ -226,6 +157,32 @@ public class MyBookingsFragment extends Fragment {
         return view ;
     }
 
+    private void initViews(View view) {
+        recyclerView = view.findViewById( R.id.recycler_booking );
+        rel_norecord = view.findViewById( R.id.rel_norecord );
+        session_management = new Session_management( getActivity() );
+        user_id= session_management.getUserDetails().get( KEY_ID );
+        tabLayout = view.findViewById( R.id.tablayout );
+        rel_filter = view.findViewById( R.id.rel_filter );
+        filter = view.findViewById( R.id.filter );
+        linear_bus = view.findViewById( R.id.linear_bus );
+        linear_car = view.findViewById( R.id.linear_car );
+        img_bus = view.findViewById( R.id.img_bus );
+        img_car = view.findViewById( R.id.img_car );
+        img_filter = view.findViewById( R.id.img_filter );
+
+        recyclerView.setNestedScrollingEnabled( false );
+
+        loadingBar= new ProgressDialog( getActivity() );
+        loadingBar.setMessage( "loading" );
+
+        linear_bus.setOnClickListener(this);
+        linear_car.setOnClickListener(this);
+        filter.setOnClickListener(this);
+
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -237,9 +194,9 @@ public class MyBookingsFragment extends Fragment {
     {
        // Toast.makeText( getActivity(),""+user_id,Toast.LENGTH_LONG ).show();
         loadingBar.show();
-        bookingList.clear();
-        car_bookinglist.clear();
 
+        bookingList = new ArrayList<>(  );
+        car_bookinglist = new ArrayList<>(  );
         HashMap<String,String> params = new HashMap<>(  );
         params.put( "user_id",user_id);
 
@@ -251,17 +208,15 @@ public class MyBookingsFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             Boolean status = response.getBoolean( "responce" );
-                            Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
+                            //Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
 
 
                             if (status) {
                                 loadingBar.dismiss();
                           //    JSONArray data_array = (JSONArray) response.get( "data" );
                                 JSONObject data = (JSONObject) response.get( "data" );
-                                if (booking_type.equals( "bus" )) {
-
                                     JSONArray bus_array = data.getJSONArray( "bus" );
-
+                                    Log.e("bus-data",bus_array.toString());
 
                                     for (int i = 0; i < bus_array.length(); i++) {
                                         JSONObject object = bus_array.getJSONObject( i );
@@ -295,10 +250,8 @@ public class MyBookingsFragment extends Fragment {
                                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
                                     recyclerView.setLayoutManager( linearLayoutManager );
                                     recyclerView.setAdapter( bookingadapter );
-                                }
-                                else if (booking_type.equals( "car" ))
-                                {
-                                    JSONArray car_array = data.getJSONArray( "car" );
+                                                                    JSONArray car_array = data.getJSONArray( "car" );
+                                Log.e("car-data",bus_array.toString());
                                     for (int i = 0 ; i <car_array.length();i++)
                                     {
                                         JSONObject object = car_array.getJSONObject( i );
@@ -321,22 +274,17 @@ public class MyBookingsFragment extends Fragment {
 
                                     }
 
-                                    rel_norecord.setVisibility( View.GONE );
-                                    recyclerView.setVisibility( View.VISIBLE );
-                                    carBookingHistoryAdapter = new CarBookingHistoryAdapter( car_bookinglist,getActivity() );
-                                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
-                                    recyclerView.setLayoutManager( linearLayoutManager );
-                                    recyclerView.setAdapter( carBookingHistoryAdapter );
+
                                 }
 
-                            }
-                            else
-                            {
-                                loadingBar.dismiss();
-                                rel_norecord.setVisibility( View.VISIBLE );
-                                recyclerView.setVisibility( View.GONE);
-                              //  Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
-                            }
+//                            }
+//                            else
+//                            {
+//                                loadingBar.dismiss();
+//                                rel_norecord.setVisibility( View.VISIBLE );
+//                                recyclerView.setVisibility( View.GONE);
+//                              //  Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
+//                            }
 
 
                         } catch (JSONException e) {
@@ -371,4 +319,148 @@ public class MyBookingsFragment extends Fragment {
         }
         return s;
     }
+
+    @Override
+    public void onClick(View v) {
+
+        int id=v.getId();
+
+        if(id == R.id.linear_bus)
+        {
+            booking_type ="bus";
+            img_bus.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow ) ) );
+            img_car.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white) ) );
+            img_filter.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white) ) );
+//              Toast.makeText( getActivity(),"type:" +booking_type,Toast.LENGTH_LONG ).show();
+            rel_norecord.setVisibility( View.GONE );
+            recyclerView.setVisibility( View.VISIBLE );
+            bookingadapter = new MyBookingAdapter( bookingList, getActivity() );
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
+            recyclerView.setLayoutManager( linearLayoutManager );
+            recyclerView.setAdapter( bookingadapter );
+
+        }
+        else if(id == R.id.linear_car)
+        {
+            booking_type = "car";
+            img_car.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow ) ) );
+            img_bus.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
+            img_filter.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
+
+            rel_norecord.setVisibility( View.GONE );
+            recyclerView.setVisibility( View.VISIBLE );
+            carBookingHistoryAdapter = new CarBookingHistoryAdapter( car_bookinglist,getActivity() );
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
+            recyclerView.setLayoutManager( linearLayoutManager );
+            recyclerView.setAdapter( carBookingHistoryAdapter );
+        }
+        else if(id == R.id.filter)
+        {
+
+            img_filter.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow )) );
+            img_car.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
+            img_bus.setImageTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.white ) ) );
+            Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            b_date=year + "-" + getMonthTwoDigit(String.valueOf( monthOfYear + 1 )) + "-" + getMonthTwoDigit(String.valueOf( dayOfMonth));
+
+                            getFilterList(booking_type,b_date);
+
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
+        }
+
+    }
+
+    private void getFilterList(String booking_type, String b_date) {
+
+        if(booking_type.equals("bus"))
+        {
+            ArrayList<BookingDetailsModel> filterdBusList=new ArrayList<>();
+            for (BookingDetailsModel model:bookingList)
+            {
+                 String j_dt=model.getJourney_startdate();
+                 if(b_date.equals(j_dt))
+                 {
+                     filterdBusList.add(model);
+                 }
+                 else
+                 {
+
+                 }
+            }
+
+            if(filterdBusList.size()<=0)
+            {
+                rel_norecord.setVisibility( View.VISIBLE );
+                recyclerView.setVisibility( View.GONE );
+
+            }
+            else {
+                rel_norecord.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                bookingadapter = new MyBookingAdapter(filterdBusList, getActivity());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(bookingadapter);
+                bookingadapter.notifyDataSetChanged();
+            }
+
+        }
+        else if(booking_type.equalsIgnoreCase("car"))
+        {
+            ArrayList<CarEnquiryHistroyModel> filterdBusList=new ArrayList<>();
+            for (CarEnquiryHistroyModel model:car_bookinglist)
+            {
+                String j_dt=model.getJourney_date();
+                if(b_date.equals(j_dt))
+                {
+                    filterdBusList.add(model);
+                }
+                else
+                {
+
+                }
+            }
+
+            //Toast.makeText(getActivity(),""+filterdBusList.size(),Toast.LENGTH_LONG).show();
+
+            if(filterdBusList.size()<=0)
+            {
+                rel_norecord.setVisibility( View.VISIBLE );
+                recyclerView.setVisibility( View.GONE );
+
+            }
+            else {
+                rel_norecord.setVisibility( View.GONE );
+                recyclerView.setVisibility( View.VISIBLE );
+
+                carBookingHistoryAdapter = new CarBookingHistoryAdapter(filterdBusList, getActivity());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(carBookingHistoryAdapter);
+                carBookingHistoryAdapter.notifyDataSetChanged();
+            }
+        }
+        else
+        {
+            Toast.makeText(getActivity(),"else ",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
 }
