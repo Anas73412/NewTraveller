@@ -170,7 +170,7 @@ public class BookingConfirmation extends AppCompatActivity {
         Double left_amt = wallet_Amt-total_amount;
         left_wallet_amount =String.valueOf( left_amt );
 
-//        Toast.makeText(BookingConfirmation.this,"gender " + AddPassengerDetails.p_list.get(0).getGender(),Toast.LENGTH_LONG).show();
+     //  Toast.makeText(BookingConfirmation.this,"size" + AddPassengerDetails.p_list.size(),Toast.LENGTH_LONG).show();
         btnConfirm.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {

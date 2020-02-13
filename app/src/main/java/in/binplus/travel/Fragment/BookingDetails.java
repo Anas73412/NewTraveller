@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +60,8 @@ import static in.binplus.travel.Config.Constants.KEY_ID;
 public class BookingDetails extends Fragment {
 
     RecyclerView recycler_passenger ;
-    TextView text_to ,txt_from,txt_date,txt_total,txt_busname,txt_busno ,passengers ,cancel_booking ,txt_tot_seats ,txt_pass_name ,txt_pass_mobile;
+    TextView text_to ,txt_from,txt_date,txt_total,txt_busname,txt_busno ,passengers ,txt_status
+            ,cancel_booking ,txt_tot_seats ,txt_pass_name ,txt_pass_mobile;
     Dialog dialog ;
     TextView btn_no ,btn_yes ;
     EditText et_remark ;
@@ -69,6 +73,7 @@ public class BookingDetails extends Fragment {
     Module module ;
     ProgressDialog loadingBar ;
     RelativeLayout rel_passenger ;
+    LinearLayout rel_status ;
 
     String booking_id ,vehicle_id ,status ,payment ,total_money ,vehicle_type,start_from ,end_to ,booking_date,start_date,end_date,
             vehicle_category,vehicle_name,vehicle_number,name ,adhar_id,address ,mobile ,total_seats ,drop_location ,board_location;
@@ -106,12 +111,15 @@ public class BookingDetails extends Fragment {
         txt_tot_seats = view.findViewById( R.id.txt_tot_seats );
         txt_pass_name = view.findViewById( R.id.booking_name );
         txt_pass_mobile =view.findViewById( R.id.txt_mobile );
+        txt_status = view.findViewById( R.id.txt_status );
         recycler_passenger = view.findViewById( R.id.recycler_pass_details );
+        rel_status= view.findViewById( R.id.rel_status );
         session_management = new Session_management( getActivity() );
         user_id = session_management.getUserDetails().get( KEY_ID );
         img_up = view.findViewById( R.id.up );
         img_down = view.findViewById( R.id.down );
         rel_passenger =view.findViewById(R.id.rel_passenger_detail);
+
 
         booking_id = getArguments().getString( "booking_id" );
         booking_date=getArguments().getString( "booking_date" );
@@ -130,6 +138,31 @@ public class BookingDetails extends Fragment {
         total_seats = getArguments().getString( "total_seats" );
         drop_location=getArguments().getString( "drop_location");
         board_location = getArguments().getString( "board_location" );
+       status = getArguments().getString( "status" );
+        int sts = Integer.parseInt( status );
+        if (sts==0)
+        {
+            txt_status.setText( "Pending" );
+            txt_status.setTextColor( Color.WHITE );
+            rel_status.setBackgroundTintList( ColorStateList.valueOf(getActivity().getResources().getColor( R.color.green )) );
+
+        }
+        else if (sts ==1)
+        {
+            txt_status.setText( "Confirmed" );
+            txt_status.setTextColor( Color.WHITE);
+
+            rel_status.setBackgroundTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.yelow )) );
+        }
+        else if (sts==2)
+        {
+            txt_status.setText( "Cancelled" );
+            txt_status.setTextColor( Color.WHITE );
+            cancel_booking.setVisibility( View.GONE );
+            rel_status.setBackgroundTintList( ColorStateList.valueOf( getActivity().getResources().getColor( R.color.color_cancel ) ) );
+        }
+
+
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(start_from +"-"+end_to);
     //    Toast.makeText( getActivity(),"booking_id" +booking_id,Toast.LENGTH_LONG ).show();
@@ -151,24 +184,24 @@ public class BookingDetails extends Fragment {
 
 
 
-        rel_passenger.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (img_down.getVisibility()== View.VISIBLE) {
-                    recycler_passenger.setVisibility( View.VISIBLE );
-                    img_up.setVisibility( View.VISIBLE );
-                    img_down.setVisibility( View.GONE );
-                }
-                else if (img_up.getVisibility()==View.VISIBLE)
-                {
-                    recycler_passenger.setVisibility( View.GONE );
-                    img_up.setVisibility( View.GONE );
-                    img_down.setVisibility( View.VISIBLE);
-                }
-
-
-            }
-        } );
+//        rel_passenger.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (img_down.getVisibility()== View.VISIBLE) {
+//                    recycler_passenger.setVisibility( View.VISIBLE );
+//                    img_up.setVisibility( View.VISIBLE );
+//                    img_down.setVisibility( View.GONE );
+//                }
+//                else if (img_up.getVisibility()==View.VISIBLE)
+//                {
+//                    recycler_passenger.setVisibility( View.GONE );
+//                    img_up.setVisibility( View.GONE );
+//                    img_down.setVisibility( View.VISIBLE);
+//                }
+//
+//
+//            }
+//        } );
 
         cancel_booking.setOnClickListener( new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package in.binplus.travel.Adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,23 @@ public class CarBookingHistoryAdapter extends RecyclerView.Adapter<CarBookingHis
         viewHolder.txt_to.setText( model.getTo_locations() );
         viewHolder.txt_pass_name.setText( model.getName() );
         viewHolder.txt_mobile.setText( model.getMobile_no() );
-        viewHolder.txt_status.setVisibility( View.GONE );
+
+        int sts = Integer.parseInt( model.getStatus() );
+        if (sts==0)
+        {
+           viewHolder.txt_status.setText( "Pending" );
+           viewHolder.txt_status.setTextColor( Color.CYAN );
+        }
+        else if (sts ==1)
+        {
+            viewHolder.txt_status.setText( "Confirmed" );
+           viewHolder.txt_status.setTextColor( Color.GREEN);
+        }
+        else if (sts==2)
+        {
+            viewHolder.txt_status.setText( "Cancelled" );
+            viewHolder.txt_status.setTextColor( Color.RED );
+        }
 
     }
 

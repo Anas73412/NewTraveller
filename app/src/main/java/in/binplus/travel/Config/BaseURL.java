@@ -43,6 +43,8 @@ public class BaseURL {
     public static String URL_VERIFY_REGISTER_OTP = BASE_URL + "mobile_register_otp_verification";
     public static String URL_VERIFY_OTP = BASE_URL + "mobile_otp_verification";
     public static String URL_VEHICLE_DETAILS_WID = BASE_URL + "vehicles_lists_by_id";
+    public static String URL_VEHICLE_DETAILS = BASE_URL + "get_vehicle_by_id";
+
     public static String URL_CANCEL_CAR_BOOKING=BASE_URL+"cancel_car_booking";
     public static String IMG_SLIDER_URL = "https://traveller.anshuwap.com/uploads/sliders/";
     public static String DOC_IMG_URL = "https://traveller.anshuwap.com/uploads/docs/";

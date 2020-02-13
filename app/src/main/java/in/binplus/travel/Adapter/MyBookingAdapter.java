@@ -53,17 +53,17 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
 
         holder.txt_price.setText(activity.getResources().getString(R.string.currency)+ ""+model.getTotal_money() );
         int sts = Integer.parseInt( model.getStatus() );
-        if (sts==1)
+        if (sts==0)
         {
            holder.txt_status.setText( "Pending" );
            holder.txt_status.setTextColor( Color.CYAN );
         }
-        else if (sts ==0)
+        else if (sts ==1)
         {
             holder.txt_status.setText( "Confirmed" );
             holder.txt_status.setTextColor( Color.GREEN);
         }
-        else if (sts==3)
+        else if (sts==2)
         {
             holder.txt_status.setText( "Cancelled" );
             holder.txt_status.setTextColor( Color.RED );

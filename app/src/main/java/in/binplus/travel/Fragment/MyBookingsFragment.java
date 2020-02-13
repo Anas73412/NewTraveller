@@ -137,9 +137,10 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                        args.putString( "adhar_no",car_bookinglist.get( position ).getAdhaar_no() );
                        args.putString( "mobile",car_bookinglist.get( position ).getMobile_no() );
                        args.putString( "route",car_bookinglist.get( position ).getStop_list() );
+                       args.putString( "status",car_bookinglist.get( position ).getStatus() );
 
 
-//                Toast.makeText( getActivity(),"booking_id:"+bookingList.get( position ).getBooking_id(),Toast.LENGTH_LONG ).show();
+//                Toast.makeText( getActivity(),"booking_id:"+bookingList.get( position ).getVehicle_id(),Toast.LENGTH_LONG ).show();
                        CarBookingDetailsFragments carBookingDetailsFragments = new CarBookingDetailsFragments();
                        carBookingDetailsFragments.setArguments( args );
                        FragmentManager fragmentManager = getFragmentManager();
@@ -250,8 +251,8 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
                                     recyclerView.setLayoutManager( linearLayoutManager );
                                     recyclerView.setAdapter( bookingadapter );
-                                                                    JSONArray car_array = data.getJSONArray( "car" );
-                                Log.e("car-data",bus_array.toString());
+                                    JSONArray car_array = data.getJSONArray( "car" );
+                                Log.e("car-data",car_array.toString());
                                     for (int i = 0 ; i <car_array.length();i++)
                                     {
                                         JSONObject object = car_array.getJSONObject( i );
@@ -267,10 +268,11 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                                         model.setMobile_no( object.getString( "mobile_no" ) );
                                         model.setAdhaar_no( object.getString( "adhaar_no" ) );
                                         model.setNote( object.getString( "note" ));
+                                        model.setStatus( object.getString( "status" ) );
                                         String rts=object.getString( "route" );
                                         model.setStop_list( rts );
                                         car_bookinglist.add( model );
-
+                                        Toast.makeText( getActivity(),"vehicle_id:"+object.getString( "vehicle_id" ),Toast.LENGTH_LONG ).show();
 
                                     }
 
@@ -278,13 +280,13 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                                 }
 
 //                            }
-//                            else
-//                            {
-//                                loadingBar.dismiss();
-//                                rel_norecord.setVisibility( View.VISIBLE );
-//                                recyclerView.setVisibility( View.GONE);
-//                              //  Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
-//                            }
+                            else
+                            {
+                                loadingBar.dismiss();
+                                rel_norecord.setVisibility( View.VISIBLE );
+                                recyclerView.setVisibility( View.GONE);
+                              //  Toast.makeText( getActivity(),""+response,Toast.LENGTH_LONG ).show();
+                            }
 
 
                         } catch (JSONException e) {
@@ -339,6 +341,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
             recyclerView.setLayoutManager( linearLayoutManager );
             recyclerView.setAdapter( bookingadapter );
 
+
         }
         else if(id == R.id.linear_car)
         {
@@ -353,6 +356,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getActivity() );
             recyclerView.setLayoutManager( linearLayoutManager );
             recyclerView.setAdapter( carBookingHistoryAdapter );
+
         }
         else if(id == R.id.filter)
         {

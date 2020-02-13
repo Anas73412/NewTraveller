@@ -216,6 +216,7 @@
                 android:layout_marginTop="@dimen/space_5"
                 android:layout_width="wrap_content"
                 android:layout_toRightOf="@id/txtTotal"
+                android:layout_marginLeft="@dimen/space_5"
                 android:textColor="#f4b362"
                 android:layout_height="wrap_content"
                 android:text="TOTAL :"
@@ -241,6 +242,7 @@
                     android:layout_width="wrap_content"
                     android:layout_toRightOf="@id/txtst"
                     android:textColor="#f4b362"
+                    android:layout_marginLeft="@dimen/space_5"
                     android:layout_height="wrap_content"
                     android:text="TOTAL :"
                     />

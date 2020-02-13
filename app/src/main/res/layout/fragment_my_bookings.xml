@@ -2,15 +2,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
    android:orientation="vertical"
-    android:background="@drawable/gradientbackground"
+
     tools:context=".Fragment.MyBookingsFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradientbackground"
+       >
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
@@ -110,34 +112,35 @@
 
 
 
-    <RelativeLayout
-        android:id="@+id/rel_norecord"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_below="@+id/tablayout"
 
-
-        >
-
-        <ImageView
-            android:id="@+id/img"
+</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rel_norecord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/norecord"
-            android:layout_centerInParent="true"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No Records Found"
-            android:layout_below="@id/img"
-            android:layout_marginTop="-80dp"
-            android:textAlignment="center"
-            android:textSize="@dimen/space_20"/>
+            android:background="@color/white"
+            android:layout_below="@+id/tablayout"
+            android:visibility="gone"
+
+            >
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/norecord"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Records Found"
+                android:layout_below="@id/img"
+                android:layout_marginTop="-80dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/space_20"/>
 
 
-    </RelativeLayout>
-</RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

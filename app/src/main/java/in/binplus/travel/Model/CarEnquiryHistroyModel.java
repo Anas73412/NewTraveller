@@ -15,11 +15,12 @@ public class CarEnquiryHistroyModel {
     String adhaar_no ;
     String note ;
     String stop_list;
+    String status ;
 
     public CarEnquiryHistroyModel() {
     }
 
-    public CarEnquiryHistroyModel(String enquiry_id, String f_id, String vehicle_id, String from_location, String to_locations, String journey_date, String enquiry_date, String name, String mobile_no, String adhaar_no, String note,String  stop_list) {
+    public CarEnquiryHistroyModel(String enquiry_id, String f_id, String vehicle_id, String from_location, String to_locations, String journey_date, String enquiry_date, String name, String mobile_no, String adhaar_no, String note, String stop_list, String status) {
         this.enquiry_id = enquiry_id;
         this.f_id = f_id;
         this.vehicle_id = vehicle_id;
@@ -32,6 +33,7 @@ public class CarEnquiryHistroyModel {
         this.adhaar_no = adhaar_no;
         this.note = note;
         this.stop_list = stop_list;
+        this.status = status;
     }
 
     public String getEnquiry_id() {
@@ -128,5 +130,13 @@ public class CarEnquiryHistroyModel {
 
     public void setStop_list(String stop_list) {
         this.stop_list = stop_list;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
