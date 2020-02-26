@@ -56,7 +56,6 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
         if (sts==0)
         {
            holder.txt_status.setText( "Pending" );
-           holder.txt_status.setTextColor( Color.CYAN );
         }
         else if (sts ==1)
         {

@@ -272,7 +272,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                                         String rts=object.getString( "route" );
                                         model.setStop_list( rts );
                                         car_bookinglist.add( model );
-                                        Toast.makeText( getActivity(),"vehicle_id:"+object.getString( "vehicle_id" ),Toast.LENGTH_LONG ).show();
+//                                        Toast.makeText( getActivity(),"vehicle_id:"+object.getString( "vehicle_id" ),Toast.LENGTH_LONG ).show();
 
                                     }
 

@@ -48,7 +48,7 @@ public class CarBookingHistoryAdapter extends RecyclerView.Adapter<CarBookingHis
         if (sts==0)
         {
            viewHolder.txt_status.setText( "Pending" );
-           viewHolder.txt_status.setTextColor( Color.CYAN );
+//           viewHolder.txt_status.setTextColor( Color.CYAN );
         }
         else if (sts ==1)
         {
