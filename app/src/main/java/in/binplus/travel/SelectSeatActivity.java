@@ -191,7 +191,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                             rec_lower_seats.setAdapter(seater2x2Adapter);
                             seater2x2Adapter.notifyDataSetChanged();
-                        } else if (layout.equalsIgnoreCase("3X2")) {
+                        } else if (layout.equalsIgnoreCase("2X3")) {
                             int row = total_seats / 5;
                             seater3x2Adapter = new Seater3x2Adapter(activity, row,remainSeats);
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
@@ -205,7 +205,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                             rec_lower_seats.setAdapter(semiSleeper2x2Adapter);
                             semiSleeper2x2Adapter.notifyDataSetChanged();
-                        } else if (layout.equalsIgnoreCase("3X2")) {
+                        } else if (layout.equalsIgnoreCase("2X3")) {
                             int row = total_seats / 5;
                             semiSleeper3x2Adapter = new SemiSleeper3x2Adapter(activity, remainSeats,row);
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
@@ -312,7 +312,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                     if (layout.equalsIgnoreCase("2X2")) {
                         seat_list = seater2x2Adapter.getSeatList();
 
-                    } else if (layout.equalsIgnoreCase("3X2")) {
+                    } else if (layout.equalsIgnoreCase("2X3")) {
                         seat_list = seater3x2Adapter.getSeatList();
 
                     }
@@ -320,7 +320,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                     if (layout.equalsIgnoreCase("2X2")) {
                         seat_list = semiSleeper2x2Adapter.getSeatList();
 
-                    } else if (layout.equalsIgnoreCase("3X2")) {
+                    } else if (layout.equalsIgnoreCase("2X3")) {
                         seat_list = semiSleeper3x2Adapter.getSeatList();
 
                     }
