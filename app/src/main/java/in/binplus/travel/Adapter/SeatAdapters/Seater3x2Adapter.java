@@ -28,11 +28,15 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
     Module module;
     ArrayList<String> rm_list;
     ArrayList<String> seat_list=new ArrayList<>();
+    ArrayList<String> femaleList=new ArrayList<>();
+    ArrayList<String> resList=new ArrayList<>();
 
-    public Seater3x2Adapter(Activity activity, int seats, ArrayList<String> rm_list) {
+    public Seater3x2Adapter(Activity activity, int seats, ArrayList<String> rm_list,ArrayList<String> femaleList, ArrayList<String> resList) {
         this.activity = activity;
         this.seats = seats;
         this.rm_list = rm_list;
+        this.femaleList=femaleList;
+        this.resList=resList;
     }
 
     @NonNull
@@ -46,12 +50,34 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
+        for(int res=0; res<resList.size();res++)
+        {
+            String[] s=resList.get( res ).split( "" );
+            pos=module.getRowReverseData( s[1].toString() );
+            if(position == pos) {
+                int seat_number = Integer.parseInt(s[2].toString());
+
+                if (seat_number == 1) {
+                    holder.seat_1.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_1.setClickable(false);
+
+                } else if (seat_number == 2) {
+                    holder.seat_2.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_2.setClickable(false);
+                } else if (seat_number == 3) {
+                    holder.seat_3.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_3.setClickable(false);
+                } else {
+                    holder.seat_4.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_4.setClickable(false);
+                }
+            }
+        }
+
         for(int i=0; i<rm_list.size();i++)
         {
             String[] s=rm_list.get( i ).split( "" );
-
             pos=module.getRowReverseData( s[1].toString() );
-
             if(position == pos)
             {
                 int seat_number=Integer.parseInt( s[2].toString() );

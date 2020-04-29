@@ -48,7 +48,5 @@ public class BaseURL {
     public static String URL_CANCEL_CAR_BOOKING=BASE_URL+"cancel_car_booking";
     public static String IMG_SLIDER_URL = "https://traveller.anshuwap.com/uploads/sliders/";
     public static String DOC_IMG_URL = "https://traveller.anshuwap.com/uploads/docs/";
-
     public static String IMG_PROFILE_URL = BASE_URL + "uploads/profile/";
-    // global topic to receive app wide push notifications
 }

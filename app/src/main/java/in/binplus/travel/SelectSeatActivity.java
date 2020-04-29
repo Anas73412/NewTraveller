@@ -56,6 +56,8 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     ArrayList<String> sleeperSeaterUpperSeatList=new ArrayList<>();
     ArrayList<String> sleeperSeaterLowerSeatList=new ArrayList<>();
     ArrayList<String> remainSeats=new ArrayList<>();
+    ArrayList<String> femaleSeats=new ArrayList<>();
+    ArrayList<String> resSeats=new ArrayList<>();
     ImageView img_info;
     Module module;
     String availabe_seats="";
@@ -155,17 +157,42 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
         HashMap<String, String> params = new HashMap<>();
         params.put("vehicle_id", bus_id);
         params.put("date", date);
-
+        femaleSeats.clear();
+        resSeats.clear();
         CustomVolleyJsonRequest request = new CustomVolleyJsonRequest(Request.Method.POST, URL_VEHICLE_DETAILS_WID, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 loadingBar.dismiss();
                 try {
+                    int total_seats=0;
                     Log.e("details-data", response.toString());
                     JSONArray array = response.getJSONArray("data");
-                    JSONObject object = array.getJSONObject(0);
-                    layout = object.getString("layout");
-                    availabe_seats=String.valueOf( response.getInt("seats") );
+                    JSONArray layoutArr=response.getJSONArray("layout");
+                    if(layoutArr.length()>0)
+                    {
+                        JSONObject object = layoutArr.getJSONObject(0);
+                        layout = object.getString("layout");
+                        sitting_type = object.getString("sitting_type");
+                         total_seats = Integer.parseInt(object.getString("total_seats"));
+                        seat_fare = Double.parseDouble(object.getString("seat_fare"));
+                        JSONArray fSeatArr=new JSONArray(object.getString("f_seats"));
+                        for(int i=0; i<fSeatArr.length();i++)
+                        {
+                            femaleSeats.add(fSeatArr.get(i).toString());
+                        }
+                        JSONArray rSeatArr=new JSONArray(object.getString("r_seats"));
+                        for(int i=0; i<rSeatArr.length();i++)
+                        {
+                            resSeats.add(rSeatArr.get(i).toString());
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+//                    availabe_seats=String.valueOf( response.getInt("seats") );
+                    availabe_seats="0";
 
                        JSONArray jsonArray=response.getJSONArray("seat_no" );
                        if(jsonArray.length()<=0)
@@ -180,10 +207,6 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                            }
                        }
 
-                    sitting_type = object.getString("sitting_type");
-                    int total_seats = Integer.parseInt(object.getString("total_seats"));
-                    seat_fare = Double.parseDouble(object.getString("seat_fare"));
-
                     if (sitting_type.equalsIgnoreCase("Seater")) {
                         if (layout.equalsIgnoreCase("2X2")) {
                             int row = total_seats / 4;
@@ -193,7 +216,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                             seater2x2Adapter.notifyDataSetChanged();
                         } else if (layout.equalsIgnoreCase("2X3")) {
                             int row = total_seats / 5;
-                            seater3x2Adapter = new Seater3x2Adapter(activity, row,remainSeats);
+                            seater3x2Adapter = new Seater3x2Adapter(activity, row,remainSeats,resSeats,femaleSeats);
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                             rec_lower_seats.setAdapter(seater3x2Adapter);
                             seater3x2Adapter.notifyDataSetChanged();

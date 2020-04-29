@@ -38,29 +38,29 @@ import in.binplus.travel.util.RecyclerTouchListener;
 import in.binplus.travel.util.ToastMsg;
 
 public class AllBusActivity extends AppCompatActivity implements View.OnClickListener{
-RecyclerView rec_buses;
-TextView toolbar_title ;
-ImageView back ;
+    RecyclerView rec_buses;
+    TextView toolbar_title ;
+    ImageView back ;
 int list_type=0;
 List<TextView> filter_list;
     Intent intent ;
-LinearLayout lin_no_bus,lin_filter;
-String source="",destination="",date="" , type ="";
-ProgressDialog loadingBar;
-TextView tv_filter_all,tv_filter_ac,tv_filter_nonac,tv_filter_seater,tv_filter_sleeper,tv_filter_semi_sleeper;
-LinearLayout linear_all , linear_ac,linear_nonac ,linear_sleeper,linear_seater ,linear_semi_sleeper ;
-ImageView img_all ,img_ac,img_non,img_seater ,img_sleeper ,img_semi_sleeper ;
-ArrayList<AvailableBusesModel> list;
-ArrayList<AvailableBusesModel> ac_list;
-ArrayList<AvailableBusesModel> non_ac_list;
-ArrayList<AvailableBusesModel> seater_list;
-ArrayList<AvailableBusesModel> sleeper_list;
-ArrayList<AvailableBusesModel> semi_sleeper_list;
-ArrayList<AvailableBusesModel> car_list ;
-ArrayList<AvailableBusesModel> sharing_list ;
-Context ctx=AllBusActivity.this;
-AvailableBusesAdapter adapter;
-Module module;
+    LinearLayout lin_no_bus,lin_filter;
+    String source="",destination="",date="" , type ="";
+    ProgressDialog loadingBar;
+    TextView tv_filter_all,tv_filter_ac,tv_filter_nonac,tv_filter_seater,tv_filter_sleeper,tv_filter_semi_sleeper;
+    LinearLayout linear_all , linear_ac,linear_nonac ,linear_sleeper,linear_seater ,linear_semi_sleeper ;
+    ImageView img_all ,img_ac,img_non,img_seater ,img_sleeper ,img_semi_sleeper ;
+    ArrayList<AvailableBusesModel> list;
+    ArrayList<AvailableBusesModel> ac_list;
+    ArrayList<AvailableBusesModel> non_ac_list;
+    ArrayList<AvailableBusesModel> seater_list;
+    ArrayList<AvailableBusesModel> sleeper_list;
+    ArrayList<AvailableBusesModel> semi_sleeper_list;
+    ArrayList<AvailableBusesModel> car_list ;
+    ArrayList<AvailableBusesModel> sharing_list ;
+    Context ctx=AllBusActivity.this;
+    AvailableBusesAdapter adapter;
+    Module module;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -230,7 +230,6 @@ Module module;
         linear_seater.setOnClickListener(this);
         linear_sleeper.setOnClickListener(this);
         linear_semi_sleeper.setOnClickListener(this);
-
 
     }
 
