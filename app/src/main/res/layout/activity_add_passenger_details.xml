@@ -107,7 +107,7 @@
              />
 
         <in.binplus.travel.Fonts.LatoBLack
-
+            android:id="@+id/txt_seat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Seat No:"
@@ -154,6 +154,18 @@
             android:maxLength="10"
             android:fontFamily="@font/bold"
             android:inputType="number"
+            android:singleLine="true"/>
+        <EditText
+            android:id="@+id/et_email"
+            android:hint="Enter Email Address"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="@dimen/space_5"
+            android:layout_marginTop="@dimen/space_4"
+            android:textSize="14sp"
+            android:background="@drawable/xml_textbox_bg"
+            android:ems="10"
+            android:fontFamily="@font/bold"
             android:singleLine="true"/>
         <EditText
             android:id="@+id/et_adhar_id"

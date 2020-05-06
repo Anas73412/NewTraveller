@@ -31,7 +31,7 @@ import in.binplus.travel.Model.AvailableBusesModel;
 import in.binplus.travel.util.RecyclerTouchListener;
 import pl.droidsonroids.gif.GifImageView;
 
-public class BookingActivity extends AppCompatActivity implements View.OnClickListener {
+public class  BookingActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout linear_from , linear_to , linear_date ;
     public static TextView txt_from , txt_to ,txt_date ;
     RadioButton radio_car,radio_bus, radio_sharing;

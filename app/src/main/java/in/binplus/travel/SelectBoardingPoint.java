@@ -53,7 +53,7 @@ public class SelectBoardingPoint extends AppCompatActivity {
     BoardingPointsAdapter adapter;
     RecyclerView recycler_boarding , recycler_droping ;
     RelativeLayout rel_board ,rel_drop ;
-    String source,destination ,date ,seat_fare ;
+    String source,destination ,date ,seat_fare ,v_type;
     View view_board ,view_drop ;
     ArrayList<BoardingModel> list;
     ArrayList<BoardingPointModel> board_list ;
@@ -89,6 +89,7 @@ public class SelectBoardingPoint extends AppCompatActivity {
         destination =getIntent().getStringExtra( "destination" );
         date = getIntent().getStringExtra( "date" );
         seat_fare = getIntent().getStringExtra( "seat_fare" );
+        v_type = getIntent().getStringExtra( "v_type" );
         board_list = new ArrayList<>(  );
         drop_list = new ArrayList<>(  );
         list=new ArrayList<>();
@@ -155,6 +156,10 @@ public class SelectBoardingPoint extends AppCompatActivity {
                 intent.putExtra( "date",String.valueOf( date ));
                 intent.putExtra( "source",source );
                 intent.putExtra( "destination",destination );
+                intent.putExtra( "start_from",SelectSeatActivity.start_time );
+                intent.putExtra( "end_to",SelectSeatActivity.end_time );
+                intent.putExtra( "v_type",v_type );
+                intent.putExtra( "v_id",SelectSeatActivity.bus_id);
                 intent.putExtra("board",boardLocation);
                 intent.putExtra("drop",dropLoaction);
 

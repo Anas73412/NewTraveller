@@ -27,10 +27,16 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
 
     ArrayList<String> seatList;
    ArrayList<String> p_list;
-    public CustomAddPassengerAdapter(Activity activity, ArrayList<String> seatList) {
+   String v_type ;
+   int tot_seats ;
+
+    public CustomAddPassengerAdapter(Activity activity, ArrayList<String> seatList, String v_type, int tot_seats) {
         this.activity = activity;
         this.seatList = seatList;
+        this.v_type = v_type;
+        this.tot_seats = tot_seats;
     }
+
 
     @NonNull
     @Override
@@ -51,7 +57,16 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
         }
         else
         {
-            holder.seat_no.setText(seatList.get(position));
+            if (v_type.equals("bus")) {
+                holder.seat_no.setText(seatList.get(position));
+                holder.et_mobile.setVisibility(View.GONE);
+            }
+            else
+            {
+                holder.seat_no.setText("");
+                holder.txt_seat.setText("");
+
+            }
 
         }
 
@@ -60,15 +75,23 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
 
     @Override
     public int getItemCount() {
-        return seatList.size();
+        int size ;
+        if (v_type.equals("bus")) {
+            size= seatList.size();
+        }
+        else
+        {
+            size = tot_seats;
+        }
+        return size;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
         public EditText et_name;
-        public EditText et_age;
-        public TextView seat_no;
+        public EditText et_age ,et_mobile;
+        public TextView seat_no ,txt_seat;
 
         public EditText et_nationality;
        public RadioButton male,female;
@@ -76,8 +99,10 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
             super(itemView);
             p_list=new ArrayList<>();
             seat_no=(TextView)itemView.findViewById(R.id.seat_no);
+            txt_seat=(TextView)itemView.findViewById(R.id.txt_seat);
             et_name=(EditText) itemView.findViewById(R.id.et_name);
             et_age=(EditText) itemView.findViewById(R.id.et_age);
+            et_mobile=(EditText) itemView.findViewById(R.id.et_mobile);
             et_nationality=(EditText) itemView.findViewById(R.id.et_nationality);
             male=(RadioButton)itemView.findViewById(R.id.male);
             female=(RadioButton)itemView.findViewById(R.id.female);

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -116,32 +120,96 @@ List<TextView> filter_list;
                 if (model.getV_type().equalsIgnoreCase( "car" ))
                 {
                     intent = new Intent( ctx, CarBookingActivity.class );
+                    intent.putExtra("id",model.getId());
+                    intent.putExtra( "vehicle_type",model.getVehicle_type() );
+                    intent.putExtra( "vehicle_name",model.getVehicle_name() );
+                    intent.putExtra( "total_seats",model.getTotal_seats() );
+                    intent.putExtra( "station_to",destination);
+                    intent.putExtra( "station_from",source);
+                    intent.putExtra( "end_time",model.getTo_time());
+                    intent.putExtra( "start_time",model.getFrom_time() );
+                    intent.putExtra( "bus_no",model.getRegistration_no() );
+                    intent.putExtra( "price",model.getSeat_fare() );
+                    intent.putExtra( "v_type",model.getV_type() );
+                    intent.putExtra( "bus_desc",model.getVeh_description() );
+                    intent.putExtra( "agency_name",model.getCompany_name() );
+                    intent.putExtra( "date",date);
+
+                    startActivity(intent);
                    // new ToastMsg(ctx).toastIconSuccess("car"+"\n"+list_type+"\n"+model.getCompany_name());
+                }
+              else if (model.getV_type().equalsIgnoreCase( "sharing" ))
+                {
+                    final String seat_fare = model.getSeat_fare();
+                    final String v_type = model.getV_type();
+                    final String v_id = model.getId();
+                    final Dialog dialog = new Dialog(AllBusActivity.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_add_passenger_detail);
+                    dialog.setCanceledOnTouchOutside(false);
+                    final EditText et_no_seats = dialog.findViewById(R.id.et_no_pass);
+                    TextView txt_sbmit = dialog.findViewById(R.id.submitDetail);
+                    ImageView iv_close = dialog.findViewById(R.id.close);
+                    iv_close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    txt_sbmit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tot_pass = et_no_seats.getText().toString();
+
+                            if (tot_pass.isEmpty())
+                            {
+                                et_no_seats.setError("Enter total number of passengers");
+                                et_no_seats.requestFocus();
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(AllBusActivity.this ,AddPassengerDetails.class);
+                                intent.putExtra( "destination",destination);
+                                intent.putExtra( "source",source);
+                                intent.putExtra( "seat_fare",seat_fare );
+                                intent.putExtra( "date",date);
+                                intent.putExtra( "board","");
+                                intent.putExtra( "drop","");
+                                intent.putExtra( "total_seats",tot_pass );
+                                intent.putExtra( "v_type",v_type );
+                                intent.putExtra("v_id",v_id);
+                                startActivity(intent);
+
+                                                         }
+                        }
+
+                    });
+                    dialog.show();
+//
                 }
                 else {
                  //   new ToastMsg(ctx).toastIconSuccess("not car"+"\n"+list_type+"\n"+model.getCompany_name());
                    intent = new Intent( ctx, SelectSeatActivity.class );
+                    intent.putExtra("id",model.getId());
+                    intent.putExtra( "vehicle_type",model.getVehicle_type() );
+                    intent.putExtra( "vehicle_name",model.getVehicle_name() );
+                    intent.putExtra( "total_seats",model.getTotal_seats() );
+                    intent.putExtra( "station_to",destination);
+                    intent.putExtra( "station_from",source);
+                    intent.putExtra( "end_time",model.getTo_time());
+                    intent.putExtra( "start_time",model.getFrom_time() );
+                    intent.putExtra( "bus_no",model.getRegistration_no() );
+                    intent.putExtra( "price",model.getSeat_fare() );
+                    intent.putExtra( "v_type",model.getV_type() );
+                    intent.putExtra( "bus_desc",model.getVeh_description() );
+                    intent.putExtra( "agency_name",model.getCompany_name() );
+                    intent.putExtra( "date",date);
+//
+                    startActivity(intent);
 
 
                 }
-                intent.putExtra("id",model.getId());
-                intent.putExtra( "vehicle_type",model.getVehicle_type() );
-                intent.putExtra( "vehicle_name",model.getVehicle_name() );
-                intent.putExtra( "total_seats",model.getTotal_seats() );
-                intent.putExtra( "station_to",destination);
-                intent.putExtra( "station_from",source);
-                intent.putExtra( "end_time",model.getTo_time());
-                intent.putExtra( "start_time",model.getFrom_time() );
-                intent.putExtra( "bus_no",model.getRegistration_no() );
-                intent.putExtra( "price",model.getSeat_fare() );
-//                intent.putExtra( "duration",model.getDuration() );
-                intent.putExtra( "bus_desc",model.getVeh_description() );
-                intent.putExtra( "agency_name",model.getCompany_name() );
-                intent.putExtra( "date",date);
-//                intent.putExtra( "bus_image",model.get );
-//                intent.putExtra( "stops",model.getStops() );
-//                intent.putExtra( "bus_id",model.getBus_id() );
-                startActivity(intent);
+
 
 
             }
@@ -321,6 +389,14 @@ List<TextView> filter_list;
                          if (v_type.equalsIgnoreCase( "Car" ))
                          {
                              car_list.add( model );
+                         }
+                         if(v_type.equalsIgnoreCase("sharing"))
+                         {
+                             sharing_list.add(model);
+                         }
+                         if (v_type.equalsIgnoreCase("bus"))
+                         {
+                             list.add(model);
                          }
 
                          if(sitting_type.equalsIgnoreCase("Sleeper"))

@@ -82,7 +82,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     RelativeLayout rel_birth, rel_lower_seats, rel_upper_sheats;
     public static ArrayList<StopsModel> selected_seat_list;
 
-    public static String id ,vehicle_type,vehicle_name ,total_seats,destination,source,end_time,start_time,bus_no,bus_desc,agency_name,date,price;
+    public static String id,v_type ,vehicle_type,vehicle_name ,total_seats,destination,source,end_time,start_time,bus_no,bus_desc,agency_name,date,price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
 
        bus_id=getIntent().getStringExtra( "id" );
        vehicle_type = getIntent().getStringExtra( "vehicle_type" );
+       v_type = getIntent().getStringExtra( "v_type" );
        vehicle_name= getIntent().getStringExtra( "vehicle_name" );
        total_seats= getIntent().getStringExtra( "total_seats" );
        destination=getIntent().getStringExtra( "station_to");
@@ -393,6 +394,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                        intent.putExtra( "seat_fare",String.valueOf( seat_fare ));
                        intent.putExtra( "date",String.valueOf( date ));
                        intent.putExtra( "source",source );
+                       intent.putExtra( "v_type",v_type );
                        intent.putExtra( "destination",destination );
                        startActivity(intent);
 
@@ -405,6 +407,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                     intent.putExtra( "date",String.valueOf( date) );
                     intent.putExtra( "source",source );
                     intent.putExtra( "destination",destination );
+                    intent.putExtra( "v_type",v_type );
                     startActivity(intent);
                 }
 

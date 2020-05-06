@@ -11,6 +11,7 @@ import android.app.DownloadManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -68,7 +69,7 @@ public class BookingConfirmation extends AppCompatActivity {
    int total_seats ;
     JSONArray passArray ;
     String formattedDate ;
-    String adhar_id ,u_name,mobile,address,j_date ;
+    String adhar_id ,u_name,mobile,address,j_date ,source,destination,date ,v_type,email ;
     String left_wallet_amount,seat_fare ;
     Dialog dialog;
     GifImageView dialog_gif ;
@@ -113,8 +114,7 @@ public class BookingConfirmation extends AppCompatActivity {
         Double fare = Double.parseDouble( seat_fare );
         Double tot_seats = Double.valueOf( AddPassengerDetails.p_list.size() );
         total_amount =fare*tot_seats ;
-
-        bus_id = SelectSeatActivity.bus_id;
+        email = AddPassengerDetails.getemail;
         bus_name = SelectSeatActivity.vehicle_name;
         startfrom =SelectSeatActivity.source;
         endto =SelectSeatActivity.destination;
@@ -128,19 +128,30 @@ public class BookingConfirmation extends AppCompatActivity {
         u_name = getIntent().getStringExtra( "p_name" ) ;
         board_location = getIntent().getStringExtra( "board" ) ;
         drop_location = getIntent().getStringExtra( "drop" ) ;
+        source = getIntent().getStringExtra( "source" ) ;
+        destination= getIntent().getStringExtra( "destination" ) ;
+        date= getIntent().getStringExtra( "date" ) ;
+        v_type= getIntent().getStringExtra( "v_type" ) ;
+        bus_id= getIntent().getStringExtra( "v_id" ) ;
+
 
         module = new Module( BookingConfirmation.this );
 
 
         txt_mobile.setText( mobile );
-//      txt_address.setText( address );
         txt_adhar.setText( adhar_id );
         txt_name.setText( u_name );
-        txt_to.setText( SelectSeatActivity.destination);
-        txt_from.setText( SelectSeatActivity.source);
-        txt_timefrom.setText( SelectSeatActivity.start_time );
-        txt_timeto.setText(SelectSeatActivity.end_time );
-        txt_busname.setText(SelectSeatActivity.vehicle_name );
+        txt_to.setText(destination);
+        txt_from.setText(source);
+        if (v_type.equals("sharing"))
+        { txt_timefrom.setText("");
+            txt_timeto.setText("");
+          }
+        else {
+            txt_timefrom.setText(SelectSeatActivity.start_time);
+            txt_timeto.setText(SelectSeatActivity.end_time);
+            txt_busname.setText(SelectSeatActivity.vehicle_name);
+        }
         session_management = new Session_management( BookingConfirmation.this );
         user_id = session_management.getUserDetails().get( KEY_ID);
         wallet_amount= session_management.getUserDetails().get( KEY_WALLET_Ammount );
@@ -189,28 +200,49 @@ public class BookingConfirmation extends AppCompatActivity {
                                     for (int i = 0; i < AddPassengerDetails.p_list.size(); i++)
                                     {
                                         JSONObject jObjP = new JSONObject();
+
                                         try {
                                             //  jObjP.put( "seat_id", EnterPassengerDetails.passenger_list.get( i ).getSeat_id() );
-                                            jObjP.put( "seat_no", AddPassengerDetails.p_list.get( i ).getSeat_no() );
-                                            jObjP.put( "seat_price", seat_fare );
-                                            jObjP.put( "name",AddPassengerDetails.p_list.get( i ).getPassenger_name() );
-                                            jObjP.put( "age",AddPassengerDetails.p_list.get( i ).getAge());
-                                            jObjP.put( "nationality",AddPassengerDetails.p_list.get( i).getNationality() );
-                                            jObjP.put( "gender", AddPassengerDetails.p_list.get( i).getGender() );
-                                            jObjP.put( "vehicle_id",bus_id );
-                                            jObjP.put( "journey_startdate",j_date );
+                                            if (v_type.equals("bus")) {
+                                                jObjP.put("seat_no", AddPassengerDetails.p_list.get(i).getSeat_no());
+                                                jObjP.put("seat_price", seat_fare);
+                                                jObjP.put("name", AddPassengerDetails.p_list.get(i).getPassenger_name());
+                                                jObjP.put("age", AddPassengerDetails.p_list.get(i).getAge());
+                                                jObjP.put("nationality", AddPassengerDetails.p_list.get(i).getNationality());
+                                                jObjP.put("gender", AddPassengerDetails.p_list.get(i).getGender());
+                                                jObjP.put("vehicle_id", bus_id);
+                                                jObjP.put("journey_startdate", j_date);
+                                                jObjP.put("booking_id", booking_id);
+                                                passArray.put( jObjP );
+                                                makeBooking( passArray );
+                                            }
+                                            else if (v_type.equals("sharing"))
+                                            {
 
-                                            jObjP.put( "booking_id", booking_id );
 
-                                            passArray.put( jObjP );
+                                                jObjP.put("seat_price", seat_fare);
+                                                jObjP.put("name", AddPassengerDetails.p_list.get(i).getPassenger_name());
+                                                jObjP.put("age", AddPassengerDetails.p_list.get(i).getAge());
+                                                jObjP.put("mobile", AddPassengerDetails.p_list.get(i).getMobile_no());
+                                                jObjP.put("nationality", AddPassengerDetails.p_list.get(i).getNationality());
+                                                jObjP.put("gender", AddPassengerDetails.p_list.get(i).getGender());
+                                                jObjP.put("vehicle_id", bus_id);
+//                                                jObjP.put("journey_startdate", j_date);
+                                                jObjP.put("booking_id", booking_id);
+
+                                                passArray.put( jObjP );
+                                                makeShareBooking(passArray);
+                                                Log.e("jarry",passArray.toString() + passArray.length());
+                                            }
+
+
 
                                         } catch (JSONException e)
                                         {
                                             e.printStackTrace();
                                         }
                                     }
-                                    //     Toast.makeText(BookingConfirmation.this,"json Array " +passArray,Toast.LENGTH_LONG).show();
-                                    makeBooking( passArray );
+
 //                    Toast.makeText(BookingConfirmation.this,"seat fare" +formattedDate,Toast.LENGTH_LONG).show();
                                 }
 
@@ -338,6 +370,93 @@ public class BookingConfirmation extends AppCompatActivity {
                 } );
 
         AppController.getInstance().addToRequestQueue( jsonRequest,"add Booking" );
+    }
+
+    public void makeShareBooking( JSONArray passArray)
+    {
+
+
+        HashMap<String,String> params =new HashMap<>(  );
+        params.put( "user_id",user_id );
+        params.put( "vehicles_id",bus_id );
+        params.put( "total_seats" , String.valueOf( total_seats ) );
+        params.put( "journey_startdate",j_date );
+        params.put( "start_from",source );
+        params.put( "end_to",destination );
+        params.put( "booking_id",booking_id );
+        params.put( "mobile",mobile );
+        params.put( "email",email);
+        params.put( "total_money", String.valueOf( total_amount ) );
+        params.put( "adhar_no",adhar_id );
+        params.put( "b_name",u_name );
+
+        params.put( "passenger_list", String.valueOf( passArray ) );
+
+        CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest( Request.Method.POST, BaseURL.MAKE_SHARE_BOOKING, params,
+
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.e("sharing",response.toString());
+                            Boolean status = response.getBoolean( "responce" );
+                            if (status)
+                            {
+
+                                String data = response.getString( "data" );
+                                //    Toast.makeText( BookingConfirmation.this, ""+msg,Toast.LENGTH_LONG).show();
+                                session_management.updateWallet( left_wallet_amount );
+//
+                                dialog=new Dialog(BookingConfirmation.this);
+                                dialog.requestWindowFeature( Window.FEATURE_NO_TITLE);
+                                dialog.setContentView(R.layout.dialogue_booking_confirmation);
+                                dialog.setCanceledOnTouchOutside(false);
+                                dialog.show();
+                                dialog_gif = dialog.findViewById( R.id.dialog_gif );
+                                dialog_txt = dialog.findViewById( R.id.text_msg );
+                                dialog_btn =dialog.findViewById( R.id.btn_ok );
+
+                                dialog_txt.setText( "Your booking is CONFIRMED  with Booking Id :"+booking_id  );
+                                dialog_btn.setOnClickListener( new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent( BookingConfirmation.this,MainActivity.class );
+                                        startActivity( intent );
+                                        dialog.dismiss();
+                                    }
+                                } );
+
+
+                            }
+                            else
+                            {
+//                                Toast.makeText( BookingConfirmation.this, ""+response,Toast.LENGTH_LONG).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String msg=module.VolleyErrorMessage(error);
+                        if(!(msg.isEmpty() || msg.equals("")))
+                        {
+                            Toast.makeText(BookingConfirmation.this,""+msg.toString(),Toast.LENGTH_SHORT).show();
+                        }
+                        //        Toast.makeText( BookingConfirmation.this,error.getMessage(),Toast.LENGTH_LONG ).show();
+
+                    }
+                } );
+
+        AppController.getInstance().addToRequestQueue( jsonRequest,"add share Booking" );
     }
 
 }
