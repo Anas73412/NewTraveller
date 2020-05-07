@@ -133,6 +133,7 @@ public class BookingConfirmation extends AppCompatActivity {
         date= getIntent().getStringExtra( "date" ) ;
         v_type= getIntent().getStringExtra( "v_type" ) ;
         bus_id= getIntent().getStringExtra( "v_id" ) ;
+        bus_name= getIntent().getStringExtra( "v_name" ) ;
 
 
         module = new Module( BookingConfirmation.this );
@@ -143,6 +144,7 @@ public class BookingConfirmation extends AppCompatActivity {
         txt_name.setText( u_name );
         txt_to.setText(destination);
         txt_from.setText(source);
+        txt_busname.setText(bus_name);
         if (v_type.equals("sharing"))
         { txt_timefrom.setText("");
             txt_timeto.setText("");
@@ -150,7 +152,7 @@ public class BookingConfirmation extends AppCompatActivity {
         else {
             txt_timefrom.setText(SelectSeatActivity.start_time);
             txt_timeto.setText(SelectSeatActivity.end_time);
-            txt_busname.setText(SelectSeatActivity.vehicle_name);
+
         }
         session_management = new Session_management( BookingConfirmation.this );
         user_id = session_management.getUserDetails().get( KEY_ID);
@@ -214,7 +216,7 @@ public class BookingConfirmation extends AppCompatActivity {
                                                 jObjP.put("journey_startdate", j_date);
                                                 jObjP.put("booking_id", booking_id);
                                                 passArray.put( jObjP );
-                                                makeBooking( passArray );
+
                                             }
                                             else if (v_type.equals("sharing"))
                                             {
@@ -231,8 +233,8 @@ public class BookingConfirmation extends AppCompatActivity {
                                                 jObjP.put("booking_id", booking_id);
 
                                                 passArray.put( jObjP );
-                                                makeShareBooking(passArray);
-                                                Log.e("jarry",passArray.toString() + passArray.length());
+
+//                                                Log.e("jarry",passArray.toString() + passArray.length());
                                             }
 
 
@@ -241,6 +243,12 @@ public class BookingConfirmation extends AppCompatActivity {
                                         {
                                             e.printStackTrace();
                                         }
+                                    }
+                                    if (v_type.equals("sharing"))
+                                    {makeShareBooking(passArray);}
+                                    else if (v_type.equals("bus"))
+                                    {
+                                        makeBooking(passArray);
                                     }
 
 //                    Toast.makeText(BookingConfirmation.this,"seat fare" +formattedDate,Toast.LENGTH_LONG).show();

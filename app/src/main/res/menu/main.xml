@@ -2,9 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"
-        android:visible="false"/>
+        android:id="@+id/filter_date"
+        android:icon="@drawable/icons8_up_down_arrow_52px"
+        android:title="Date"
+      />
+    <item
+        android:id="@+id/filter_pending"
+        android:iconTint="@color/dark_black"
+        android:icon="@drawable/icons8_up_down_arrow_52px"
+        android:title="Pending"
+        />
+    <item
+        android:id="@+id/filter_complete"
+        android:icon="@drawable/icons8_up_down_arrow_52px"
+        android:title="Confirmed"
+        />
+    <item
+        android:id="@+id/filter_cancel"
+        android:icon="@drawable/icons8_up_down_arrow_52px"
+        android:title="Cancelled"
+        />
 </menu>

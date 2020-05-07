@@ -38,7 +38,7 @@ public class AddPassengerDetails extends AppCompatActivity {
     public static ArrayList<AddPassengerToSeatModel> p_list = new ArrayList<>();
     public static String getname, getadhar, getmobile, getnationality, getage, getseatno;
     public static String getgender = "", getemail = "";
-    public static String seat_fare, source, destination, date, board_location, drop_location, v_type, v_id;
+    public static String seat_fare, source, destination, date, board_location, drop_location, v_type, v_id,v_name;
     int tot_seats = 0;
 
     TextView title, bus_name;
@@ -70,6 +70,7 @@ public class AddPassengerDetails extends AppCompatActivity {
         source = getIntent().getStringExtra("source");
         v_type = getIntent().getStringExtra("v_type");
         v_id = getIntent().getStringExtra("v_id");
+        v_name = getIntent().getStringExtra("v_name");
         destination = getIntent().getStringExtra("destination");
         if (v_type.equals("sharing")) {
             txt_seat_no.setText("");
@@ -144,7 +145,10 @@ public class AddPassengerDetails extends AppCompatActivity {
                         et_adhar_id.setError("Enter Adhaar Card No");
                         et_adhar_id.requestFocus();
                     }
-
+                    else if (adhaar_no.length()!=12) {
+                        et_adhar_id.setError("Enter valid Adhaar No");
+                        et_adhar_id.requestFocus();
+                    }
                     else if (age.equals("") || age.isEmpty()) {
                         et_age.setError("Enter Age");
                         et_age.requestFocus();
@@ -178,7 +182,12 @@ public class AddPassengerDetails extends AppCompatActivity {
                     else if (adhaar_no.isEmpty() || adhaar_no.equals("")) {
                         et_adhar_id.setError("Enter Adhaar Card No");
                         et_adhar_id.requestFocus();
-                    } else if (age.equals("") || age.isEmpty()) {
+                    }
+                    else if (adhaar_no.length()!=12) {
+                        et_adhar_id.setError("Enter valid Adhaar No");
+                        et_adhar_id.requestFocus();
+                    }
+                    else if (age.equals("") || age.isEmpty()) {
                         et_age.setError("Enter Age");
                         et_age.requestFocus();
                     } else if (gen.equals("") || gen.isEmpty()) {
@@ -217,6 +226,7 @@ public class AddPassengerDetails extends AppCompatActivity {
         intent.putExtra("date", date);
         intent.putExtra("v_type", v_type);
         intent.putExtra("v_id",v_id);
+        intent.putExtra("v_name",v_name);
         intent.putExtra("board", board_location);
         intent.putExtra("drop", drop_location);
         intent.putExtra("source", source);

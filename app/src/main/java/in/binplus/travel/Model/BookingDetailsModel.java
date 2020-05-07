@@ -1,6 +1,5 @@
 package in.binplus.travel.Model;
 
-import java.util.ArrayList;
 
 public class BookingDetailsModel {
     String id ;
@@ -27,15 +26,18 @@ public class BookingDetailsModel {
     String address ;
     String adhar_no ;
     String mobile;
+    String email ;
   String tot_seats ;
   String seat_no ;
   String drop_location ;
   String board_location ;
+  String cancelled_by ;
+  String cancelled_type ;
 
     public BookingDetailsModel() {
     }
 
-    public BookingDetailsModel(String id, String booking_id, String vehicle_id, String status, String user_id, String payment_type, String total_money, String vehicle_type, String vehicle_no, String start_from, String end_to, String booking_date, String journey_startdate, String vehicle_category, String vehicle_name, String note, String f_id, String b_name, String address, String adhar_no, String mobile, String tot_seats, String seat_no, String drop_location, String board_location) {
+    public BookingDetailsModel(String id, String booking_id, String vehicle_id, String status, String user_id, String payment_type, String total_money, String vehicle_type, String vehicle_no, String start_from, String end_to, String booking_date, String journey_startdate, String vehicle_category, String vehicle_name, String note, String f_id, String b_name, String address, String adhar_no, String mobile, String email, String tot_seats, String seat_no, String drop_location, String board_location, String cancelled_by, String cancelled_type) {
         this.id = id;
         this.booking_id = booking_id;
         this.vehicle_id = vehicle_id;
@@ -57,10 +59,37 @@ public class BookingDetailsModel {
         this.address = address;
         this.adhar_no = adhar_no;
         this.mobile = mobile;
+        this.email = email;
         this.tot_seats = tot_seats;
         this.seat_no = seat_no;
         this.drop_location = drop_location;
         this.board_location = board_location;
+        this.cancelled_by = cancelled_by;
+        this.cancelled_type = cancelled_type;
+    }
+
+    public String getCancelled_by() {
+        return cancelled_by;
+    }
+
+    public void setCancelled_by(String cancelled_by) {
+        this.cancelled_by = cancelled_by;
+    }
+
+    public String getCancelled_type() {
+        return cancelled_type;
+    }
+
+    public void setCancelled_type(String cancelled_type) {
+        this.cancelled_type = cancelled_type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {

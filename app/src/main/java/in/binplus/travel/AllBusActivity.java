@@ -143,6 +143,7 @@ List<TextView> filter_list;
                     final String seat_fare = model.getSeat_fare();
                     final String v_type = model.getV_type();
                     final String v_id = model.getId();
+                    final String v_name = model.getVehicle_name();
                     final Dialog dialog = new Dialog(AllBusActivity.this);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.dialog_add_passenger_detail);
@@ -173,8 +174,7 @@ List<TextView> filter_list;
                                 intent.putExtra( "source",source);
                                 intent.putExtra( "seat_fare",seat_fare );
                                 intent.putExtra( "date",date);
-                                intent.putExtra( "board","");
-                                intent.putExtra( "drop","");
+                                intent.putExtra("v_name",v_name);
                                 intent.putExtra( "total_seats",tot_pass );
                                 intent.putExtra( "v_type",v_type );
                                 intent.putExtra("v_id",v_id);
@@ -394,10 +394,10 @@ List<TextView> filter_list;
                          {
                              sharing_list.add(model);
                          }
-                         if (v_type.equalsIgnoreCase("bus"))
-                         {
-                             list.add(model);
-                         }
+//                         if (v_type.equalsIgnoreCase("bus"))
+//                         {
+//                             list.add(model);
+//                         }
 
                          if(sitting_type.equalsIgnoreCase("Sleeper"))
                          {
@@ -448,6 +448,8 @@ List<TextView> filter_list;
                      rec_buses.setLayoutManager(new LinearLayoutManager(ctx));
                      rec_buses.setAdapter(adapter);
                      adapter.notifyDataSetChanged();
+                         tv_filter_all .setTextColor( AllBusActivity.this.getResources().getColor( R.color.orange ) );
+                         img_all.setImageTintList( ColorStateList.valueOf( AllBusActivity.this.getResources().getColor( R.color.orange ) ) );
                      }
                  }
                  else

@@ -160,6 +160,7 @@ public class SelectBoardingPoint extends AppCompatActivity {
                 intent.putExtra( "end_to",SelectSeatActivity.end_time );
                 intent.putExtra( "v_type",v_type );
                 intent.putExtra( "v_id",SelectSeatActivity.bus_id);
+                intent.putExtra( "v_name",SelectSeatActivity.vehicle_name);
                 intent.putExtra("board",boardLocation);
                 intent.putExtra("drop",dropLoaction);
 

@@ -17,8 +17,9 @@ public class MyBookingModel {
     String vehicle_categories;
     String vehicle_name ;
     String vehicle_no ;
+    String email ;
 
-    public MyBookingModel(String booking_id, String vehicles_id, String status, String user_id, String payment_type, String total_money, String vehicle_type, String start_from, String end_to, String booking_date, String journey_startdate, String journey_enddate, String passenger_id, String vehicle_categories, String vehicle_name, String vehicle_no) {
+    public MyBookingModel(String booking_id, String vehicles_id, String status, String user_id, String payment_type, String total_money, String vehicle_type, String start_from, String end_to, String booking_date, String journey_startdate, String journey_enddate, String passenger_id, String vehicle_categories, String vehicle_name, String vehicle_no, String email) {
         this.booking_id = booking_id;
         this.vehicles_id = vehicles_id;
         this.status = status;
@@ -35,6 +36,7 @@ public class MyBookingModel {
         this.vehicle_categories = vehicle_categories;
         this.vehicle_name = vehicle_name;
         this.vehicle_no = vehicle_no;
+        this.email = email;
     }
 
     public String getBooking_id() {
