@@ -490,7 +490,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
             popup.show();
 
         }
-        Toast.makeText( getActivity(),"type:" +booking_type,Toast.LENGTH_LONG ).show();
+//        Toast.makeText( getActivity(),"type:" +booking_type,Toast.LENGTH_LONG ).show();
     }
 
     private void getFilterList(String booking_type, String b_date ,String filter_type) {

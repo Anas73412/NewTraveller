@@ -43,6 +43,8 @@ public class CarBookingHistoryAdapter extends RecyclerView.Adapter<CarBookingHis
         viewHolder.txt_to.setText( model.getTo_locations() );
         viewHolder.txt_pass_name.setText( model.getName() );
         viewHolder.txt_mobile.setText( model.getMobile_no() );
+        viewHolder.txt_tot.setText("");
+        viewHolder.txt_price.setText("");
 
         int sts = Integer.parseInt( model.getStatus() );
         if (sts==0)
@@ -69,7 +71,7 @@ public class CarBookingHistoryAdapter extends RecyclerView.Adapter<CarBookingHis
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_from,txt_to,txt_booking_id,txt_date ,txt_price ,txt_mobile ,txt_pass_name  ,txt_status;
+        TextView txt_from,txt_to,txt_booking_id,txt_date ,txt_price ,txt_mobile ,txt_pass_name  ,txt_status ,txt_tot;
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
             txt_from = itemView.findViewById( R.id.txt_from );
@@ -78,6 +80,7 @@ public class CarBookingHistoryAdapter extends RecyclerView.Adapter<CarBookingHis
             txt_booking_id = itemView.findViewById( R.id.txt_booking_id );
             txt_mobile = itemView.findViewById( R.id.txt_mobile );
             txt_price = itemView.findViewById( R.id.txt_price );
+            txt_tot = itemView.findViewById( R.id.txtTotal);
             txt_pass_name= itemView.findViewById( R.id.txt_pass_name );
             txt_status = itemView.findViewById( R.id.txt_status );
         }
