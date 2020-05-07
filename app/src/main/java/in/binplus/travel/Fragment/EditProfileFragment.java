@@ -186,7 +186,7 @@ public class EditProfileFragment extends Fragment {
                        try {
                            loadingBar.dismiss();
                            Boolean status = response.getBoolean( "responce" );
-                           String msg = response.getString( "data" );
+                           String msg = response.getString( "message" );
                            if(status)
                            {
                                session_management.updateProfile( "",name,"",f_name,address,mobile,email );

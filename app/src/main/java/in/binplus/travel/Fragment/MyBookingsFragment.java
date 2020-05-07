@@ -4,9 +4,11 @@ package in.binplus.travel.Fragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
@@ -47,7 +49,10 @@ import in.binplus.travel.Config.BaseURL;
 import in.binplus.travel.Model.BookingDetailsModel;
 import in.binplus.travel.Model.CarEnquiryHistroyModel;
 import in.binplus.travel.R;
+import in.binplus.travel.networkconnectivity.NetworkConnection;
+import in.binplus.travel.networkconnectivity.NoInternetConnection;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
+import in.binplus.travel.util.LoadingBar;
 import in.binplus.travel.util.RecyclerTouchListener;
 import in.binplus.travel.util.Session_management;
 
@@ -68,7 +73,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
     MyBookingAdapter bookingadapter ;
     CarBookingHistoryAdapter carBookingHistoryAdapter ;
     TabLayout tabLayout ;
-    ProgressDialog loadingBar ;
+   LoadingBar loadingBar ;
     ArrayList<String> stop_list ;
 
    int mMonth ,mYear,mDay ;
@@ -90,7 +95,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
         View view = inflater.inflate( R.layout.fragment_my_bookings, container, false );
 
         initViews(view);
-       getMyBookings( user_id );
+//       getMyBookings( user_id );
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener( getActivity(),recyclerView, new RecyclerTouchListener.OnItemClickListener() {
             @Override
@@ -101,11 +106,12 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
 
                    if (booking_type.equals( "bus" )) {
                        args.putString( "booking_id", bookingList.get( position ).getBooking_id() );
+                       args.putString( "id", bookingList.get( position ).getId() );
                        args.putString( "vehicle_id", bookingList.get( position ).getVehicle_id() );
                        args.putString( "status", bookingList.get( position ).getStatus() );
                        args.putString( "payment_type", bookingList.get( position ).getPayment_type() );
                        args.putString( "total_money", bookingList.get( position ).getTotal_money() );
-                       args.putString( "vehicle_type", bookingList.get( position ).getVehicle_type() );
+                       args.putString( "vehicle_type",booking_type );
                        args.putString( "start_from", bookingList.get( position ).getStart_from() );
                        args.putString( "end_to", bookingList.get( position ).getEnd_to() );
                        args.putString( "booking_date", bookingList.get( position ).getBooking_date() );
@@ -127,27 +133,28 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                        FragmentManager fragmentManager = getFragmentManager();
                        fragmentManager.beginTransaction().replace( R.id.container_frame, details ).addToBackStack( null ).commit();
                    }
-              else if (booking_type.equals( "sharing" )) {
-                    args.putString( "booking_id", bookingList.get( position ).getBooking_id() );
-                    args.putString( "vehicle_id", bookingList.get( position ).getVehicle_id() );
-                    args.putString( "status", bookingList.get( position ).getStatus() );
-                    args.putString( "payment_type", bookingList.get( position ).getPayment_type() );
-                    args.putString( "total_money", bookingList.get( position ).getTotal_money() );
-                    args.putString( "vehicle_type", bookingList.get( position ).getVehicle_type() );
-                    args.putString( "start_from", bookingList.get( position ).getStart_from() );
-                    args.putString( "end_to", bookingList.get( position ).getEnd_to() );
-                    args.putString( "booking_date", bookingList.get( position ).getBooking_date() );
-                    args.putString( "journey_startdate", bookingList.get( position ).getJourney_startdate() );
-                    args.putString( "vehicle_category", bookingList.get( position ).getVehicle_category() );
-                    args.putString( "vehicle_no", bookingList.get( position ).getVehicle_no() );
-                    args.putString( "user_id", bookingList.get( position ).getUser_id() );
-                    args.putString( "b_name", bookingList.get( position ).getB_name() );
-                    args.putString( "adhar_no", bookingList.get( position ).getAdhar_no() );
-                    args.putString( "mobile", bookingList.get( position ).getMobile() );
-                    args.putString( "email", bookingList.get( position ).getEmail());
-                    args.putString( "total_seats", bookingList.get( position ).getTot_seats() );
-//                    args.putString( "board_location", bookingList.get( position ).getBoard_location() );
-//                    args.putString( "drop_location", bookingList.get( position ).getDrop_location() );
+              else if (booking_type.equals( "share" )) {
+                    args.putString( "booking_id", sharingList.get( position ).getBooking_id() );
+                    args.putString( "id", sharingList.get( position ).getId() );
+                    args.putString( "vehicle_id", sharingList.get( position ).getVehicle_id() );
+                    args.putString( "status", sharingList.get( position ).getStatus() );
+                    args.putString( "payment_type", sharingList.get( position ).getPayment_type() );
+                    args.putString( "total_money", sharingList.get( position ).getTotal_money() );
+                    args.putString( "vehicle_type",booking_type );
+                    args.putString( "start_from", sharingList.get( position ).getStart_from() );
+                    args.putString( "end_to",sharingList.get( position ).getEnd_to() );
+                    args.putString( "booking_date", sharingList.get( position ).getBooking_date() );
+                    args.putString( "journey_startdate", sharingList.get( position ).getJourney_startdate() );
+                    args.putString( "vehicle_category",sharingList.get( position ).getVehicle_category() );
+                    args.putString( "vehicle_no",sharingList.get( position ).getVehicle_no() );
+                    args.putString( "user_id", sharingList.get( position ).getUser_id() );
+                    args.putString( "b_name", sharingList.get( position ).getB_name() );
+                    args.putString( "adhar_no", sharingList.get( position ).getAdhar_no() );
+                    args.putString( "mobile",sharingList.get( position ).getMobile() );
+                    args.putString( "email", sharingList.get( position ).getEmail());
+                    args.putString( "total_seats", sharingList.get( position ).getTot_seats() );
+                    args.putString( "board_location", sharingList.get( position ).getBoard_location() );
+                    args.putString( "drop_location", sharingList.get( position ).getDrop_location() );
 
 //                Toast.makeText( getActivity(),"booking_id:"+bookingList.get( position ).getBooking_id(),Toast.LENGTH_LONG ).show();
                     BookingDetails details = new BookingDetails();
@@ -159,6 +166,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                    {
                        args.putString( "enquiry_id",car_bookinglist.get( position ).getEnquiry_id() );
                        args.putString( "vehicle_id",car_bookinglist.get( position ).getVehicle_id() );
+                       args.putString( "vehicle_type",booking_type );
 //                     args.putString( "total_money",car_bookinglist.get( position ).get() );
                        args.putString( "note",car_bookinglist.get( position ).getNote());
                        args.putString( "start_from",car_bookinglist.get( position ).getFrom_location());
@@ -209,8 +217,8 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
 
         recyclerView.setNestedScrollingEnabled( false );
 
-        loadingBar= new ProgressDialog( getActivity() );
-        loadingBar.setMessage( "loading" );
+        loadingBar= new LoadingBar( getActivity() );
+
 
         linear_bus.setOnClickListener(this);
         linear_car.setOnClickListener(this);
@@ -224,8 +232,33 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
     @Override
     public void onStart() {
         super.onStart();
-//       getTodaysBookings( user_id );
+        if (NetworkConnection.connectionChecking(getActivity()))
+        {
+            getMyBookings(user_id);
+        }
+        else
+        {
+            Intent intent = new Intent(getActivity(), NoInternetConnection.class);
+            startActivity(intent);
+        }
 
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (NetworkConnection.connectionChecking(getActivity()))
+        {
+            getMyBookings(user_id);
+        }
+        else
+        {
+            Intent intent = new Intent(getActivity(), NoInternetConnection.class);
+            startActivity(intent);
+        }
     }
 
     public  void getMyBookings(String user_id)
@@ -262,6 +295,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                                         BookingDetailsModel model = new BookingDetailsModel();
                                         model.setStart_from( object.getString( "start_from" ) );
                                         model.setEnd_to( object.getString( "end_to" ) );
+                                        model.setId(object.getString("id"));
                                         model.setBooking_date( object.getString( "booking_date" ) );
                                         model.setBooking_id( object.getString( "booking_id" ) );
                                         model.setStatus( object.getString( "status" ) );
@@ -300,6 +334,7 @@ public class MyBookingsFragment extends Fragment implements View.OnClickListener
                                     model.setEnd_to( object.getString( "end_to" ) );
                                     model.setBooking_date( object.getString( "booking_date" ) );
                                     model.setBooking_id( object.getString( "booking_id" ) );
+                                    model.setId(object.getString("id"));
                                     model.setStatus( object.getString( "status" ) );
                                     model.setJourney_startdate( object.getString( "j_date" ) );
 //                                    model.setJourney_enddate( object.getString( "journey_enddate" ) );

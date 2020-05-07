@@ -50,6 +50,7 @@ import in.binplus.travel.Model.PassengerDetailsModel;
 import in.binplus.travel.R;
 import in.binplus.travel.util.ConnectivityReceiver;
 import in.binplus.travel.util.CustomVolleyJsonRequest;
+import in.binplus.travel.util.LoadingBar;
 import in.binplus.travel.util.Session_management;
 
 import static in.binplus.travel.Config.Constants.KEY_ID;
@@ -71,12 +72,12 @@ public class BookingDetails extends Fragment {
     ArrayList<AddPassengerToSeatModel>passenger_list ;
     PassengerListAdapter passengerListAdapter ;
     Module module ;
-    ProgressDialog loadingBar ;
+    LoadingBar loadingBar ;
     RelativeLayout rel_passenger ;
     LinearLayout rel_status ;
 
-    String booking_id ,vehicle_id ,status ,payment ,total_money ,vehicle_type,start_from ,end_to ,booking_date,start_date,end_date,
-            vehicle_category,vehicle_name,vehicle_number,name ,adhar_id,address ,mobile ,total_seats ,drop_location ,board_location;
+    String  id="" ,booking_id="" ,vehicle_id ,status ,payment ,total_money ,vehicle_type,start_from ,end_to ,booking_date,start_date,end_date,
+            vehicle_category,vehicle_name,vehicle_number,name ,adhar_id,address ,mobile ,total_seats ,drop_location ="",board_location="";
 
 
 
@@ -96,9 +97,9 @@ public class BookingDetails extends Fragment {
         dialog.setContentView(R.layout.dialog_cancel_order_layout);
         dialog.setCanceledOnTouchOutside(false);
         module = new Module( getActivity() );
+        passenger_list = new ArrayList<>(  );
+        loadingBar = new LoadingBar( getActivity() );
 
-        loadingBar = new ProgressDialog( getActivity() );
-        loadingBar.setMessage("loading" );
 
         txt_from = view.findViewById( R.id.txt_from );
         text_to=view.findViewById( R.id.txt_to );
@@ -122,13 +123,15 @@ public class BookingDetails extends Fragment {
 
 
         booking_id = getArguments().getString( "booking_id" );
+         id = getArguments().getString( "id" );
         booking_date=getArguments().getString( "booking_date" );
         start_from =getArguments().getString( "start_from" );
         end_to =getArguments().getString( "end_to" );
         start_date=getArguments().getString( "journey_startdate" );
         end_date = getArguments().getString( "journey_enddate" );
         total_money=getArguments().getString( "total_money" );
-        vehicle_id =getArguments().getString( "vehicles_id" );
+        vehicle_id =getArguments().getString( "vehicle_id" );
+        vehicle_type =getArguments().getString( "vehicle_type" );
         payment = getArguments().getString( "payment_type" );
         name = getArguments().getString("b_name");
         address = getArguments().getString( "address" );
@@ -136,8 +139,18 @@ public class BookingDetails extends Fragment {
         mobile = getArguments().getString( "mobile" );
         vehicle_number = getArguments().getString("vehicle_no");
         total_seats = getArguments().getString( "total_seats" );
+        if (vehicle_type.equals("bus"))
+        {
         drop_location=getArguments().getString( "drop_location");
         board_location = getArguments().getString( "board_location" );
+            txt_busname.setText("Board At:"+board_location );
+            txt_busno.setText( "Drop At:" +drop_location );
+            getBookingDetails(booking_id);
+        }
+        else if (vehicle_type.equals("share"))
+        {
+            getSharingDetails(booking_id);
+        }
        status = getArguments().getString( "status" );
         int sts = Integer.parseInt( status );
         if (sts==0)
@@ -167,17 +180,19 @@ public class BookingDetails extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(start_from +"-"+end_to);
     //    Toast.makeText( getActivity(),"booking_id" +booking_id,Toast.LENGTH_LONG ).show();
 
-        passenger_list = new ArrayList<>(  );
 
 
-         getBookingDetails();
-
-        txt_from.setText( "Booking Id : #"+booking_id);
+        if (booking_id.isEmpty())
+        {
+            txt_from.setText( "Booking Id : #"+id);
+        }
+        else
+        {
+        txt_from.setText( "Booking Id : #"+booking_id);}
         text_to.setText( end_to );
         txt_date.setText( "Date : "+booking_date );
         txt_total.setText(getActivity().getResources().getString(R.string.currency)+""+ total_money );
-        txt_busname.setText("Board At:"+board_location );
-        txt_busno.setText( "Drop At:" +drop_location );
+
         txt_pass_mobile.setText( mobile );
         txt_pass_name.setText( name );
         txt_tot_seats.setText( total_seats );
@@ -235,7 +250,14 @@ public class BookingDetails extends Fragment {
                                 else
                                 {
                                     if (ConnectivityReceiver.isConnected()) {
-                                        cancelRequest(booking_id, user_id,remark);
+                                        if (vehicle_type.equals("share"))
+                                        {
+                                            cancelShare(id,user_id,remark);
+                                        }
+//                                        else if (vehicle_type.equals("car"))
+                                        else {
+                                            cancelRequest(id, user_id, remark);
+                                        }
                                         dialog.dismiss();
 
                                     }
@@ -260,12 +282,72 @@ public class BookingDetails extends Fragment {
         return view ;
     }
 
-    public  void getBookingDetails()
+    public  void getBookingDetails( String b_id)
     {
+        passenger_list.clear();
         loadingBar.show();
         HashMap<String,String> params = new HashMap<>(  );
-        params.put( "booking_id",booking_id );
+        params.put( "booking_id",b_id );
         CustomVolleyJsonRequest customVolleyJsonRequest = new CustomVolleyJsonRequest( Request.Method.POST, BaseURL.GET_PASSENGER_DETAILS, params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Boolean status = response.getBoolean( "responce" );
+                            if (status)
+                            {
+                                loadingBar.dismiss();
+                                JSONArray array = response.getJSONArray( "data" );
+                                for (int i = 0 ;i<array.length();i++)
+                                {
+                                    JSONObject object = array.getJSONObject( i );
+                                    AddPassengerToSeatModel model = new AddPassengerToSeatModel();
+
+                                    model.setPassenger_name( String.valueOf( object.get( "name" ) ) );
+                                    model.setAge( String.valueOf( object.get( "age" ) ) );
+                                    model.setGender( String.valueOf( object.get( "gender" ) ) );
+//                                    model.setSeat_no( String.valueOf( object.get( "seat_no" ) ) );
+//                                    model.setSeat_price( String.valueOf( object.get( "seat_price" ) ) );
+                                    model.setNationality( String.valueOf( object.get( "nationality" ) ) );
+//                                    model.setId( String.valueOf( object.get( "id" ) ) );
+                                    passenger_list.add( model );
+
+                                }
+//                                recycler_passenger.setVisibility( View.VISIBLE );
+
+                                passengerListAdapter = new PassengerListAdapter(passenger_list,getActivity());
+                                recycler_passenger.setLayoutManager( new LinearLayoutManager( getActivity(),LinearLayoutManager.VERTICAL,false ) );
+                                recycler_passenger.setAdapter( passengerListAdapter );
+                            }
+                        } catch (JSONException e) {
+                            loadingBar.dismiss();
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loadingBar.dismiss();
+
+                        String msg=module.VolleyErrorMessage(error);
+                        if(!msg.equals(""))
+                        {
+                            Toast.makeText(getActivity(),""+msg,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                } );
+        AppController.getInstance().addToRequestQueue( customVolleyJsonRequest,"Booking Details" );
+
+    }
+    public  void getSharingDetails( String b_id)
+    {
+        passenger_list.clear();
+        loadingBar.show();
+        HashMap<String,String> params = new HashMap<>(  );
+        params.put( "booking_id",b_id );
+        CustomVolleyJsonRequest customVolleyJsonRequest = new CustomVolleyJsonRequest( Request.Method.POST, BaseURL.GET_S_PASSENGER_DETAILS, params,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -348,6 +430,60 @@ public class BookingDetails extends Fragment {
                                     loadingBar.dismiss();
                                     Toast.makeText( getActivity(),""+msg,Toast.LENGTH_LONG ).show();
                                 }
+
+                        } catch (JSONException e) {
+                            loadingBar.dismiss();
+                            e.printStackTrace();
+                        }
+//                        Toast.makeText( getActivity(),"" + response,Toast.LENGTH_LONG ).show();
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loadingBar.dismiss();
+                        String msg=module.VolleyErrorMessage(error);
+                        if(!msg.equals(""))
+                        {
+                            Toast.makeText(getActivity(),""+msg,Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                } );
+        AppController.getInstance().addToRequestQueue( jsonRequest,"cancel booking" );
+    }
+    public  void  cancelShare( String booking_id ,String user_id ,String remark)
+    {
+        loadingBar.show();
+        HashMap<String,String> params = new HashMap<>(  );
+        params.put( "id",booking_id );
+        params.put( "user_id",user_id );
+        params.put( "remark",remark );
+        CustomVolleyJsonRequest jsonRequest = new CustomVolleyJsonRequest( Request.Method.POST, BaseURL.CANCEL_SHARE_URL, params,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Boolean status = Boolean.valueOf( response.getString( "responce" ) );
+                            String msg = response.getString( "message" );
+
+                            if (status)
+                            {
+                                loadingBar.dismiss();
+                                Toast.makeText( getActivity(),""+msg,Toast.LENGTH_LONG ).show();
+                                MyBookingsFragment bookingModel = new MyBookingsFragment(  );
+                                FragmentManager fragmentManager = getFragmentManager();
+                                fragmentManager.beginTransaction().replace( R.id.container_frame, bookingModel )
+                                        .addToBackStack( null )
+                                        .commit();
+                            }
+                            else
+                            {
+                                loadingBar.dismiss();
+                                Toast.makeText( getActivity(),""+msg,Toast.LENGTH_LONG ).show();
+                            }
 
                         } catch (JSONException e) {
                             loadingBar.dismiss();

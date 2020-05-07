@@ -22,10 +22,12 @@ public class BaseURL {
     public static String ABOUTUS_URL = BASE_URL + "aboutus";
     public static String GETWALLET_URL = BASE_URL + "wallet";
     public static String CANCEL_BOOKING_URL = BASE_URL + "cancel_booking";
+    public static String CANCEL_SHARE_URL = BASE_URL + "cancel_share_booking";
 //    public static  String GET_BOOKINGS =BASE_URL+"get_bookingdetails";
     public static  String GET_TODAY_BOOKINGS =BASE_URL+"today_bookings";
     public  static String GET_BOOKING_DETAILS = BASE_URL+"booking_details";
     public  static String GET_PASSENGER_DETAILS = BASE_URL+"booking_details_passenger";
+    public  static String GET_S_PASSENGER_DETAILS = BASE_URL+"sharing_details_passenger";
     public  static String GET_CURRENT_STATUS = BASE_URL+"franchise_lists";
     public  static String GET_RECHARGE_REQUEST = BASE_URL+"request_recharge_wallet";
     public  static String GET_RECHARGE_HISTORY = BASE_URL+"allrecharge_history";
