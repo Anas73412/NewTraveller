@@ -169,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 loadingBar.dismiss();
+                Log.e("erroror",""+error.getMessage());
                 String msg=module.VolleyErrorMessage(error);
                 if(!msg.equals(""))
                 {

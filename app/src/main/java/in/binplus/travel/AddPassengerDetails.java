@@ -22,6 +22,7 @@ import java.util.List;
 
 import in.binplus.travel.Adapter.AddPassengerAdapter;
 import in.binplus.travel.Adapter.CustomAddPassengerAdapter;
+import in.binplus.travel.Config.Module;
 import in.binplus.travel.Model.AddPassengerToSeatModel;
 import in.binplus.travel.Model.PassengerDetailsModel;
 import in.binplus.travel.util.ToastMsg;
@@ -40,7 +41,8 @@ public class AddPassengerDetails extends AppCompatActivity {
     public static String getgender = "", getemail = "";
     public static String seat_fare, source, destination, date, board_location, drop_location, v_type, v_id,v_name;
     int tot_seats = 0;
-
+    ArrayList<String> sList;
+    Module module;
     TextView title, bus_name;
     ImageView back;
 
@@ -58,10 +60,12 @@ public class AddPassengerDetails extends AppCompatActivity {
         bus_name = findViewById(R.id.txt_vehicle_name);
         r_male = findViewById(R.id.male);
         r_female = findViewById(R.id.female);
+        sList=new ArrayList<>();
         btnContinue = findViewById(R.id.btnContinue);
         txt_seat_no = findViewById(R.id.seat_no);
         txt_seat = findViewById(R.id.txt_seat);
         back = findViewById(R.id.back);
+        module=new Module(AddPassengerDetails.this);
         title = findViewById(R.id.title);
         recycler_add_passenger = findViewById(R.id.recycler_add_passenger);
         v_type = getIntent().getStringExtra("v_type");
@@ -79,7 +83,8 @@ public class AddPassengerDetails extends AppCompatActivity {
             tot_seats = Integer.parseInt(getIntent().getStringExtra("total_seats"));
 
         } else {
-            txt_seat_no.setText(SelectSeatActivity.seat_list.get(0));
+            sList=SelectSeatActivity.seat_list;
+            txt_seat_no.setText(module.removeF(SelectSeatActivity.seat_list.get( 0 ) ));
             board_location = getIntent().getStringExtra("board");
             drop_location = getIntent().getStringExtra("drop");
             et_email.setVisibility(View.GONE);
@@ -95,7 +100,12 @@ public class AddPassengerDetails extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
             }
-        });
+        } );
+        if(sList.get(0).toString().contains("F"))
+        {
+          r_female.setChecked(true);
+          r_male.setEnabled(false);
+        }
 
 
         adapter = new CustomAddPassengerAdapter(AddPassengerDetails.this, (ArrayList<String>) SelectSeatActivity.seat_list, v_type, tot_seats);

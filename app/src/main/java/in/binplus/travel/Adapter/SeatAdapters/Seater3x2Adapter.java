@@ -33,7 +33,7 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
     ArrayList<String> femaleList=new ArrayList<>();
     ArrayList<String> resList=new ArrayList<>();
 
-    public Seater3x2Adapter(Activity activity, int seats, ArrayList<String> rm_list,ArrayList<String> femaleList, ArrayList<String> resList) {
+    public Seater3x2Adapter(Activity activity, int seats, ArrayList<String> rm_list,ArrayList<String> resList, ArrayList<String> femaleList) {
         this.activity = activity;
         this.seats = seats;
         this.rm_list = rm_list;
@@ -56,61 +56,89 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
         {
             String[] s=resList.get( res ).split( "" );
 //            pos=module.getRowReverseData( s[2].toString() );
-            pos=Integer.parseInt(s[2].toString());
-            if(position == pos) {
+          int posr=Integer.parseInt(s[2].toString());
+            if(position+1 == posr) {
                 String seat_number = s[1].toString();
 
                 if (seat_number.equalsIgnoreCase("A")) {
-                    holder.seat_1.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_1.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.reserve_seat)));
                     holder.seat_1.setClickable(false);
 
                 } else if (seat_number.equalsIgnoreCase("B")) {
-                    holder.seat_2.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_2.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.reserve_seat)));
                     holder.seat_2.setClickable(false);
                 } else if (seat_number.equalsIgnoreCase("C")) {
-                    holder.seat_3.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_3.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.reserve_seat)));
                     holder.seat_3.setClickable(false);
                 } else if (seat_number.equalsIgnoreCase("D")) {
-                    holder.seat_4.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_4.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.reserve_seat)));
                     holder.seat_4.setClickable(false);
                 } else {
-                    holder.seat_5.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.color_1)));
+                    holder.seat_5.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.reserve_seat)));
                     holder.seat_5.setClickable(false);
                 }
             }
         }
 
+        for(int res=0; res<femaleList.size();res++)
+        {
+            String[] s=femaleList.get( res ).split( "" );
+//            pos=module.getRowReverseData( s[2].toString() );
+           int posf=Integer.parseInt(s[2].toString());
+            if(position+1 == posf) {
+                String seat_number = s[1].toString();
+
+                if (seat_number.equalsIgnoreCase("A")) {
+                    holder.seat_1.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.female_seat)));
+                    holder.seat_1.setClickable(false);
+
+                } else if (seat_number.equalsIgnoreCase("B")) {
+                    holder.seat_2.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.female_seat)));
+                    holder.seat_2.setClickable(false);
+                } else if (seat_number.equalsIgnoreCase("C")) {
+                    holder.seat_3.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.female_seat)));
+                    holder.seat_3.setClickable(false);
+                } else if (seat_number.equalsIgnoreCase("D")) {
+                    holder.seat_4.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.female_seat)));
+                    holder.seat_4.setClickable(false);
+                } else {
+                    holder.seat_5.setImageTintList(ColorStateList.valueOf(activity.getResources().getColor(R.color.female_seat)));
+                    holder.seat_5.setClickable(false);
+                }
+            }
+        }
+
+
         for(int i=0; i<rm_list.size();i++)
         {
             String[] s=rm_list.get( i ).split( "" );
 //            pos=module.getRowReverseData( s[2].toString() );
-            pos=Integer.parseInt(s[2].toString());
-            if(position == pos) {
+            int pos_rem=Integer.parseInt(s[2].toString());
+             if(position+1 == pos_rem) {
                 String seat_number = s[1].toString();
-
                 if(seat_number.equalsIgnoreCase("A"))
                 {
-                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.booked_seat) ) );
                     holder.seat_1.setClickable(false);
 
                 }
                 else if(seat_number.equalsIgnoreCase("B"))
                 {
-                    holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.booked_seat) ) );
                     holder.seat_2.setClickable(false);
                 }
                 else if(seat_number.equalsIgnoreCase("C"))
                 {
-                    holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.booked_seat) ) );
                     holder.seat_3.setClickable(false);
                 }else if(seat_number.equalsIgnoreCase("D"))
                 {
-                    holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.booked_seat) ) );
                     holder.seat_4.setClickable(false);
                 }
                 else
                 {
-                    holder.seat_5.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.red_600) ) );
+                    holder.seat_5.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor(R.color.booked_seat) ) );
                     holder.seat_5.setClickable(false);
                 }
             }
@@ -123,24 +151,10 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
         holder.seat_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String seatString="A"+(position+1);
-                if(module.getExistSeat( rm_list, seatString))
-                {
-                    Log.e("asdas","adsdas");
+              setSeatMap(holder.seat_1,seatString);
 
-                }
-                else {
-
-                    if (module.getSeatDeseletct( seat_list, seatString)) {
-                        holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray) ) );
-                        seat_list.remove( module.getSeatListPosition( seat_list, seatString) );
-
-                    } else {
-                        holder.seat_1.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
-                        seat_list.add( seatString );
-                    }
-                    updateintent();
-                }
             }
         });
         holder.seat_2.setOnClickListener(new View.OnClickListener() {
@@ -148,23 +162,26 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
             public void onClick(View v) {
 
                 String seatString="B"+(position+1);
+                setSeatMap(holder.seat_2,seatString);
 
-
-                if(module.getExistSeat( rm_list, seatString))
-                {
-
-                }
-                else {
-                    if (module.getSeatDeseletct( seat_list, seatString)) {
-                        holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray ) ) );
-                        seat_list.remove( module.getSeatListPosition( seat_list, seatString ));
-
-                    } else {
-                        holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
-                        seat_list.add( seatString );
-                    }
-                    updateintent();
-                }
+//                String seatString="A"+(position+1);
+//                if(module.getExistSeat( rm_list, seatString))
+//                {
+//                    Log.e("asdas","adsdas");
+//
+//                }
+//                else {
+//
+//                    if (module.getSeatDeseletct( seat_list, seatString)) {
+//                        holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray ) ) );
+//                        seat_list.remove( module.getSeatListPosition( seat_list, seatString ));
+//
+//                    } else {
+//                        holder.seat_2.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
+//                        seat_list.add( seatString );
+//                    }
+//                    updateintent();
+//                }
             }
         });
          holder.seat_3.setOnClickListener(new View.OnClickListener() {
@@ -172,66 +189,69 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
             public void onClick(View v) {
 
                 String seatString="C"+(position+1);
-
-                if(module.getExistSeat( rm_list,seatString))
-                {
-
-                }
-                else {
-                    if (module.getSeatDeseletct( seat_list, seatString)) {
-                        holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray) ) );
-                        seat_list.remove( module.getSeatListPosition( seat_list, seatString) );
-
-                    } else {
-                        holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500) ) );
-                        seat_list.add( seatString );
-                    }
-                    updateintent();
-                }
+                setSeatMap(holder.seat_3,seatString);
+//                if(module.getExistSeat( rm_list,seatString))
+//                {
+//
+//                }
+//                else {
+//                    if (module.getSeatDeseletct( seat_list, seatString)) {
+//                        holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray) ) );
+//                        seat_list.remove( module.getSeatListPosition( seat_list, seatString) );
+//
+//                    } else {
+//                        holder.seat_3.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500) ) );
+//                        seat_list.add( seatString );
+//                    }
+//                    updateintent();
+//                }
             }
-        });holder.seat_4.setOnClickListener(new View.OnClickListener() {
+        });
+         holder.seat_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String seatString="D"+(position+1);
-                if(module.getExistSeat( rm_list, seatString))
-                {
-
-                }
-                else {
-
-                    if (module.getSeatDeseletct( seat_list, seatString )) {
-                        holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray ) ) );
-                        seat_list.remove( module.getSeatListPosition( seat_list, seatString ) );
-
-                    } else {
-                        holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
-                        seat_list.add( seatString );
-                    }
-                    updateintent();
-                }
+                setSeatMap(holder.seat_4,seatString);
+//                if(module.getExistSeat( rm_list, seatString))
+//                {
+//
+//                }
+//                else {
+//
+//                    if (module.getSeatDeseletct( seat_list, seatString )) {
+//                        holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.dark_gray ) ) );
+//                        seat_list.remove( module.getSeatListPosition( seat_list, seatString ) );
+//
+//                    } else {
+//                        holder.seat_4.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
+//                        seat_list.add( seatString );
+//                    }
+//                    updateintent();
+//                }
             }
         });holder.seat_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String seatString="E"+(position+1);
-                if(module.getExistSeat( rm_list, seatString))
-                {
-
-                }
-                else {
-
-                    if (module.getSeatDeseletct( seat_list, seatString )) {
-                        holder.seat_5.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.white ) ) );
-                        seat_list.remove( module.getSeatListPosition( seat_list, seatString ) );
-
-                    } else {
-                        holder.seat_5.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
-                        seat_list.add(seatString );
-                    }
-                    updateintent();
-                }
+                setSeatMap(holder.seat_5,seatString);
+//                if(module.getExistSeat( rm_list, seatString))
+//                {
+//
+//                }
+//                else {
+//
+//                    if (module.getSeatDeseletct( seat_list, seatString )) {
+//                        holder.seat_5.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.white ) ) );
+//                        seat_list.remove( module.getSeatListPosition( seat_list, seatString ) );
+//
+//                    } else {
+//                        holder.seat_5.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.green_500 ) ) );
+//                        seat_list.add(seatString );
+//                    }
+//                    updateintent();
+//                }
             }
         });
     }
@@ -264,6 +284,49 @@ public class Seater3x2Adapter extends RecyclerView.Adapter<Seater3x2Adapter.View
     private void updateintent() {
         Intent updates = new Intent("Seats");
         updates.putExtra("type", seat_list);
+        updates.putExtra("deck", "");
         activity.sendBroadcast(updates);
+    }
+
+
+    public void setSeatMap(ImageView img,String seatString)
+    {
+        switch(module.getImageColorTint(img))
+        {
+            case "av":
+                img.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.select_seat ) ) );
+                seat_list.add( seatString );
+                updateintent();
+                break;
+            case "pending":
+                String stNo=seat_list.get(module.getSeatListPosition( seat_list,seatString ));
+                if(stNo.contains("F"))
+                {
+                    img.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.female_seat ) ) );
+
+                }
+                else
+                {
+                    img.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.avl_seat ) ) );
+
+                }
+
+                seat_list.remove( module.getSeatListPosition( seat_list, seatString ));
+                updateintent();
+                break;
+            case "reserve":
+                module.showToast("Reserved Seat");
+                break;
+            case "female":
+                module.showToast("Female Seat");
+                img.setImageTintList( ColorStateList.valueOf( activity.getResources().getColor( R.color.select_seat)));
+                String se= seatString+"F";
+                seat_list.add(se);
+                updateintent();
+                break;
+            case "booked":
+                module.showToast("Already Booked");
+                break;
+        }
     }
 }

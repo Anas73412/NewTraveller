@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.binplus.travel.AddPassengerDetails;
+import in.binplus.travel.Fragment.BookingDetails;
 import in.binplus.travel.Model.AddPassengerToSeatModel;
 import in.binplus.travel.Model.PassengerDetailsModel;
 import in.binplus.travel.R;
@@ -50,9 +51,19 @@ public class PassengerListAdapter extends RecyclerView.Adapter<PassengerListAdap
         }
 
         holder.txt_pname.setText( model.getPassenger_name());
-        holder.txt_age.setText( model.getAge());
+        holder.txt_age.setText("Age : "+ model.getAge());
        holder.txt_seat_no.setText( model.getSeat_no() );
-        holder.txt_price.setText( model.getSeat_price() );
+//       if(model.getSeat_price().equalsIgnoreCase("null"))
+//       {
+//          double tot= Double.parseDouble(BookingDetails.total_money.toString());
+//           int singleRent=(int)(tot/passenger_list.size());
+//           holder.txt_price.setText(activity.getResources().getString(R.string.currency)+" "+ String.valueOf(singleRent) );
+//       }
+//       else
+//       {
+           holder.txt_price.setText(activity.getResources().getString(R.string.currency)+" "+ model.getSeat_price() );
+//       }
+
 
 
 

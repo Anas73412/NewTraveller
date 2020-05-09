@@ -76,7 +76,7 @@ public class BookingDetails extends Fragment {
     RelativeLayout rel_passenger ;
     LinearLayout rel_status ;
 
-    String  id="" ,booking_id="" ,vehicle_id ,status ,payment ,total_money ,vehicle_type,start_from ,end_to ,booking_date,start_date,end_date,
+    public static String  id="" ,booking_id="" ,vehicle_id ,status ,payment ,total_money ,vehicle_type,start_from ,end_to ,booking_date,start_date,end_date,
             vehicle_category,vehicle_name,vehicle_number,name ,adhar_id,address ,mobile ,total_seats ,drop_location ="",board_location="";
 
 
@@ -143,8 +143,8 @@ public class BookingDetails extends Fragment {
         {
         drop_location=getArguments().getString( "drop_location");
         board_location = getArguments().getString( "board_location" );
-            txt_busname.setText("Board At:"+board_location );
-            txt_busno.setText( "Drop At:" +drop_location );
+            txt_busname.setText("Board At : "+board_location );
+            txt_busno.setText( "Drop At : " +drop_location );
             getBookingDetails(booking_id);
         }
         else if (vehicle_type.equals("share"))
@@ -307,7 +307,7 @@ public class BookingDetails extends Fragment {
                                     model.setAge( String.valueOf( object.get( "age" ) ) );
                                     model.setGender( String.valueOf( object.get( "gender" ) ) );
 //                                    model.setSeat_no( String.valueOf( object.get( "seat_no" ) ) );
-//                                    model.setSeat_price( String.valueOf( object.get( "seat_price" ) ) );
+                                    model.setSeat_price( String.valueOf( module.getParticulerSeatRent(total_money,array.length()) ) );
                                     model.setNationality( String.valueOf( object.get( "nationality" ) ) );
 //                                    model.setId( String.valueOf( object.get( "id" ) ) );
                                     passenger_list.add( model );

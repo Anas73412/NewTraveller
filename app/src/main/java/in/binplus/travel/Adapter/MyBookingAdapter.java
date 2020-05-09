@@ -60,12 +60,12 @@ public class MyBookingAdapter extends RecyclerView.Adapter<MyBookingAdapter.View
         else if (sts ==1)
         {
             holder.txt_status.setText( "Confirmed" );
-            holder.txt_status.setTextColor( Color.GREEN);
+            holder.txt_status.setTextColor( activity.getResources().getColor(R.color.green_500));
         }
         else if (sts==2)
         {
             holder.txt_status.setText( "Cancelled" );
-            holder.txt_status.setTextColor( Color.RED );
+            holder.txt_status.setTextColor( activity.getResources().getColor(R.color.red_600) );
         }
         else
         {

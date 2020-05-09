@@ -1,6 +1,7 @@
 package in.binplus.travel;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -34,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
          drawer = findViewById( R.id.drawer_layout );
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -108,21 +111,112 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .into( iv_profile );
         }
 
-        if (type.equals( "f" )) {
-            HomeFragment homeFragment=new HomeFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace( R.id.container_frame,homeFragment )
-//                    .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN )
-                    .commit();
+//        if (type.equals( "f" )) {
+//            HomeFragment homeFragment=new HomeFragment();
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace( R.id.container_frame,homeFragment )
+////                    .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN )
+//                    .commit();
+//        }
+//        else if (type.equals( "r" ))
+//        {
+//            RestoHomeFragment restoHomeFragment = new RestoHomeFragment();
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace( R.id.container_frame,restoHomeFragment )
+////                    .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN )
+//                    .commit();
+//        }
+
+        if (savedInstanceState == null) {
+            if(type.equals("f"))
+            {
+                Fragment fm = new HomeFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container_frame, fm, "HomeFragment")
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+            }
+            else if(type.equals("r"))
+            {
+                Fragment fm = new RestoHomeFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container_frame, fm, "RestoHomeFragment")
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+            }
+
         }
-        else if (type.equals( "r" ))
-        {
-            RestoHomeFragment restoHomeFragment = new RestoHomeFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace( R.id.container_frame,restoHomeFragment )
-//                    .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN )
-                    .commit();
-        }
+        getSupportFragmentManager().
+
+                addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+                    @Override
+                    public void onBackStackChanged() {
+                        try {
+                            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                            Fragment fr = getSupportFragmentManager().findFragmentById(R.id.container_frame);
+
+                            final String fm_name = fr.getClass().getSimpleName();
+                            Log.e("backstack: ", ": " + fm_name);
+                            if (fm_name.contentEquals("HomeFragment")) {
+                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                                toggle.setDrawerIndicatorEnabled(true);
+                                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                                toggle.syncState();
+
+                            } else if (fm_name.contentEquals("My_order_fragment") ||
+                                    fm_name.contentEquals("Thanks_fragment")) {
+                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+                                toggle.setDrawerIndicatorEnabled(false);
+                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                                toggle.syncState();
+
+                                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if(type.equals("f"))
+                                        {
+                                            Fragment fm = new HomeFragment();
+                                            FragmentManager fragmentManager = getSupportFragmentManager();
+                                            fragmentManager.beginTransaction()
+                                                    .replace(R.id.container_frame, fm, "HomeFragment")
+                                                    .addToBackStack(null).commit();
+                                        }
+                                        else if(type.equals("r"))
+                                        {
+                                            Fragment fm = new RestoHomeFragment();
+                                            FragmentManager fragmentManager = getSupportFragmentManager();
+                                            fragmentManager.beginTransaction()
+                                                    .replace(R.id.container_frame, fm, "RestoHomeFragment")
+                                                    .addToBackStack(null).commit();
+                                        }
+                                    }
+                                });
+                            } else {
+
+                                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+                                toggle.setDrawerIndicatorEnabled(false);
+                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                                toggle.syncState();
+
+                                toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                        onBackPressed();
+                                    }
+                                });
+                            }
+
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
 
 
     }

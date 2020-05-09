@@ -144,7 +144,7 @@ public class BookingConfirmation extends AppCompatActivity {
         txt_name.setText( u_name );
         txt_to.setText(destination);
         txt_from.setText(source);
-        txt_busname.setText(bus_name);
+        txt_busname.setText("Bus Name : "+bus_name);
         if (v_type.equals("sharing"))
         { txt_timefrom.setText("");
             txt_timeto.setText("");

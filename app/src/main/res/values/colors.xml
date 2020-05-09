@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00264D</color>
     <color name="colorAccent">#0052A2</color>
     <color name="white">#ffffff</color>
-    <color name="gray">#E3E3E3</color>
+    <color name="gray">#C6C4C4</color>
     <color name="textcolor">#000000</color>
     <color name="bgcolor2">#eff0f4</color>
     <color name="dark_black">#000000</color>
@@ -35,6 +35,13 @@
 
     <color name="green_500">#4CAF50</color>
     <color name="red_600">#E53935</color>
+    <color name="pink">#FC88AB</color>
+    //Seat Colors
+    <color name="female_seat">#FC88AB</color>
+    <color name="booked_seat">#E53935</color>
+    <color name="select_seat">#4CAF50</color>
+    <color name="reserve_seat">#666666</color>
+    <color name="avl_seat">#FFBAB7B7</color>
 
 
 </resources>

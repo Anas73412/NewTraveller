@@ -3,7 +3,10 @@ package in.binplus.travel.Config;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -14,6 +17,9 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
+
+import in.binplus.travel.Model.KeyValueModel;
+import in.binplus.travel.R;
 
 public class Module {
 
@@ -145,15 +151,33 @@ public class Module {
         int position=-1;
         for(int i=0; i<list.size();i++)
         {
-            if(list.get(i).equals(seat))
+
+            if(removeF(list.get(i)).equals(removeF(seat)))
             {
                 position=i;
+                Log.e("existance",""+list.get(i)+" - "+i+" - "+seat);
                 break;
             }
 
         }
         return position;
     }
+
+    public String removeF(String str)
+    {
+        String strValue="";
+        if(str.contains("F"))
+        {
+            strValue=str.split("F")[0].toString();
+        }
+        else
+        {
+            strValue=str;
+        }
+        return strValue;
+    }
+
+
 
     public int getRowReverseData(String pos)
     {
@@ -241,6 +265,45 @@ public class Module {
 
         }
         return flag;
+    }
+    public void showToast(String s)
+    {
+        Toast.makeText(context,""+s,Toast.LENGTH_SHORT).show();
+    }
+
+    public String getImageColorTint(ImageView img)
+    {
+        String str="av";
+        int color=img.getImageTintList().getDefaultColor();
+        if(color==context.getResources().getColor(R.color.avl_seat))
+        {
+            str="av";
+        }
+        else if(color == context.getResources().getColor(R.color.female_seat))
+        {
+            str="female";
+        }
+        else if(color == context.getResources().getColor(R.color.select_seat))
+        {
+            str="pending";
+        }
+        else if(color == context.getResources().getColor(R.color.reserve_seat))
+        {
+          str="reserve";
+        }
+        else if(color == context.getResources().getColor(R.color.booked_seat))
+        {
+            str="booked";
+        }
+
+        return str;
+    }
+
+    public String getParticulerSeatRent(String total_money,int length)
+    {
+        double tot=Double.parseDouble(total_money);
+        int r=(int)(tot/length);
+        return String.valueOf(r);
     }
 }
 

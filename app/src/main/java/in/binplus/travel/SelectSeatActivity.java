@@ -35,7 +35,8 @@ import in.binplus.travel.Adapter.SeatAdapters.Seater3x2Adapter;
 import in.binplus.travel.Adapter.SeatAdapters.SemiSleeper2x2Adapter;
 import in.binplus.travel.Adapter.SeatAdapters.SemiSleeper3x2Adapter;
 import in.binplus.travel.Adapter.SeatAdapters.SleeperAdapter;
-import in.binplus.travel.Adapter.SeatAdapters.SleeperSeaterAdapter;
+import in.binplus.travel.Adapter.SeatAdapters.SleeperSeaterx1Adapter;
+import in.binplus.travel.Adapter.SeatAdapters.SleeperSeaterx2Adapter;
 import in.binplus.travel.Adapter.SeatAdapters.SleeperSeaterUpperAdapter;
 import in.binplus.travel.Config.Module;
 import in.binplus.travel.Model.StopsModel;
@@ -72,7 +73,8 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     SemiSleeper3x2Adapter semiSleeper3x2Adapter;
     SleeperAdapter sleeperAdapter;
     SleeperAdapter sleeperUpperAdapter;
-    SleeperSeaterAdapter sleeperSeaterAdapter;
+    SleeperSeaterx2Adapter sleeperSeaterx2Adapter;
+    SleeperSeaterx1Adapter sleeperSeaterx1Adapter;
     SleeperSeaterUpperAdapter sleeperSeaterUpperAdapter;
     public static ArrayList<String> seat_list = new ArrayList<>();
     ArrayList<String> receiver_seat_list = new ArrayList<>();
@@ -211,7 +213,7 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                     if (sitting_type.equalsIgnoreCase("Seater")) {
                         if (layout.equalsIgnoreCase("2X2")) {
                             int row = total_seats / 4;
-                            seater2x2Adapter = new Seater2x2Adapter(activity, row,remainSeats);
+                            seater2x2Adapter = new Seater2x2Adapter(activity, row,remainSeats,resSeats,femaleSeats);
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                             rec_lower_seats.setAdapter(seater2x2Adapter);
                             seater2x2Adapter.notifyDataSetChanged();
@@ -225,13 +227,13 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                     } else if (sitting_type.equalsIgnoreCase("Semi Sleeper")) {
                         if (layout.equalsIgnoreCase("2X2")) {
                             int row = total_seats / 4;
-                            semiSleeper2x2Adapter = new SemiSleeper2x2Adapter(activity, row,remainSeats);
+                            semiSleeper2x2Adapter = new SemiSleeper2x2Adapter(activity, row,remainSeats,resSeats,femaleSeats);
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                             rec_lower_seats.setAdapter(semiSleeper2x2Adapter);
                             semiSleeper2x2Adapter.notifyDataSetChanged();
                         } else if (layout.equalsIgnoreCase("2X3")) {
                             int row = total_seats / 5;
-                            semiSleeper3x2Adapter = new SemiSleeper3x2Adapter(activity, remainSeats,row);
+                            semiSleeper3x2Adapter = new SemiSleeper3x2Adapter(activity, remainSeats,row,resSeats,femaleSeats);
                             rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                             rec_lower_seats.setAdapter(semiSleeper3x2Adapter);
                             semiSleeper3x2Adapter.notifyDataSetChanged();
@@ -245,8 +247,8 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                         }
 
                         int row = total_seats / 3;
-                        sleeperAdapter = new SleeperAdapter(activity, row, "L",remainSeats);
-                        sleeperUpperAdapter = new SleeperAdapter(activity, row, "U",remainSeats);
+                        sleeperAdapter = new SleeperAdapter(activity, row, "L",remainSeats,resSeats,femaleSeats);
+                        sleeperUpperAdapter = new SleeperAdapter(activity, row, "U",remainSeats,resSeats,femaleSeats);
                         rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                         rec_upper_seats.setLayoutManager(new LinearLayoutManager(activity));
                         rec_lower_seats.setAdapter(sleeperAdapter);
@@ -264,13 +266,16 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                         }
 
                         int row = total_seats / 3;
-                        sleeperSeaterAdapter = new SleeperSeaterAdapter(activity, row, "L",remainSeats);
-                        sleeperSeaterUpperAdapter = new SleeperSeaterUpperAdapter(activity, row, remainSeats);
+                        sleeperSeaterx2Adapter = new SleeperSeaterx2Adapter(activity, row, "L",remainSeats,resSeats,femaleSeats);
+//                        sleeperSeaterx1Adapter = new SleeperSeaterx1Adapter(activity, row, "L",remainSeats,resSeats,femaleSeats);
+                        sleeperSeaterUpperAdapter = new SleeperSeaterUpperAdapter(activity, row,"U", remainSeats,resSeats,femaleSeats);
                         rec_lower_seats.setLayoutManager(new LinearLayoutManager(activity));
                         rec_upper_seats.setLayoutManager(new LinearLayoutManager(activity));
-                        rec_lower_seats.setAdapter(sleeperSeaterAdapter);
+                        rec_lower_seats.setAdapter(sleeperSeaterx2Adapter);
+//                        rec_lower_seats.setAdapter(sleeperSeaterx1Adapter);
                         rec_upper_seats.setAdapter(sleeperSeaterUpperAdapter);
-                        sleeperSeaterAdapter.notifyDataSetChanged();
+                        sleeperSeaterx2Adapter.notifyDataSetChanged();
+//                        sleeperSeaterx1Adapter.notifyDataSetChanged();
                         sleeperSeaterUpperAdapter.notifyDataSetChanged();
 
                     }
@@ -309,6 +314,10 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                 btn_upper.setBackgroundColor(getResources().getColor(R.color.gray));
                 btn_upper.setTextColor(getResources().getColor(R.color.dark_black));
 
+                if(!tv_upr_seats.getText().toString().isEmpty())
+                {
+                    tv_upr_seats.setVisibility(View.VISIBLE);
+                }
                 birth_type = 1;
                 if (rel_upper_sheats.getVisibility() == View.VISIBLE) {
                     rel_upper_sheats.setVisibility(View.GONE);
@@ -318,6 +327,10 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
             }
 
         } else if (id == R.id.btn_upper) {
+            if(!tv_seats.getText().toString().isEmpty())
+            {
+                tv_seats.setVisibility(View.VISIBLE);
+            }
             if (birth_type != 2) {
                 birth_type = 2;
                 btn_upper.setBackgroundColor(getResources().getColor(R.color.color_cancel));
@@ -360,7 +373,16 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
                 }else if (sitting_type.equalsIgnoreCase("Sleeper+Seater")) {
                     seat_list.clear();
 
-                   sleeperSeaterLowerSeatList = sleeperSeaterAdapter.getSeatList();
+//                    if(sleeperSeaterx1Adapter.getSeatList().size()>0)
+//                    {
+//                        sleeperSeaterLowerSeatList = sleeperSeaterx1Adapter.getSeatList();
+//
+//                    }
+//                    else
+//                    {
+                        sleeperSeaterLowerSeatList = sleeperSeaterx2Adapter.getSeatList();
+
+//                    }
                     sleeperSeaterUpperSeatList = sleeperSeaterUpperAdapter.getSeatList();
 
                     seat_list.addAll(sleeperSeaterLowerSeatList);
@@ -456,84 +478,145 @@ public class SelectSeatActivity extends AppCompatActivity implements View.OnClic
     private BroadcastReceiver mCart = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
             ArrayList<String> type = (ArrayList<String>) intent.getSerializableExtra("type");
+            String deck = intent.getStringExtra("deck");
+//            if (type.size() <= 0) {
+//                module.showToast("<0");
+//                if(sitting_type.equalsIgnoreCase("Sleeper"))
+//                {
+//
+//                    if(upperSeatList.size()<=0)
+//                    {
+//                        tv_upr_seats.setVisibility(View.GONE);
+//                    }
+//                    else
+//                    {
+//                        tv_upr_seats.setVisibility(View.VISIBLE);
+//                    }
+//                     if(lowerSeatList.size()<=0)
+//                    {
+//                        tv_seats.setVisibility(View.GONE);
+//                    }
+//                    else
+//                    {
+//                        tv_seats.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//                else
+//                {
+//                    module.showToast("else");
+//                    if(sitting_type.equalsIgnoreCase("Sleeper")) {
+//                        if (upperSeatList.size() <= 0) {
+//                            tv_upr_seats.setVisibility(View.GONE);
+//                        } else {
+//                            tv_upr_seats.setVisibility(View.VISIBLE);
+//                        }
+//                        if (lowerSeatList.size() <= 0) {
+//                            tv_seats.setVisibility(View.GONE);
+//                        } else {
+//                            tv_seats.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    else {
+//                        module.showToast("Second last else");
+//
+//                        tv_upr_seats.setVisibility(View.GONE);
+//                        tv_seats.setVisibility(View.GONE);
+//                    }
+//                    }
+//
+//            } else {
+//               module.showToast("last else");
+//                tv_seats.setVisibility(View.VISIBLE);
+//                tv_upr_seats.setVisibility(View.VISIBLE);
+//                updateData(type);
+//            }
 
-            if (type.size() <= 0) {
+         if(deck.equals("L"))
+         {
+             tv_upr_seats.setVisibility(View.VISIBLE);
+         }
+         else if(deck.equals("U"))
+         {
+             tv_seats.setVisibility(View.VISIBLE);
+         }
+            updateData(type,deck);
+//            }
 
-                if(sitting_type.equalsIgnoreCase("Sleeper"))
-                {
-                    if(upperSeatList.size()<=0)
-                    {
-                        tv_upr_seats.setVisibility(View.GONE);
-                    }
-                    else
-                    {
-                        tv_upr_seats.setVisibility(View.VISIBLE);
-                    }
-                     if(lowerSeatList.size()<=0)
-                    {
-                        tv_seats.setVisibility(View.GONE);
-                    }
-                    else
-                    {
-                        tv_seats.setVisibility(View.VISIBLE);
-                    }
-                }
-                else
-                {
-                    if(sitting_type.equalsIgnoreCase("Sleeper")) {
-                        if (upperSeatList.size() <= 0) {
-                            tv_upr_seats.setVisibility(View.GONE);
-                        } else {
-                            tv_upr_seats.setVisibility(View.VISIBLE);
-                        }
-                        if (lowerSeatList.size() <= 0) {
-                            tv_seats.setVisibility(View.GONE);
-                        } else {
-                            tv_seats.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    else {
-
-                        tv_upr_seats.setVisibility(View.GONE);
-                        tv_seats.setVisibility(View.GONE);
-                    }
-                    }
-
-            } else {
-
-                tv_seats.setVisibility(View.VISIBLE);
-                tv_upr_seats.setVisibility(View.VISIBLE);
-                updateData(type);
-            }
         }
     };
 
-    private void updateData(ArrayList<String> type) {
-        receiver_seat_list.clear();
-        receiver_seat_list.addAll(type);
+    private void updateData(ArrayList<String> type,String deck) {
 
+
+        receiver_seat_list.clear();
+        if(deck.equals("sleeperseaterx2") || deck.equals("sleeperseaterx1"))
+        {
+             if(sleeperSeaterUpperAdapter.getSeatList().size()>0)
+             {
+                 receiver_seat_list.addAll(sleeperSeaterUpperAdapter.getSeatList());
+             }
+        }
+
+        if(deck.equals("sleeperupper"))
+        {
+            if(sleeperSeaterx2Adapter.getSeatList().size()>0)
+            {
+                receiver_seat_list.addAll(sleeperSeaterx2Adapter.getSeatList());
+            }
+            else
+            {
+                if(sleeperSeaterx1Adapter.getSeatList().size()>0)
+                {
+                    receiver_seat_list.addAll(sleeperSeaterx1Adapter.getSeatList());
+                }
+
+            }
+        }
+        if(deck.equals("lowersleeper"))
+        {
+            if(sleeperSeaterx2Adapter.getSeatList().size()>0)
+            {
+                receiver_seat_list.addAll(sleeperSeaterx2Adapter.getSeatList());
+            }
+        }
+        receiver_seat_list.addAll(type);
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < receiver_seat_list.size(); i++) {
-                builder = builder.append(receiver_seat_list.get(i).toString() + ",");
-            }
-
-            if (birth_type == 2) {
-                if (sitting_type.equalsIgnoreCase("Sleeper")) {
-                    tv_upr_seats.setVisibility(View.VISIBLE);
-                    tv_upr_seats.setText("Upper Seats :" + builder);
+                if(receiver_seat_list.get(i).contains("F"))
+                {
+                    builder = builder.append(receiver_seat_list.get(i).toString().split("F")[0].toString() + ",");
+                }
+                else
+                {
+                    builder = builder.append(receiver_seat_list.get(i).toString() + ",");
                 }
 
-            } else {
-                if (sitting_type.equalsIgnoreCase("Sleeper")) {
-                    tv_seats.setVisibility(View.VISIBLE);
-                    tv_seats.setText("Lower Seats :" + builder);
-                } else {
-                    tv_seats.setVisibility(View.VISIBLE);
-                    tv_seats.setText("Seats :" + builder);
-                }
             }
+        tv_upr_seats.setVisibility(View.VISIBLE);
+        tv_upr_seats.setText("Seats :" + builder);
+
+//            if (birth_type == 2) {
+//                if (sitting_type.equalsIgnoreCase("Sleeper")) {
+//                    tv_upr_seats.setVisibility(View.VISIBLE);
+//                    tv_upr_seats.setText("Upper Seats :" + builder);
+//                }
+//                else
+//                {
+//
+//                    tv_seats.setVisibility(View.VISIBLE);
+//                    tv_seats.setText("Lower Seats :" + builder);
+//                }
+//
+//            } else {
+//                if (sitting_type.equalsIgnoreCase("Sleeper")) {
+//                    tv_seats.setVisibility(View.VISIBLE);
+//                    tv_seats.setText("Lower Seats :" + builder);
+//                } else {
+//                    tv_seats.setVisibility(View.VISIBLE);
+//                    tv_seats.setText("Seats :" + builder);
+//                }
+//            }
 
 
 

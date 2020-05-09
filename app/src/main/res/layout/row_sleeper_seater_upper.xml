@@ -26,6 +26,14 @@
                 android:layout_width="0dp"
                 android:weightSum="10"
                 android:layout_height="80dp">
+                <ImageView
+                    android:id="@+id/seat_1"
+                    android:src="@drawable/sleeper"
+                    android:tint="@color/avl_seat"
+                    android:layout_weight="2"
+                    android:padding="@dimen/space_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"/>
 
             </LinearLayout>
              </LinearLayout>
@@ -52,17 +60,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:id="@+id/seat_1"
+                        android:id="@+id/seat_2"
                         android:src="@drawable/sleeper"
-                        android:tint="@color/dark_gray"
+                        android:tint="@color/avl_seat"
                         android:layout_weight="2"
                         android:padding="@dimen/space_2"
                         android:layout_width="0dp"
                         android:layout_height="80dp"/>
                     <ImageView
-                        android:id="@+id/seat_2"
+                        android:id="@+id/seat_3"
                         android:src="@drawable/sleeper"
-                        android:tint="@color/dark_gray"
+                        android:tint="@color/avl_seat"
                         android:layout_weight="2"
                         android:padding="@dimen/space_2"
                         android:layout_width="0dp"

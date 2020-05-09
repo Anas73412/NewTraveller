@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.binplus.travel.AddPassengerDetails;
+import in.binplus.travel.Config.Module;
 import in.binplus.travel.Model.AddPassengerToSeatModel;
 import in.binplus.travel.R;
 
@@ -26,9 +27,10 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
     Activity activity;
 
     ArrayList<String> seatList;
-   ArrayList<String> p_list;
-   String v_type ;
-   int tot_seats ;
+    ArrayList<String> p_list;
+    String v_type ;
+    int tot_seats ;
+    Module module;
 
     public CustomAddPassengerAdapter(Activity activity, ArrayList<String> seatList, String v_type, int tot_seats) {
         this.activity = activity;
@@ -53,12 +55,12 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
         {
             holder.itemView.setVisibility(View.GONE );
             holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
-          //  AddPassengerDetails.passengerList.add( 0, new AddPassengerToSeatModel( AddPassengerDetails.getname, AddPassengerDetails.getage, AddPassengerDetails.getgender, AddPassengerDetails.getnationality,AddPassengerDetails.getseatno ) );
+            //  AddPassengerDetails.passengerList.add( 0, new AddPassengerToSeatModel( AddPassengerDetails.getname, AddPassengerDetails.getage, AddPassengerDetails.getgender, AddPassengerDetails.getnationality,AddPassengerDetails.getseatno ) );
         }
         else
         {
             if (v_type.equals("bus")) {
-                holder.seat_no.setText(seatList.get(position));
+                holder.seat_no.setText(module.removeF(seatList.get(position)));
                 holder.et_mobile.setVisibility(View.GONE);
             }
             else
@@ -67,7 +69,11 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
                 holder.txt_seat.setText("");
 
             }
-
+            if(seatList.get(position).contains("F"))
+            {
+                holder.male.setEnabled(false);
+                holder.female.setChecked(true);
+            }
         }
 
 
@@ -94,7 +100,7 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
         public TextView seat_no ,txt_seat;
 
         public EditText et_nationality;
-       public RadioButton male,female;
+        public RadioButton male,female;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             p_list=new ArrayList<>();
@@ -106,6 +112,7 @@ public class CustomAddPassengerAdapter extends RecyclerView.Adapter<CustomAddPas
             et_nationality=(EditText) itemView.findViewById(R.id.et_nationality);
             male=(RadioButton)itemView.findViewById(R.id.male);
             female=(RadioButton)itemView.findViewById(R.id.female);
+            module=new Module(activity);
 
         }
     }

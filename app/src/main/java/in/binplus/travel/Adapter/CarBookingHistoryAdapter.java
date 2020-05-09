@@ -55,12 +55,12 @@ public class CarBookingHistoryAdapter extends RecyclerView.Adapter<CarBookingHis
         else if (sts ==1)
         {
             viewHolder.txt_status.setText( "Confirmed" );
-           viewHolder.txt_status.setTextColor( Color.GREEN);
+           viewHolder.txt_status.setTextColor( activity.getResources().getColor(R.color.green_500));
         }
         else if (sts==2)
         {
             viewHolder.txt_status.setText( "Cancelled" );
-            viewHolder.txt_status.setTextColor( Color.RED );
+            viewHolder.txt_status.setTextColor( activity.getResources().getColor(R.color.red_600) );
         }
 
     }
